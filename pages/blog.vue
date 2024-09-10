@@ -1,7 +1,7 @@
 <template>
   <div class="blog-page">
     <!-- Cover Image Section -->
-    <div class="cover-image-container">
+    <div ref="coverSection" class="cover-image-container full-page">
       <img 
         v-if="posts.length && posts[0].attributes.image && posts[0].attributes.image.data" 
         :src="`http://localhost:1337${posts[0].attributes.image.data.attributes.url}`" 
@@ -13,17 +13,19 @@
       </div>
     </div>
 
-    <!-- Scrolling Content Section -->
-    <div class="content-container">
-      <div v-for="post in posts" :key="post.id" class="post">
+    <!-- Full-page Subtitle and Description Section -->
+    <div v-for="post in posts" :key="post.id">
+      <div ref="contentSection" class="content-container full-page">
         <div class="text-container">
+          <h4 ref="heading">{{ post.attributes.heading }}</h4>
           <h2 ref="subtitle">{{ post.attributes.subtitle }}</h2>
-          <!-- Render description as HTML content -->
-          <p ref="description" v-html="post.attributes.description"></p>
+          <p ref="description">{{ post.attributes.description }}</p>
         </div>
+      </div>
 
-        <!-- Gallery Section -->
-        <div v-if="post.attributes.gallery && post.attributes.gallery.data.length" class="gallery">
+      <!-- Full-page Gallery Section -->
+      <div ref="gallerySection" class="gallery-container full-page" v-if="post.attributes.gallery && post.attributes.gallery.data.length">
+        <div class="gallery">
           <div v-for="image in post.attributes.gallery.data" :key="image.id" class="gallery-image">
             <img :src="`http://localhost:1337${image.attributes.url}`" alt="Gallery Image" />
           </div>
@@ -52,6 +54,9 @@ const posts = data.value?.data || [];
 const title = ref(null);
 const subtitle = ref(null);
 const description = ref(null);
+const coverSection = ref(null);
+const contentSection = ref(null);
+const gallerySection = ref(null);
 
 onMounted(() => {
   // Animate title and subtitle
@@ -79,6 +84,37 @@ onMounted(() => {
     y: 50
   });
 
+  // Create stacked pinning effect
+  ScrollTrigger.create({
+    trigger: coverSection.value,
+    pin: true,
+    pinSpacing: false,  // Disable extra space after pinning
+    start: "top top",
+    end: "+=100%",      // Duration of pinning
+    scrub: true,
+    markers: true
+  });
+
+  ScrollTrigger.create({
+    trigger: contentSection.value,
+    pin: true,
+    pinSpacing: false,
+    start: "top top",
+    end: "+=100%",
+    scrub: true,
+    markers: true
+  });
+
+  ScrollTrigger.create({
+    trigger: gallerySection.value,
+    pin: true,
+    pinSpacing: false,
+    start: "top top",
+    end: "+=100%",
+    scrub: true,
+    markers: true
+  });
+
   // Animate gallery images
   gsap.utils.toArray('.gallery-image').forEach((image) => {
     gsap.from(image, {
@@ -99,6 +135,16 @@ onMounted(() => {
 .blog-page {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.full-page {
+  height: 100vh; /* Full page height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .cover-image-container {
@@ -106,14 +152,13 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  margin-bottom: -5px;
 }
 
 .cover-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  
+  position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
@@ -128,30 +173,52 @@ onMounted(() => {
   color: white;
 }
 
-h1 {
-  font-size: 4rem;
-  font-weight: bold;
-}
-
 .content-container {
-  
   background-color: white;
   color: #111;
-   /* To scroll content after the cover image */
 }
 
 .text-container {
-  margin-bottom: 50px;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
 }
 
-h2, h3, p {
-  margin: 10px 0;
-  
+h1 {
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: 'SilkSerif', serif;  /* Utilizzo del font definito in fonts.css */
+}
+
+h2 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 400;
+  font-family: 'Forma DJR Display', sans-serif; /* Utilizzo del font definito in fonts.css */
+}
+
+
+h4{
+  font-weight: 500;
+  font-family: 'Forma DJR Display', sans-serif;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  font-weight: 300;
+  font-family: 'Forma DJR Text', sans-serif;
+}
+
+.gallery-container {
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .gallery {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .gallery-image {

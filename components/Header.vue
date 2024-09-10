@@ -111,4 +111,16 @@ export default {
 h1, h2 {
   margin: 0;
 }
+h1{
+  font-size: 4rem;
+  font-weight: 200;
+  font-family: 'SilkSerif', serif; 
+  text-transform: uppercase;
+}
+h2{
+  font-weight: 300;
+  font-family: 'Forma DJR Text', sans-serif;
+  letter-spacing: 6px;
+  font-size: 1rem;
+  }
 </style>
