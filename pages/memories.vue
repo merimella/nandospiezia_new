@@ -1,6 +1,6 @@
 <template>
   <div> <!-- Single root element -->
-    <h1>FAQ Page</h1>
+    <h1>MEMORIES</h1>
     <p>Here are the frequently asked questions.</p>
   </div>
 </template>
@@ -12,7 +12,8 @@
 
 <style scoped>
 div{
-  background-color:red;
+  background-color:grey;
   
 }
+
 </style>

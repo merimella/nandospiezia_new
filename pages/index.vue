@@ -21,3 +21,9 @@ import Header from '~/components/Header.vue';
   margin-top: 100vh; /* Sposta il contenuto sotto l'header */
 }
 </style>
+
+<style scoped>
+div {
+  background-color: #000;
+}
+</style>
