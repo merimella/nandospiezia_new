@@ -10,9 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/http": "^0.6.4",
     "@studio-freight/lenis": "^1.0.42",
     "bootstrap": "^5.3.3",
-    "gsap": "^3.12.5",
+    "gsap": "file:../../../../Downloads/gsap-premium 2/npm-install-this/gsap-bonus.tgz",
     "nuxt": "^3.13.0"
   }
 }

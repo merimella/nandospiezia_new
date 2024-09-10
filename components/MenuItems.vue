@@ -2,7 +2,6 @@
   <transition name="fade">
     <div v-if="isMenuOpen" class="menu-overlay">
       <ul class="menu-links">
-        <!-- Aggiungi la classe anim-in agli elementi li -->
         <li class="menu-item anim-in">
           <NuxtLink to="/" @click="closeMenu">
             Home
@@ -39,6 +38,11 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
+import SplitText from 'gsap/SplitText'; // Usa SplitText per dividere le parole
+
+gsap.registerPlugin(SplitText);
+
 export default {
   props: ['isMenuOpen'],
   mounted() {
@@ -55,8 +59,8 @@ export default {
           const animEls = document.querySelectorAll('.anim-in');
 
           animEls.forEach(el => {
-            // Usa SplitText per dividere le parole e le righe su ciascun elemento li
-            const splitEl = new SplitText(el, { type: "lines, words", linesClass: "line" });
+            // Usa SplitText per dividere le parole su ciascun elemento li
+            const splitEl = new SplitText(el, { type: 'words', wordsClass: 'word' });
 
             // Crea una timeline di animazione per ciascun li
             const splitTl = gsap.timeline({
@@ -64,11 +68,11 @@ export default {
               ease: 'power4'
             });
 
-            // Anima le parole all'interno del li
+            // Anima le parole all'interno del li con l'effetto slide-in-up
             splitTl.from(splitEl.words, {
               yPercent: 100,  // Le parole appaiono risalendo
               opacity: 0,  // Appaiono gradualmente
-              stagger: 0.05,  // Ritardo tra ciascuna parola
+              stagger: 0.1,  // Ritardo tra ciascuna parola
               duration: 0.8,  // Durata di ciascuna animazione
               ease: 'power4.out'  // Movimento fluido di risalita
             });
@@ -114,7 +118,8 @@ export default {
   text-decoration: none;
 }
 
-.line {
+.word {
+  display: inline-block;
   overflow: hidden;
 }
 </style>
