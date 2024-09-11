@@ -68,6 +68,9 @@ const leave = (el, done) => {
     ease: 'power2.out',
   });
 };
+
+
+
 </script>
 
 <style scoped>

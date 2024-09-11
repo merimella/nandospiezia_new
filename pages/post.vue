@@ -1,8 +1,9 @@
 <template>
-  <div class="blog-page">
+  <div class="wrapper">
     <div v-for="post in posts" :key="post.id">
-      <!-- Cover Image Section -->
-      <div ref="coverSection" class="cover-image-container full-page">
+
+      <!-- Sezione di copertina con immagine e titolo -->
+      <section class="coverSection cover-image-container full-page">
         <img 
           v-if="post.attributes.image && post.attributes.image.data" 
           :src="`http://localhost:1337${post.attributes.image.data.attributes.url}`" 
@@ -12,58 +13,62 @@
         <div class="overlay-text">
           <h1 ref="title">{{ post.attributes.title }}</h1>
         </div>
-      </div>
+      </section>
 
-      <!-- Full-page Subtitle and Description Section -->
-      <div ref="contentSection" class="content-container full-page">
+      <!-- Sezione per sottotitolo e descrizione -->
+      <section class="contentSection content-container full-page">
         <div class="text-container">
           <h4 ref="heading">{{ post.attributes.heading }}</h4>
           <h2 ref="subtitle">{{ post.attributes.subtitle }}</h2>
           <p ref="description">{{ post.attributes.description }}</p>
         </div>
-      </div>
+      </section>
 
-      <!-- Focus Images Section (horizontal scroll) -->
-      <div ref="contentFocus" class="content-container full-page horizontal-section">
-        <div class="image-container">
-          <img v-if="post.attributes.focus1 && post.attributes.focus1.data" 
+      <!-- Sezione di scroll orizzontale -->
+      <section class="horizontal">
+        <div class="horizontal__container">
+
+          <div class="horizontal__item">
+            <img v-if="post.attributes.focus1 && post.attributes.focus1.data" 
               :src="`http://localhost:1337${post.attributes.focus1.data.attributes.url}`" 
               alt="Focus Image 1" />
-          <img v-if="post.attributes.focus2 && post.attributes.focus2.data" 
+              <img v-if="post.attributes.focus2 && post.attributes.focus2.data" 
               :src="`http://localhost:1337${post.attributes.focus2.data.attributes.url}`" 
               alt="Focus Image 2" />
-        </div>
-      </div>
+              <img v-if="post.attributes.focus3 && post.attributes.focus2.data" 
+              :src="`http://localhost:1337${post.attributes.focus3.data.attributes.url}`" 
+              alt="Focus Image 3" />
+          </div>
+          
+          <div class="horizontal__item">
+            <div class="text-container">
+              <p ref="paragraph">{{ post.attributes.paragraph }}</p>
+              <h5 ref="quote">{{ post.attributes.quote }}</h5>
+            </div>
+          </div>
 
-      <!-- Paragraph and Quote Section (horizontal scroll) -->
-      <div ref="contentParagraph" class="content-container full-page horizontal-section">
-        <div class="text-container">
-          <p ref="paragraph">{{ post.attributes.paragraph }}</p>
-          <h5 ref="quote">{{ post.attributes.quote }}</h5>
         </div>
-      </div>
+      </section>
 
-      <!-- Gallery Section -->
-      <div ref="gallerySection" class="gallery-container full-page" v-if="post.attributes.gallery && post.attributes.gallery.data.length">
+      <!-- Sezione Galleria -->
+      <section class="gallerySection gallery-container full-page" v-if="post.attributes.gallery && post.attributes.gallery.data.length">
         <div class="gallery">
           <div v-for="image in post.attributes.gallery.data" :key="image.id" class="gallery-image">
             <img :src="`http://localhost:1337${image.attributes.url}`" alt="Gallery Image" />
           </div>
         </div>
-      </div>
-      
-    </div>
+      </section>
 
+    </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 const { data } = await useAsyncData('posts', () => $fetch('http://localhost:1337/api/posts?populate=*', {
   headers: {
@@ -73,111 +78,69 @@ const { data } = await useAsyncData('posts', () => $fetch('http://localhost:1337
 
 const posts = data.value?.data || [];
 
-const title = ref(null);
-const subtitle = ref(null);
-const description = ref(null);
-const coverSection = ref(null);
-const contentSection = ref(null);
-const contentFocus = ref(null);
-const contentParagraph = ref(null);
-const gallerySection = ref(null);
-
 onMounted(() => {
-  // Prima sezione - Pin verticale
+  const sections = gsap.utils.toArray(".horizontal__item");
+  let maxWidth = 0;
+
+  // Calcola la larghezza totale degli elementi orizzontali
+  const getMaxWidth = () => {
+    maxWidth = sections.reduce((acc, section) => acc + section.offsetWidth, 0);
+    
+  };
+
+  getMaxWidth();
+  ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
+
+  gsap.set('section.spacer', { minHeight: window.innerHeight - document.querySelector('.horizontal').offsetHeight });
+
+  // Pin delle sezioni verticali (coverSection e contentSection)
   ScrollTrigger.create({
-    trigger: coverSection.value,
+    trigger: ".coverSection",
     pin: true,
     pinSpacing: false,
     start: "top top",
-    end: "bottom bottom",
-    scrub: true,
-  });
-
-  ScrollTrigger.create({
-    trigger: contentSection.value,
-    pin: true,
-    pinSpacing: false,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true,
-  });
-
-  // Sezione orizzontale (da contentFocus a contentParagraph)
-  gsap.to(contentFocus.value, {
-    xPercent: -100 * (document.querySelectorAll('.horizontal-section').length - 1),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: contentFocus.value,
-      pin: true,
-      scrub: true,
-      snap: 1 / (document.querySelectorAll('.horizontal-section').length - 1),
-      start: 'top top',
-      end: "+=300%", // Estendi la durata dello scroll orizzontale
-      markers: true,
-    },
-  });
-
-  // Torna allo scroll verticale con la gallerySection
-  ScrollTrigger.create({
-    trigger: gallerySection.value,
-    pin: true,
-    pinSpacing: false,
-    start: "top top",
-    end: "+=100%", // Pin fino alla fine della galleria
+    end: "+=100%",
     scrub: true,
     markers: true,
   });
 
-  // Animazione per il titolo e il sottotitolo
-  const splitTitle = new SplitText(title.value, { type: "chars, words" });
-  gsap.from(splitTitle.chars, {
-    scrollTrigger: {
-      trigger: title.value,
-      start: "top 80%",
-      end: "top 20%",
-      scrub: true
-    },
-    opacity: 0,
-    y: 50,
-    stagger: 0.05
+  ScrollTrigger.create({
+    trigger: ".contentSection",
+    pin: true,
+    start: "top top",
+    end: "+=100%",
+    scrub: true,
+    markers: true,
   });
 
-  gsap.from(subtitle.value, {
-    scrollTrigger: {
-      trigger: subtitle.value,
-      start: "top 80%",
-      end: "top 30%",
-      scrub: true
-    },
-    opacity: 0,
-    y: 50
-  });
+  
 
-  // Animazione immagini galleria
-  gsap.utils.toArray('.gallery-image').forEach((image) => {
-    gsap.from(image, {
-      scrollTrigger: {
-        trigger: image,
-        start: "top 90%",
-        end: "top 50%",
-        scrub: true
-      },
-      opacity: 0,
-      y: 100,
-    });
+  // Scroll orizzontale per la sezione horizontal
+  gsap.to(sections, {
+    x: () => `-${maxWidth - window.innerWidth}`,  // Assicurati che lo scroll termini all'ultimo elemento
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".horizontal",
+      pin: true,
+      start: "top top",
+      scrub: true,
+      markers: true,
+      end: () => `+=${maxWidth}`,  // Definisci correttamente la fine dello scroll
+    },
   });
 });
 </script>
 
+
 <style scoped>
-.blog-page {
+.wrapper {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
 .full-page {
-  height: 100vh; /* Full page height */
+  height: 100vh; /* Altezza intera pagina */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,9 +174,45 @@ onMounted(() => {
   color: white;
 }
 
-.content-container {
-  background-color: white;
-  color: #111;
+.horizontal {
+  padding: 60px 20px 120px;
+  box-sizing: border-box;
+}
+
+.horizontal__container {
+  display: flex;
+  width: calc(100vw * 3); /* Regola la larghezza in base al numero di elementi */
+  overflow: hidden;
+}
+
+.horizontal__item {
+  width: 100vw; /* Ogni item occuperà l'intera larghezza dello schermo */
+  
+  box-sizing: border-box;
+  display: flex; /* Utilizza Flexbox */
+  flex-direction:row; /* Imposta la direzione verticale per gli elementi interni */
+  justify-content: center; /* Centra verticalmente gli elementi */
+  align-items: center; /* Centra orizzontalmente se desiderato */
+  text-align: center;
+}
+
+.horizontal__item img{
+  width: 30%;
+  margin-right: 20px;
+}
+
+.horizontal__item:first-of-type {
+  margin-left: 0;
+}
+
+.horizontal__item:last-of-type {
+  margin-left: 0;
+  display: flex; /* Utilizza Flexbox */
+  flex-direction: column; /* Imposta la direzione verticale per gli elementi interni */
+  justify-content: center; /* Centra verticalmente gli elementi */
+  align-items: center; /* Centra orizzontalmente se desiderato */
+  text-align: center; /* Opzionale: centra il testo */
+  
 }
 
 .text-container {
@@ -222,24 +221,13 @@ onMounted(() => {
   padding: 20px;
 }
 
-/* Focus Images Section Styles */
-.image-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0 20px;
+.content-container {
   background-color: white;
+  color: #111;
 }
 
-.image-container img {
-  max-width: 25%; /* Occupa il 25% ciascuna */
-  height: 100vh;
-  object-fit: contain;
-}
 
-/* Stili per il testo */
+
 h1 {
   font-size: 4rem;
   font-weight: 500;
@@ -247,29 +235,30 @@ h1 {
 }
 
 h2 {
-  margin: 0;
   font-size: 3rem;
-  font-weight: 400;
-  font-family: 'Forma DJR Display', sans-serif; /* Utilizzo del font definito in fonts.css */
+  font-weight: 700;
+  font-family: 'SilkSerif', serif; /* Utilizzo del font definito in fonts.css */
 }
 
-h4 {
+h4{
   font-weight: 500;
   font-family: 'Forma DJR Display', sans-serif;
-}
-
-h5 {
-  font-size: 1.8rem;
-  font-weight: 400;
-  font-family: 'Forma DJR Text', sans-serif;
-  margin-top: 20px;
 }
 
 p {
   font-size: 1.5rem;
   margin-top: 20px;
-  font-weight: 300;
+  font-weight: 400;
   font-family: 'Forma DJR Text', sans-serif;
+}
+
+h5{
+  font-family: 'Forma DJR Text', sans-serif;  /* Utilizzo del font definito in fonts.css */
+  font-weight: 800;
+}
+
+h4, h5, p {
+  margin-top: 20px;
 }
 
 .gallery-container {
@@ -291,6 +280,6 @@ p {
 .gallery-image img {
   width: 100%;
   height: auto;
-  display: block;
 }
+
 </style>

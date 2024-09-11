@@ -45,7 +45,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const { data } = await useAsyncData('posts', () => $fetch('http://localhost:1337/api/posts?populate=*', {
   headers: {
-    Authorization: `Bearer 54b84e77fadaffe240be5599ee40ce6a49204b95cfb8915aa6c13f688b28aad0bc5cf812b8f94a1dbf56217a0b75dfde504e8c3ada424bd621a02b5eaa4f3ffe751acfc3e39c891d15d6d97a343199acd72d009031a126ac9640ce5a2049060f9505f0520fd870ece5a1048e34aeeaa569903c0c99d582c17adbee70a8c6840b`
+    Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`
   }
 }));
 
