@@ -47,3 +47,11 @@ font-style: normal;
   font-weight: bold;
   font-style: italic;
 }
+
+@font-face {
+  font-family: 'SilkSerif';
+  src: url('/fonts/SilkSerif-Blackc.woff2') format('woff2'),
+       url('/fonts/SilkSerif-Black.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}

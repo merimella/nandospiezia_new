@@ -3,20 +3,21 @@
     <!-- Logo in alto a sinistra -->
     <div class="logo" :class="{ 'menu-open-logo': isMenuOpen }">
       <NuxtLink to="/">
-        <img src="/images/logo-vector.svg" alt="Logo" />
+        <div class="logo">LOGO</div>
       </NuxtLink>
     </div>
 
     <!-- Bottone MENU/CLOSE ruotato di 90 gradi -->
     <button class="menu-button" @click="toggleMenu">
       <span v-if="!isMenuOpen" class="rotate-text">MENU</span>
-      <span v-else class="rotate-text">CLOSE</span>
+      <img v-else class="frame-8" src="/close.svg" />
     </button>
 
     <!-- Componente delle voci del menu -->
     <MenuItems :isMenuOpen="isMenuOpen" @close-menu="closeMenu" />
   </nav>
 </template>
+
 
 <script>
 import MenuItems from '~/components/MenuItems.vue';
@@ -53,15 +54,6 @@ export default {
   width: 100%;
 }
 
-.logo img {
-  height: 50px;
-  width: auto;
-}
-
-.menu-open-logo img {
-  filter: invert(1); /* Cambia il logo a bianco quando il menu è aperto */
-}
-
 .menu-button {
   font-size: 1.5rem;
   color: white;
@@ -72,7 +64,5 @@ export default {
   z-index: 1100;
 }
 
-.rotate-text {
-  transform: rotate(90deg);
-}
+
 </style>
