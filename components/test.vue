@@ -1,15 +1,19 @@
 <template>
   <div class="desktop-1">
+    <div class="frame-7">
+      <div class="close">CLOSE</div>
+    </div>
+    <div class="frame-4">
+      <div class="faq">FAQ</div>
+    </div>
     <div class="frame-6">
       <div class="logo">LOGO</div>
     </div>
-    <img class="frame-8" src="/public/close.svg" />
     <div class="frame-1">
-      <div class="home">HOME</div>
       <div class="memories">MEMORIES</div>
+      <div class="home">HOME</div>
       <div class="stories">STORIES</div>
       <div class="about">ABOUT</div>
-      <div class="faq">FAQ</div>
       <div class="contacts">CONTACTS</div>
     </div>
     <div class="frame-3">
@@ -43,6 +47,53 @@ export default {
   position: relative;
   overflow: hidden;
 }
+.frame-7 {
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 38px;
+  height: 121px;
+  position: absolute;
+  left: 1319px;
+  top: 44px;
+}
+.close {
+  color: #000000;
+  text-align: left;
+  font-family: "SilkSerif-Regular", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+  height: 38px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+}
+.frame-4 {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 65px;
+  position: absolute;
+  left: 1266px;
+  top: 919px;
+}
+.faq {
+  color: #000000;
+  text-align: left;
+  font-family: "SilkSerif-Regular", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(1, 1);
+}
 .frame-6 {
   padding: 10px;
   display: flex;
@@ -64,19 +115,6 @@ export default {
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, 1);
 }
-.frame-8 {
-  display: flex;
-  flex-direction: column;
-  gap: 8.04px;
-  align-items: flex-end;
-  justify-content: flex-start;
-  height: auto;
-  position: absolute;
-  right: 25px;
-  top: 53px;
-  transform: translate(-41px, 0px);
-  overflow: visible;
-}
 .frame-1 {
   display: flex;
   flex-direction: column;
@@ -86,9 +124,9 @@ export default {
   width: 430px;
   position: absolute;
   left: calc(50% - 215px);
-  top: calc(50% - 323px);
+  top: calc(50% - 227px);
 }
-.home {
+.memories {
   color: #000000;
   text-align: left;
   font-family: "SilkSerif-Regular", sans-serif;
@@ -98,7 +136,7 @@ export default {
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, 1);
 }
-.memories {
+.home {
   color: #000000;
   text-align: left;
   font-family: "SilkSerif-Regular", sans-serif;
@@ -128,16 +166,6 @@ export default {
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, 1);
 }
-.faq {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
 .contacts {
   color: #000000;
   text-align: left;
@@ -156,7 +184,7 @@ export default {
   justify-content: flex-start;
   position: absolute;
   left: 79px;
-  bottom: 58px;
+  top: 951px;
 }
 .privacy-policy {
   color: #000000;
@@ -196,7 +224,7 @@ export default {
   justify-content: center;
   position: absolute;
   left: calc(50% - 103px);
-  top: calc(50% - -222.92px);
+  top: 734.92px;
 }
 .instagram {
   color: #000000;
