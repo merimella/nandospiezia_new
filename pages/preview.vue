@@ -1,231 +1,80 @@
 <template>
-  <div class="desktop-1">
-    <div class="frame-6">
-      <div class="logo">LOGO</div>
-    </div>
-    <img class="frame-8" src="/public/close.svg" />
-    <div class="frame-1">
-      <div class="home">HOME</div>
-      <div class="memories">MEMORIES</div>
-      <div class="stories">STORIES</div>
-      <div class="about">ABOUT</div>
-      <div class="faq">FAQ</div>
-      <div class="contacts">CONTACTS</div>
-    </div>
-    <div class="frame-3">
-      <div class="privacy-policy">PRIVACY POLICY</div>
-      <div class="commercial-copyright">COMMERCIAL COPYRIGHT</div>
-      <div class="creative-project">CREATIVE PROJECT</div>
-    </div>
-    <div class="frame-2">
-      <div class="instagram">INSTAGRAM</div>
-      <div class="pinterest">PINTEREST</div>
-      <div class="facebook">FACEBOOK</div>
+  <div class="photo-scroll-wrapper">
+    <div class="photo-scroll-container">
+      <div class="photo" v-for="(photo, index) in photos" :key="index">
+        <img :src="photo.url" :alt="'Image ' + (index + 1)" />
+      </div>
     </div>
   </div>
 </template>
+
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
-  name: "Desktop1",
-  components: {},
-  props: {},
-  data() {},
+  name: "FixPhotoScrollContainer",
+  data() {
+    return {
+      photos: [
+        { url: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { url: "https://images.unsplash.com/photo-1481980235850-66e47651e431?q=80&w=3776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { url: "https://plus.unsplash.com/premium_photo-1661328138795-e188aa94bf5e?q=80&w=3840&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+      ],
+    };
+  },
+  mounted() {
+    this.initScrollAnimations();
+  },
+  methods: {
+    initScrollAnimations() {
+      gsap.utils.toArray(".photo").forEach((photo, i) => {
+        gsap.fromTo(
+          photo,
+          { autoAlpha: 0 }, // nascondiamo le immagini
+          {
+            autoAlpha: 1, // le immagini diventano visibili
+            scrollTrigger: {
+              trigger: photo,
+              start: "top top", // inizia l'animazione all'inizio della pagina
+              end: "+=100%", // fine dell'animazione
+              scrub: true, // sincronizza con lo scroll
+              pin: true, // fissa l'immagine durante lo scroll
+              pinSpacing: false, // rimuove il margine extra
+            },
+          }
+        );
+      });
+    },
+  },
 };
 </script>
+
 <style scoped>
-.desktop-1,
-.desktop-1 * {
-  box-sizing: border-box;
-}
-.desktop-1 {
-  background: #ffffff;
-  height: 1024px;
+.photo-scroll-wrapper {
+  height: 300vh; /* Abbastanza altezza per simulare lo scroll */
   position: relative;
-  overflow: hidden;
 }
-.frame-6 {
-  padding: 10px;
+
+.photo-scroll-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: absolute;
-  left: 69px;
-  top: 44px;
 }
-.logo {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 30px;
-  font-weight: 400;
+
+.photo {
+  width: 100%;
+  height: 100vh; /* Ogni immagine occupa tutto lo schermo */
   position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
 }
-.frame-8 {
-  display: flex;
-  flex-direction: column;
-  gap: 8.04px;
-  align-items: flex-end;
-  justify-content: flex-start;
-  height: auto;
-  position: absolute;
-  right: 25px;
-  top: 53px;
-  transform: translate(-41px, 0px);
-  overflow: visible;
-}
-.frame-1 {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: center;
-  justify-content: center;
-  width: 430px;
-  position: absolute;
-  left: calc(50% - 215px);
-  top: calc(50% - 323px);
-}
-.home {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.memories {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.stories {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.about {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.faq {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.contacts {
-  color: #000000;
-  text-align: left;
-  font-family: "SilkSerif-Regular", sans-serif;
-  font-size: 60px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.frame-3 {
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-  align-items: flex-end;
-  justify-content: flex-start;
-  position: absolute;
-  left: 79px;
-  bottom: 58px;
-}
-.privacy-policy {
-  color: #000000;
-  text-align: left;
-  font-family: "WorkSans-Regular", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.commercial-copyright {
-  color: #000000;
-  text-align: left;
-  font-family: "WorkSans-Regular", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.creative-project {
-  color: #000000;
-  text-align: left;
-  font-family: "WorkSans-Regular", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.frame-2 {
-  display: flex;
-  flex-direction: row;
-  gap: 21px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: calc(50% - 103px);
-  top: calc(50% - -222.92px);
-}
-.instagram {
-  color: #000000;
-  text-align: left;
-  font-family: "WorkSans-Regular", sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.pinterest {
-  color: #000000;
-  text-align: left;
-  font-family: "WorkSans-Regular", sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.facebook {
-  color: #000000;
-  text-align: left;
-  font-family: "WorkSans-Regular", sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Le immagini si adattano per coprire tutto lo schermo */
 }
 </style>

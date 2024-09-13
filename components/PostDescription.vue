@@ -107,13 +107,18 @@ onMounted(() => {
 
 p {
   font-size: 1.5rem;
+  margin-top: 20px;
   font-weight: 400;
-  font-family: 'Forma DJR Text', sans-serif;
+  font-family: "ivypresto-display", serif;
+  font-style: normal;
 }
 
 h5 {
-  font-family: 'Forma DJR Text', sans-serif;
-  font-weight: 800;
+  font-family: "ivypresto-display", serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 25px;
+  
 }
 
 p, h5 {
