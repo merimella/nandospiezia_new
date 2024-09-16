@@ -1,11 +1,7 @@
+
 <template>
   <div>
     <Navbar /> <!-- Navbar fissa -->
-    
-    <!-- Condizione per mostrare il loader -->
-    <Loader v-if="isLoading" />
-
-    <!-- Contenuto dinamico delle pagine con transizione -->
     <transition
       mode="in-out"
       @before-leave="beforeLeave"
@@ -13,28 +9,17 @@
       @before-enter="beforeEnter"
       @enter="enter"
     >
-      <NuxtPage v-if="!isLoading" /> <!-- Mostra la pagina solo dopo il caricamento -->
+      <NuxtPage /> <!-- Il contenuto dinamico delle pagine -->
     </transition>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import { gsap } from 'gsap';
 import Navbar from '~/components/Navbar.vue';
-import Loader from '~/components/Loader.vue'; // Importa il componente con il nome corretto
 
-// Stato per controllare il caricamento
-const isLoading = ref(true);
 
-// Simula il completamento del caricamento dopo un certo tempo (puoi rimuovere o modificare questo comportamento in base alle tue esigenze)
-onMounted(() => {
-  setTimeout(() => {
-    isLoading.value = false; // Nasconde il loader dopo 3 secondi
-  }, 3000);
-});
-
-// Funzioni di transizione per animare l'ingresso e l'uscita delle pagine
+// Funzioni di transizione
 const beforeEnter = (el) => {
   gsap.set(el, {
     position: 'absolute',
@@ -44,18 +29,18 @@ const beforeEnter = (el) => {
     height: '100%',
     zIndex: 2,
     x: '100vw',
-    opacity: 1,
+    opacity: 1, // The new page has no opacity effect
   });
 };
 
 const enter = (el, done) => {
   const tl = gsap.timeline({
     onComplete: done,
-    delay: 0.5,
+    delay: 0.5, // Delay before the new page animation starts
   });
   tl.to(el, {
-    x: '0vw',
-    duration: 1.5,
+    x: '0vw', // Slide in the new page fully
+    duration: 1.5, // Slowing down the new page transition slightly for better synchronization
     ease: 'power2.out',
   });
 };
@@ -74,15 +59,19 @@ const beforeLeave = (el) => {
 const leave = (el, done) => {
   const tl = gsap.timeline({
     onComplete: done,
-    delay: 0.5,
+    delay: 0.5, // Adding the delay to the old page's leave animation for synchronization
   });
   tl.to(el, {
-    x: '-20vw',
-    opacity: 0.5,
-    duration: 2,
+    x: '-20vw', // Push the old page slightly to the left
+    opacity: 0.5, // Fade slightly but keep the old page visible
+    duration: 2, // Maintain longer duration for old page fade-out
     ease: 'power2.out',
   });
 };
+
+
+
+
 </script>
 
 <style scoped>
