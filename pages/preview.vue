@@ -1,9 +1,14 @@
 <template>
-  <div class="photo-scroll-wrapper">
-    <div class="photo-scroll-container">
-      <div class="photo" v-for="(photo, index) in photos" :key="index">
-        <img :src="photo.url" :alt="'Image ' + (index + 1)" />
+  <div class="logo-loader-wrapper">
+    <div class="logo-loader">
+      <div class="rectangle">
+        <div class="rectangle2"></div>
+        <div class="rectangle2"></div>
+        <div class="rectangle2"></div>
       </div>
+      <img class="p" src="/images/loader-svg/p0.svg" />
+      <img class="n" src="/images/loader-svg/n0.svg" />
+      <img class="s" src="/images/loader-svg/s0.svg" />
     </div>
   </div>
 </template>
@@ -11,70 +16,152 @@
 <script>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin"; // Per l'effetto slot machine
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 export default {
-  name: "FixPhotoScrollContainer",
-  data() {
-    return {
-      photos: [
-        { url: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-        { url: "https://images.unsplash.com/photo-1481980235850-66e47651e431?q=80&w=3776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-        { url: "https://plus.unsplash.com/premium_photo-1661328138795-e188aa94bf5e?q=80&w=3840&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      ],
-    };
-  },
+  name: "LogoLoader",
   mounted() {
-    this.initScrollAnimations();
-  },
-  methods: {
-    initScrollAnimations() {
-      gsap.utils.toArray(".photo").forEach((photo, i) => {
-        gsap.fromTo(
-          photo,
-          { autoAlpha: 0 }, // nascondiamo le immagini
-          {
-            autoAlpha: 1, // le immagini diventano visibili
-            scrollTrigger: {
-              trigger: photo,
-              start: "top top", // inizia l'animazione all'inizio della pagina
-              end: "+=100%", // fine dell'animazione
-              scrub: true, // sincronizza con lo scroll
-              pin: true, // fissa l'immagine durante lo scroll
-              pinSpacing: false, // rimuove il margine extra
-            },
-          }
-        );
-      });
-    },
+    // Animazione ingresso rettangoli (dal basso verso l'alto)
+    gsap.from(".rectangle2", {
+      y: 300, // Parti dal basso
+      opacity: 0,
+      duration: 1.5,
+      ease: "power4.out",
+      stagger: 0.2,
+    });
+
+    // Test per la lettera P con l'effetto di rimbalzo
+    gsap.fromTo(
+      ".p",
+      {
+        y: -400, // Parti da sopra
+        opacity: 0,
+      },
+      {
+        y: 0, // Posizione finale
+        opacity: 1,
+        duration: 2, // Durata animazione
+        ease: "bounce.out", // Effetto rimbalzo
+        delay: 0.5, // Leggero ritardo
+      }
+    );
+
+    // Animazione per le altre lettere
+    gsap.fromTo(
+      ".n",
+      {
+        y: -400, 
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 2,
+        ease: "elastic.out(1, 0.5)", // Rimbalzo elastico
+        delay: 1, 
+      }
+    );
+
+    gsap.fromTo(
+      ".s",
+      {
+        y: -400, 
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 2,
+        ease: "elastic.out(1, 0.5)", // Rimbalzo elastico
+        delay: 1.5, 
+      }
+    );
   },
 };
 </script>
 
+
+
+
 <style scoped>
-.photo-scroll-wrapper {
-  height: 300vh; /* Abbastanza altezza per simulare lo scroll */
+.logo-loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Altezza 100% del viewport */
+  width: 100vw;  /* Larghezza 100% del viewport */
   position: relative;
+  overflow: hidden;
+  background: #ffffff;
 }
 
-.photo-scroll-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.logo-loader,
+.logo-loader * {
+  box-sizing: border-box;
+}
+
+.logo-loader {
+  
+  padding: 396px 447px 450px 447px;
   display: flex;
   flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
 }
 
-.photo {
-  width: 100%;
-  height: 100vh; /* Ogni immagine occupa tutto lo schermo */
+.rectangle {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
   position: relative;
 }
 
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Le immagini si adattano per coprire tutto lo schermo */
+.rectangle2 {
+  background: #000000;
+  flex-shrink: 0;
+  width: 178.58px;
+  height: 178.58px;
+  position: relative;
 }
+
+.p {
+  flex-shrink: 0;
+  width: 100.99px;
+  height: 117.82px;
+  position: absolute;
+  left: 853px;
+  top: 367px;
+  z-index: 10; /* Aggiungi questo per dare priorità di visibilità */
+  overflow: visible;
+}
+
+.n {
+  flex-shrink: 0;
+  width: 118.16px;
+  height: 117.82px;
+  position: absolute;
+  left: 477px;
+  top: 467px;
+  overflow: visible;
+}
+
+.s {
+  flex-shrink: 0;
+  width: 102px;
+  height: 122.87px;
+  position: absolute;
+  left: 669px;
+  top: 424px;
+  overflow: visible;
+}
+
 </style>
