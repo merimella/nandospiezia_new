@@ -6,16 +6,18 @@
         subtitle="PHOTOGRAPHY" 
         :images="['/images/header-slide-1.webp', '/images/header-slide-2.webp', '/images/header-slide-3.webp']" 
       />
-      <HeaderContent1 />
+      <div ref="headerContent1">
+        <HeaderContent1 />
+      </div>
+      <HeaderContent2 />
       <HomeGallery />
+      
       <section class="content">
         <!-- Rest of your homepage content -->
       </section>
     </div>
   </div>
 </template>
-
-
 
 <script setup>
 import { onMounted } from 'vue';
@@ -27,24 +29,37 @@ import Header from '~/components/Header.vue';
 import HeaderContent1 from '~/components/HeaderContent1.vue';
 import HomeGallery from '~/components/HomeGallery.vue';
 
-// Registra entrambi i plugin
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
 onMounted(() => {
-  ScrollSmoother.create({
-    wrapper: ".smooth-wrapper",  // Il wrapper che contiene tutto
-    content: ".smooth-content",  // L'elemento che deve scrollare fluidamente
-    smooth: 1.5,  // Velocità di scrolling
-    effects: true,  // Effetti di parallasse
+  const smoother = ScrollSmoother.create({
+    wrapper: ".smooth-wrapper",
+    content: ".smooth-content",
+    smooth: 1.5,
+    effects: true,
+  });
+
+  // Rimuove il pinning dell'header e fa in modo che lo scrolling passi sopra l'header
+  ScrollTrigger.create({
+    trigger: '[ref="headerContent1"]',
+    start: "top top", // Inizia il trigger quando headerContent1 è in cima
+    end: "bottom top", // Fine del trigger
+    scrub: true,
+    onEnter: () => {
+      gsap.to('.header', { opacity: 0 });
+    },
+    onLeaveBack: () => {
+      gsap.to('.header', { opacity: 1 });
+    }
   });
 });
-
 </script>
 
 <style scoped>
 .content {
   margin-top: 100vh; /* Sposta il contenuto sotto l'header */
 }
+
 .smooth-wrapper {
   position: relative;
   overflow: hidden;
@@ -55,5 +70,12 @@ onMounted(() => {
 .smooth-content {
   position: relative;
   will-change: transform;
+}
+
+header {
+  z-index: 100; /* Assicura che l'header rimanga sopra il contenuto */
+  position: fixed; /* Mantiene l'header fisso in cima */
+  width: 100%;
+  top: 0;
 }
 </style>

@@ -18,10 +18,9 @@
   </div>
 </template>
 
-
-
 <script>
 import { gsap } from "gsap";
+import { onMounted, nextTick } from 'vue';
 
 export default {
   name: "PhotoGallery",
@@ -41,9 +40,18 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      const images = Object.values(this.$refs).flat();
+    // Usa nextTick per assicurarsi che il DOM sia completamente renderizzato
+    nextTick(() => {
+      const allImages = this.images.map((_, index) => this.$refs[`image-${index}`][0]);
 
+      // Verifica che tutte le immagini siano pronte
+      if (allImages.every(img => img)) {
+        this.animateImages(allImages);
+      }
+    });
+  },
+  methods: {
+    animateImages(images) {
       // Aggiungiamo l'animazione in ingresso con immagini che entrano dal basso
       const timeline = gsap.timeline();
 
@@ -61,11 +69,10 @@ export default {
         duration: 1.5,
         ease: "power3.out",
       });
-    });
-  },
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 .photo-gallery {
@@ -74,7 +81,7 @@ export default {
 
 .img-fluid {
   width: 100%;
-  height: auto;
+  height: 700px;
   object-fit: cover;
   display: block;
 }
