@@ -8,7 +8,8 @@
         class="col-12 col-md-4 col-lg-4 d-flex align-items-stretch gallery-item"
         @mouseenter="startHoverAnimation(index)" @mouseleave="stopHoverAnimation(index)"
       >
-        <div class="image-container">
+        <!-- Aggiungi il NuxtLink intorno all'elemento cliccabile -->
+        <NuxtLink :to="`/post/${post.id}`" class="image-container">
           <!-- Sequenza di immagini dalla galleria -->
           <img 
             v-for="(image, imgIndex) in post.attributes.gallery.data" 
@@ -24,11 +25,12 @@
             <h2>{{ post.attributes.homeGalleryTitle }}</h2>
             <p>{{ post.attributes.location }}</p>
           </div>
-        </div>
+        </NuxtLink> <!-- Chiudi il NuxtLink qui -->
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { gsap } from "gsap";

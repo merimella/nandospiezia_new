@@ -48,11 +48,10 @@ export default {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".text-container",
-          start: "top 80%",
-          end: "bottom 60%",
-          scrub: false,
-          yoyo: true,
-          toggleActions: "play reverse play reverse",
+          start: "top 80%", // Quando inizia l'animazione
+          end: "bottom 60%", // Quando termina l'animazione
+          scrub: true, // Sincronizza l'animazione con lo scroll avanti e indietro
+          toggleActions: "play none none none", // Solo quando è visibile
         },
       });
 
@@ -82,6 +81,8 @@ export default {
   }
 };
 </script>
+
+
 
 <style scoped>
 .lineParent {

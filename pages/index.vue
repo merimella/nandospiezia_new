@@ -39,19 +39,7 @@ onMounted(() => {
     effects: true,
   });
 
-  // Rimuove il pinning dell'header e fa in modo che lo scrolling passi sopra l'header
-  ScrollTrigger.create({
-    trigger: '[ref="headerContent1"]',
-    start: "top top", // Inizia il trigger quando headerContent1 è in cima
-    end: "bottom top", // Fine del trigger
-    scrub: true,
-    onEnter: () => {
-      gsap.to('.header', { opacity: 0 });
-    },
-    onLeaveBack: () => {
-      gsap.to('.header', { opacity: 1 });
-    }
-  });
+  
 });
 </script>
 
