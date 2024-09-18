@@ -6,9 +6,11 @@
         v-for="(post, index) in posts.slice(0, 9)"
         :key="`post-${post.id}`" 
         class="col-12 col-md-4 col-lg-4 d-flex align-items-stretch gallery-item"
-        @mouseenter="startHoverAnimation(index)" @mouseleave="stopHoverAnimation(index)"
+        @mouseenter="startHoverAnimation(index)" 
+        @mouseleave="stopHoverAnimation(index)"
       >
-        <div class="image-container">
+        <!-- Aggiungiamo NuxtLink per il reindirizzamento basato sullo slug -->
+        <NuxtLink :to="`/memories/${post.attributes.slug}`" class="image-container">
           <!-- Sequenza di immagini dalla galleria -->
           <img 
             v-for="(image, imgIndex) in post.attributes.gallery.data" 
@@ -24,7 +26,7 @@
             <h2>{{ post.attributes.homeGalleryTitle }}</h2>
             <p>{{ post.attributes.location }}</p>
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -138,7 +140,7 @@ export default {
 
 .img-fluid {
   width: 100%;
-  height: 800px; /* Altezza fissa di 700px */
+  height: 800px; /* Altezza fissa di 800px */
   object-fit: cover; /* Assicuriamoci che le immagini coprano tutto lo spazio */
   object-position: center center; /* Centriamo l'immagine per evitare spazi bianchi */
   display: none; /* Le immagini sono nascoste di default */
