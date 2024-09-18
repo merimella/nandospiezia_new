@@ -276,6 +276,7 @@ p {
 
 /* Galleria con sfondo bianco */
 .white-background {
+  
   background-color: white;
 }
 

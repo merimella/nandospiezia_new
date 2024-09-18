@@ -43,6 +43,8 @@ export default {
       intervals: [] // Salviamo gli intervalli per ogni galleria
     };
   },
+
+
   mounted() {
     if (process.client) {
       this.fetchPostsData();
