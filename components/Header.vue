@@ -4,7 +4,7 @@
       <!-- Slideshow -->
       <ul class="slideshow">
         <li v-for="(image, index) in images" :key="index" :class="{ active: index === currentImage }">
-          <img :src="image" alt="Slideshow Image" />
+          <img :src="image || '/images/default.webp'" alt="Slideshow Image" />
         </li>
       </ul>
 
@@ -18,36 +18,60 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
+
 export default {
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    subtitle: {
-      type: String,
-      required: true
-    },
-    images: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
-      currentImage: 0 // Indice dell'immagine corrente
+      title: '',
+      subtitle: '',
+      images: [],
+      currentImage: 0,
+      interval: null // Memorizza l'intervallo per lo slideshow
     };
   },
-  mounted() {
-    this.startSlideshow(); // Avvia lo slideshow quando il componente è montato
+  async mounted() {
+    try {
+      // Chiamata API per recuperare i dati da Strapi
+      const response = await fetch('http://localhost:1337/api/header-sliders?populate=*', {
+        headers: {
+          Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`,
+        },
+      });
+      
+      const data = await response.json();
+      const attributes = data.data[0]?.attributes; // Accede ai dati del primo header-slider
+
+      // Popola i dati restituiti dall'API
+      this.title = attributes?.title || 'Default Title';
+      this.subtitle = attributes?.subtitle || 'Default Subtitle';
+
+      // Concatenare il percorso base per gli URL delle immagini
+      this.images = [
+      `http://localhost:1337${attributes?.headerSlide1?.data?.attributes?.url}`,
+      `http://localhost:1337${attributes?.headerSlide2?.data?.attributes?.url}`,
+      `http://localhost:1337${attributes?.headerSlide3?.data?.attributes?.url}`,
+      `http://localhost:1337${attributes?.headerSlider4?.data?.attributes?.url}`,  // Correzione per headerSlider4
+      `http://localhost:1337${attributes?.headerSlide5?.data?.attributes?.url}`
+    ];
+
+      // Avvia lo slideshow
+      this.startSlideshow();
+    } catch (error) {
+      console.error('Errore durante la chiamata API:', error);
+    }
   },
   methods: {
     startSlideshow() {
-      setInterval(() => {
-        this.currentImage = (this.currentImage + 1) % this.images.length; // Cicla attraverso le immagini
-      }, 3000); // Cambia immagine ogni 3 secondi
+      if (this.images.length === 0) return; // Evita slideshow vuoti
+      this.interval = setInterval(() => {
+        this.currentImage = (this.currentImage + 1) % this.images.length;
+      }, 3000);
+    },
+    stopSlideshow() {
+      clearInterval(this.interval);
     }
-  }
+  },
 };
 </script>
 
@@ -60,9 +84,8 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  z-index: 2; /* Set this to be under the navbar but above other content */
+  z-index: 2;
 }
-
 
 .content {
   position: relative;
@@ -89,7 +112,7 @@ export default {
 }
 
 .slideshow li.active {
-  opacity: 1; /* Mostra solo l'immagine corrente */
+  opacity: 1;
 }
 
 .slideshow img {
@@ -111,16 +134,18 @@ export default {
 h1, h2 {
   margin: 0;
 }
-h1{
+
+h1 {
   font-size: 4rem;
   font-weight: 200;
-  font-family: 'SilkSerif', serif; 
+  font-family: 'SilkSerif', serif;
   text-transform: uppercase;
 }
-h2{
+
+h2 {
   font-weight: 300;
   font-family: 'Forma DJR Text', sans-serif;
   letter-spacing: 6px;
   font-size: 1rem;
-  }
+}
 </style>

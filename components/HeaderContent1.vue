@@ -1,153 +1,182 @@
 <template>
-  <div class="container-fluid home-content-1">
-    <div class="row d-flex justify-content-center align-items-center text-only">
-      <!-- Colonna testo -->
-      <div class="col-12 d-flex flex-column justify-content-center align-items-center text-container">
-        <h1 class="h-1 split-links">
-          ITALIAN EDITORIAL AND REPORTAGE <br />WEDDING PHOTOGRAPHERS
+  <div class="ns-wrapper">
+    <div class="ns-heading">
+      <div class="left-container">
+        <h2 class="h-2">about</h2>
+        <h1 class="h-1">
+          ITALIAN EDITORIAL AND REPORTAGE
+          <br />
+          WEDDING PHOTOGRAPHERS
           <br />
           BASED IN NAPLES AND AMALFI COAST
         </h1>
-        <p class="split-links">
-          The importance of wedding photography lies in its power to create
-          timeless memories. Long after the day has passed, your wedding photos
-          will remain as a beautiful reminder of the day your souls became one. At
-          Nando Spiezia Photography, we follow your love story from sunrise to
-          sunset, capturing the spontaneous simplicity and the invisible bond that
-          unites you. Our unique blend of reportage authenticity and editorial
-          elegance ensures that every moment, big or small, is immortalized in
-          stunning photographs.
-        </p>
-        <div class="button split-links">READ MORE</div>
+      </div>
+      <div class="spacer-right"></div>
+    </div>
+    <div class="ns-section-1">
+      <div class="left-container">
+        <img class="img" src="\images\Bride editorial shooting.jpg" /> 
+      </div>
+      <div class="right-container">
+        <div class="text-div">
+          <p class="p">
+            The importance of wedding photography lies in its power to create
+            timeless memories. Long after the day has passed, your wedding
+            photos will remain as a beautiful reminder of the day your souls
+            became one. At Nando Spiezia Photography, we follow your love story
+            from sunrise to sunset, capturing the spontaneous simplicity and the
+            invisible bond that unites you. Our unique blend of reportage
+            authenticity and editorial elegance ensures that every moment, big
+            or small, is immortalized in stunning photographs.
+          </p>
+          <div class="button">READ MORE</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SplitText from 'gsap/SplitText';
-
-gsap.registerPlugin(SplitText, ScrollTrigger);
-
 export default {
-  mounted() {
-    this.$nextTick(() => {
-      this.animateTextOnScroll();
-    });
-  },
-  methods: {
-    animateTextOnScroll() {
-      const splitH1 = new SplitText(".h-1", { type: "lines", linesClass: "lineChild" });
-      new SplitText(".h-1", { type: "lines", linesClass: "lineParent" });
-
-      const splitButton = new SplitText(".button", { type: "lines", linesClass: "lineChild" });
-      new SplitText(".button", { type: "lines", linesClass: "lineParent" });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".text-container",
-          start: "top 80%",
-          end: "bottom 60%",
-          scrub: false,
-          yoyo: true,
-          toggleActions: "play reverse play reverse",
-        },
-      });
-
-      tl.from(splitH1.lines, {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power3.out",
-        stagger: 0.1,
-      });
-
-      tl.from("p", {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power3.out",
-      }, "-=1.2");
-
-      tl.from(splitButton.lines, {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power3.out",
-        stagger: 0.1,
-      }, "-=1.2");
-    }
-  }
+  name: "NsWrapper",
+  components: {},
+  props: {},
+  data() {},
 };
 </script>
-
 <style scoped>
-.lineParent {
-  overflow: hidden;
+.ns-wrapper,
+.ns-wrapper * {
+  box-sizing: border-box;
 }
-
-.split-links {
-  overflow: hidden;
-}
-
-.home-content-1 {
+.ns-wrapper {
   background: #ffffff;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.text-container {
- 
+  padding: 150px 0px 50px 0px;
   display: flex;
   flex-direction: column;
-  gap: 37px;
-  width: 100%;
-  text-align: center;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
-
-/* Stili per i testi */
+.ns-heading {
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  row-gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  min-width: 350px;
+  max-width: 900px;
+  position: relative;
+}
+.h-2 {
+  color: #000000;
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
 .h-1 {
   color: #000000;
-  font-family: "Silkserif", serif;
-  font-size: 60px;
-  font-weight: 500;
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-
-p {
+.spacer-right {
+  margin: 0 0 0 -54px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  height: 0px;
+  min-width: 350px;
+  max-width: 900px;
+  position: relative;
+  overflow: hidden;
+}
+.ns-section-1 {
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  row-gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.img {
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 1001px;
+  position: relative;
+  object-fit: cover;
+}
+.right-container {
+  margin: 0 0 0 -54px;
+  background: #ffffff;
+  padding: 81px 51px 69px 51px;
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex: 1;
+  min-width: 350px;
+  max-width: 897px;
+  position: relative;
+}
+.text-div {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.p {
   color: #000000;
-  font-family: "Noto Serif", serif;
-  font-size: 18px;
-  font-weight: 300;
-  width: 1200px;
+  text-align: justified;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 }
-
 .button {
-  color: #000000;
-  font-family: "Noto Serif", serif;
-  font-size: 18px;
-  font-weight: 400;
-  text-decoration: underline;
-}
-
-/* Media query per schermi più grandi */
-@media (min-width: 1200px) {
-  .text-container {
-    max-width: 100%;
-    padding: 40px 120px; /* Maggior spazio ai lati sui schermi più grandi */
-  }
-}
-
-/* Media query per mobile */
-@media (max-width: 768px) {
-  .text-container {
-    text-align: center;
-    max-width: 100%;
-    padding: 20px;
-  }
+  color: #b4b4b4;
+  text-align: right;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 </style>
