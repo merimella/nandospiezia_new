@@ -1,167 +1,84 @@
 <template>
-  <div class="logo-loader-wrapper">
-    <div class="logo-loader">
-      <div class="rectangle">
-        <div class="rectangle2"></div>
-        <div class="rectangle2"></div>
-        <div class="rectangle2"></div>
+  <section class="section-1 container-fluid min-vh-100 d-flex align-items-center p-0">
+    <!-- Il div row usa d-flex per mantenere l'altezza uguale tra le colonne -->
+    <div class="container">
+      <div class="row d-flex align-items-stretch">
+        <!-- Colonna Sinistra: Titoli e Immagine -->
+        <div class="img col-md-6 d-flex flex-column justify-content-center align-items-start py-5">
+          <h2>about us</h2>
+          <h1>
+            ITALIAN EDITORIAL AND REPORTAGE <br />
+            WEDDING PHOTOGRAPHERS
+            <br />
+            BASED IN NAPLES AND AMALFI COAST
+          </h1>
+          <div class="img-container">
+            <img
+              class="img-fluid bride-editorial-shooting-1"
+              src="/images/Bride editorial shooting.jpg"
+              alt="Bride editorial shooting"
+            />
+          </div>
+        </div>
+        <!-- Colonna Destra: Paragrafo e Pulsante centrati verticalmente -->
+        <div class="testi col-md-6 d-flex flex-column justify-content-center align-items-start py-5">
+          <p>
+            
+          The importance of wedding photography lies in its power to create timeless memories. <br><br>
+          Long after the day has passed, your wedding photos will remain as a beautiful reminder of the day your souls became one. 
+          At Nando Spiezia Photography, we follow your love story from sunrise to sunset, capturing the spontaneous simplicity and the invisible bond that unites you.<br><br>
+          Our unique blend of reportage authenticity and editorial elegance ensures that every moment, big or small, is immortalized in stunning photographs.<br><br>
+
+          </p>
+          <div class="text-left">
+            <button class="btn btn-link">READ MORE</button>
+          </div>
+        </div>
       </div>
-      <img class="p" src="/images/loader-svg/p0.svg" />
-      <img class="n" src="/images/loader-svg/n0.svg" />
-      <img class="s" src="/images/loader-svg/s0.svg" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin"; // Per l'effetto slot machine
-
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
-
 export default {
-  name: "LogoLoader",
-  mounted() {
-    // Animazione ingresso rettangoli (dal basso verso l'alto)
-    gsap.from(".rectangle2", {
-      y: 300, // Parti dal basso
-      opacity: 0,
-      duration: 1.5,
-      ease: "power4.out",
-      stagger: 0.2,
-    });
-
-    // Test per la lettera P con l'effetto di rimbalzo
-    gsap.fromTo(
-      ".p",
-      {
-        y: -400, // Parti da sopra
-        opacity: 0,
-      },
-      {
-        y: 0, // Posizione finale
-        opacity: 1,
-        duration: 2, // Durata animazione
-        ease: "bounce.out", // Effetto rimbalzo
-        delay: 0.5, // Leggero ritardo
-      }
-    );
-
-    // Animazione per le altre lettere
-    gsap.fromTo(
-      ".n",
-      {
-        y: -400, 
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 2,
-        ease: "elastic.out(1, 0.5)", // Rimbalzo elastico
-        delay: 1, 
-      }
-    );
-
-    gsap.fromTo(
-      ".s",
-      {
-        y: -400, 
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 2,
-        ease: "elastic.out(1, 0.5)", // Rimbalzo elastico
-        delay: 1.5, 
-      }
-    );
-  },
+  name: "Section1",
 };
 </script>
 
-
-
-
 <style scoped>
-.logo-loader-wrapper {
+.section-1 {
+  min-height: 100vh; /* Fa sì che la sezione occupi l'intera altezza dello schermo */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* Altezza 100% del viewport */
-  width: 100vw;  /* Larghezza 100% del viewport */
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
+  align-items: center; /* Centra verticalmente i contenuti */
+  background-color: white;
 }
 
-.logo-loader,
-.logo-loader * {
-  box-sizing: border-box;
+.img-container {
+  width: 100%;
+  height: auto;
 }
 
-.logo-loader {
-  
-  padding: 396px 447px 450px 447px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  height: 1024px;
-  position: relative;
-  overflow: hidden;
+.img h1{
+  margin-bottom: 30px;
 }
 
-.rectangle {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
+.testi{
+  margin-top: 200px;
+}
+.bride-editorial-shooting-1 {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 70vh; /* Limita l'altezza dell'immagine per evitare overflow */
 }
 
-.rectangle2 {
-  background: #000000;
-  flex-shrink: 0;
-  width: 178.58px;
-  height: 178.58px;
-  position: relative;
+@media only screen and (max-width: 600px) {
+  .testi{
+  margin-top: -60px;
 }
-
-.p {
-  flex-shrink: 0;
-  width: 100.99px;
-  height: 117.82px;
-  position: absolute;
-  left: 853px;
-  top: 367px;
-  z-index: 10; /* Aggiungi questo per dare priorità di visibilità */
-  overflow: visible;
+.img{
+  margin-top: 30px;
 }
-
-.n {
-  flex-shrink: 0;
-  width: 118.16px;
-  height: 117.82px;
-  position: absolute;
-  left: 477px;
-  top: 467px;
-  overflow: visible;
-}
-
-.s {
-  flex-shrink: 0;
-  width: 102px;
-  height: 122.87px;
-  position: absolute;
-  left: 669px;
-  top: 424px;
-  overflow: visible;
 }
 
 </style>

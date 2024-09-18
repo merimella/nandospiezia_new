@@ -2,6 +2,7 @@
 @import url("https://use.typekit.net/qsl4wmi.css");
 @import url("https://use.typekit.net/qsl4wmi.css");
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 @font-face {
   font-family: 'SilkSerif';
@@ -59,5 +60,38 @@ font-style: normal;
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'Amalfi Coast';
+  src: url('fonts/Amalfi-Coast.eot');
+  src: url('fonts/Amalfi-Coast.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Amalfi-Coast.woff2') format('woff2'),
+       url('fonts/Amalfi-Coast.woff') format('woff'),
+       url('fonts/Amalfi-Coast.ttf')  format('truetype'),
+       url('fonts/Amalfi-Coast.svg#Amalfi Coast') format('svg');
+}
 
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'SilkSerif', 'Noto Serif', serif; /* Definisci la famiglia principale */
+}
 
+/* Stili specifici */
+h1 {
+  font-size: 30px !important;
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+h2 {
+  font-size: 32px !important;
+  font-weight: 400;
+  font-family: 'Amalfi Coast';
+}
+
+p {
+  font-size: 18px !important;
+  line-height: 1.5;
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: normal;
+}
