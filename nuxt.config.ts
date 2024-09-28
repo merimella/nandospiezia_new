@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   pages: true,
-  ssr: false,
+  ssr: false, // Modalità SPA (no SSR)
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
@@ -21,5 +21,14 @@ export default defineNuxtConfig({
     }
   },
 
- 
+  // Aggiungi questa sezione per configurare le variabili d'ambiente
+  runtimeConfig: {
+    // Variabili private che saranno accessibili solo lato server
+    strapiBearerKey: process.env.STRAPI_BEARER_KEY || '',
+
+    // Variabili pubbliche, accessibili sia lato server che client
+    public: {
+      strapiUrl: process.env.STRAPI_API_URL || 'http://localhost:1337',
+    }
+  },
 });
