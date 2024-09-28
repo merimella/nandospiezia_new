@@ -16,8 +16,9 @@
     "bootstrap": "^5.3.3",
     "consola": "^3.2.3",
     "defu": "^6.1.4",
-    "gsap": "file:/Users/mariateresacirillo/gsap-premium/npm-install-this/gsap-bonus.tgz",
+    "gsap": "file:../../../Downloads/gsap-premium/npm-install-this/gsap-bonus.tgz",
     "locomotive-scroll": "^4.1.4",
-    "nuxt": "^3.13.0"
+    "nuxt": "^3.13.0",
+    "this": "^1.1.0"
   }
 }

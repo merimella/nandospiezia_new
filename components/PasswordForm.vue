@@ -27,9 +27,10 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue'; // Non è necessario importare defineEmits
+const emit = defineEmits(); // Definisci emit, non c'è bisogno di importarlo
 
-const emit = defineEmits(); // Definisci emit
+
 
 const password = ref('');
 const errorMessage = ref('');
