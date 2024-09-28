@@ -27,15 +27,14 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue'; // Non è necessario importare defineEmits
 
-const emit = defineEmits(); // Definisci emit
+const emit = defineEmits(); // Definisci emit, non c'è bisogno di importarlo
 
 const password = ref('');
 const errorMessage = ref('');
 
 const submitPassword = () => {
-  // Emitting the password to the parent component for validation
   if (password.value) {
     console.log('Password emessa:', password.value); // Log della password emessa
     emit('submit', password.value); // Emetti l'evento
@@ -43,7 +42,6 @@ const submitPassword = () => {
     errorMessage.value = 'Inserisci una password valida.';
   }
 };
-
 </script>
 
 <style scoped>
