@@ -10,17 +10,16 @@
     "start": "nuxt start",
     "postinstall": "nuxt prepare"
   },
-"dependencies": {
-  "@nuxt/http": "^0.6.4",
-  "@studio-freight/lenis": "^1.0.42",
-  "axios": "^1.7.7",
-  "bootstrap": "^5.3.3",
-  "consola": "^3.2.3",
-  "defu": "^6.1.4",
-  "@gsap/shockingly": "^3.12.5",
-  "locomotive-scroll": "^4.1.4",
-  "nuxt": "^3.13.0"
-}
-
-
+  "dependencies": {
+    "@gsap/shockingly": "^3.12.5",
+    "@nuxt/http": "^0.6.4",
+    "@studio-freight/lenis": "^1.0.42",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "consola": "^3.2.3",
+    "defu": "^6.1.4",
+    "gsap": "^3.12.5",
+    "locomotive-scroll": "^4.1.4",
+    "nuxt": "^3.13.0"
+  }
 }
