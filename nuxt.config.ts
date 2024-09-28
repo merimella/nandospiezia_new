@@ -21,8 +21,5 @@ export default defineNuxtConfig({
     }
   },
 
-  // Aggiungi transpile per GSAP
-  build: {
-    transpile: ['gsap'],
-  }
+ 
 });
