@@ -1,86 +1,103 @@
 <template>
+
+  
   <div class="smooth-wrapper">
     <div class="smooth-content" v-if="post">
-      <!-- Sezione Copertina -->
-      <section ref="coverSection" class="sectionCover full-page">
-        <div class="coverSection cover-image-container full-page">
-          <img 
-            v-if="post.attributes.image && post.attributes.image.data" 
-            :src="`http://localhost:1337${post.attributes.image.data.attributes.url}`" 
-            alt="Cover Image"
-            class="cover-image"
-            ref="coverImage"
-          />
-          <div class="overlay-text" ref="overlayText">
-            <h1 class="split-text" ref="title">{{ post.attributes.title }}</h1>
-          </div>
-        </div>
-      </section>
+      <!-- Se il post ha una password, chiedi all'utente di inserirla -->
+      <PasswordForm v-if="post.attributes.password && !isAuthenticated" @submit="checkPassword" />
 
-      <!-- Sezione Titolo e Contenuto -->
-      <section ref="contentSection" class="section content-container full-page">
-        <div class="text-container">
-          <h4 class="split-text">{{ post.attributes.heading }}</h4>
-          <h2 class="split-text">{{ post.attributes.subtitle }}</h2>
-          <p class="split-text">{{ post.attributes.description }}</p>
-        </div>
-      </section>
-
-      <!-- Sezione Focus e Paragrafo con Scroll Orizzontale e Sfondo Bianco -->
-      <section class="section horizontal white-background">
-        <div class="horizontal__container">
-          <div class="horizontal__item">
-            <img v-if="post.attributes.focus1 && post.attributes.focus1.data" 
-              :src="`http://localhost:1337${post.attributes.focus1.data.attributes.url}`" 
-              alt="Focus Image 1" />
-            <img v-if="post.attributes.focus2 && post.attributes.focus2.data" 
-              :src="`http://localhost:1337${post.attributes.focus2.data.attributes.url}`" 
-              alt="Focus Image 2" />
-            <img v-if="post.attributes.focus3 && post.attributes.focus3.data" 
-              :src="`http://localhost:1337${post.attributes.focus3.data.attributes.url}`" 
-              alt="Focus Image 3" />
-          </div>
-
-          <div class="horizontal__item">
-            <div class="text-container">
-              <p>{{ post.attributes.paragraph }}</p>
-              <h5>{{ post.attributes.quote }}</h5>
+      <!-- Mostra il contenuto se non c'è una password o se l'utente è autenticato -->
+      <div v-else>
+        <!-- Sezione Copertina -->
+        <section ref="coverSection" class="sectionCover full-page">
+          <div class="coverSection cover-image-container full-page">
+            <img 
+              v-if="post.attributes.image && post.attributes.image.data" 
+              :src="`http://localhost:1337${post.attributes.image.data.attributes.url}`" 
+              alt="Cover Image"
+              class="cover-image"
+              ref="coverImage"
+            />
+            <div class="overlay-text" ref="overlayText">
+              <h1 class="split-text" ref="title">{{ post.attributes.title }}</h1>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Sezione Galleria con Sfondo Bianco -->
-      <section v-if="post.attributes.gallery && post.attributes.gallery.data.length" class="section gallerySection full-page white-background">
-        <div class="gallery-container">
-          <div class="masonry-gallery">
-            <div
-              v-for="(image, index) in post.attributes.gallery.data"
-              :key="image.id"
-              class="masonry-item"
-              :data-index="index"
-            >
-              <img :src="`http://localhost:1337${image.attributes.url}`" class="img-fluid" alt="Gallery Image" />
+        <!-- Sezione Titolo e Contenuto -->
+        <section id="content" ref="contentSection" class="section content-container full-page">
+          <div class="text-container">
+            <h4 class="split-text">{{ post.attributes.heading }}</h4>
+            <h2 class="split-text">{{ post.attributes.subtitle }}</h2>
+            <p class="split-text">{{ post.attributes.description }}</p>
+          </div>
+        </section>
+
+        <!-- Sezione Focus e Paragrafo con Scroll Orizzontale e Sfondo Bianco -->
+        <section class="section horizontal white-background">
+          <div class="horizontal__container">
+            <div class="horizontal__item">
+              <img v-if="post.attributes.focus1 && post.attributes.focus1.data" 
+                :src="`http://localhost:1337${post.attributes.focus1.data.attributes.url}`" 
+                alt="Focus Image 1" />
+              <img v-if="post.attributes.focus2 && post.attributes.focus2.data" 
+                :src="`http://localhost:1337${post.attributes.focus2.data.attributes.url}`" 
+                alt="Focus Image 2" />
+              <img v-if="post.attributes.focus3 && post.attributes.focus3.data" 
+                :src="`http://localhost:1337${post.attributes.focus3.data.attributes.url}`" 
+                alt="Focus Image 3" />
+            </div>
+
+            <div class="horizontal__item">
+              <div class="text-container">
+                <p>{{ post.attributes.paragraph }}</p>
+                <h5>{{ post.attributes.quote }}</h5>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <!-- Sezione Galleria con Sfondo Bianco -->
+        <section v-if="post.attributes.gallery && post.attributes.gallery.data.length" class="section gallerySection full-page white-background">
+          <div class="gallery-container">
+            <div class="masonry-gallery">
+              <div
+                v-for="(image, index) in post.attributes.gallery.data"
+                :key="image.id"
+                class="masonry-item"
+                :data-index="index"
+              >
+                <img :src="`http://localhost:1337${image.attributes.url}`" class="img-fluid" alt="Gallery Image" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
+    
   </div>
+
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import SplitText from 'gsap/SplitText';
 import { useAsyncData } from 'nuxt/app';
+import Footer from '~/components/Footer.vue';
+import PasswordForm from '~/components/PasswordForm.vue';
+import { beforeEnter, enter, beforeLeave, leave } from '~/assets/gsap-transitions.js';
 
 // Recupera lo slug dall'URL dinamico
 const route = useRoute();
 const slug = route.params.slug;
+
+// Variabili reactive per password
+const inputPassword = ref('');
+const isAuthenticated = ref(false);
+const errorMessage = ref('');
 
 // Recupera il post da Strapi usando lo slug
 const { data } = await useAsyncData('post', () => $fetch(`http://localhost:1337/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
@@ -91,20 +108,25 @@ const { data } = await useAsyncData('post', () => $fetch(`http://localhost:1337/
 
 const post = data.value?.data?.[0] || null;
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+// Funzione per controllare la password
+const checkPassword = (submittedPassword) => {
+  console.log('Password inserita:', submittedPassword);
+  console.log('Password attesa:', post.attributes.password);
 
-const coverSection = ref(null);
-const contentSection = ref(null);
+  if (submittedPassword.trim() === post.attributes.password) {
+    isAuthenticated.value = true;
+    errorMessage.value = '';
+    console.log('Utente autenticato:', isAuthenticated.value); // Log per vedere se l'utente è autenticato
+    initializeAnimations();
+  } else {
+    errorMessage.value = 'Password errata. Riprova.';
+  }
+};
 
-onMounted(() => {
-  if (!post) return;
 
-  // Inizializza ScrollSmoother
-  const smoother = ScrollSmoother.create({
-    wrapper: '.smooth-wrapper',
-    content: '.smooth-content',
-    smooth: 1.5,
-  });
+// Funzione per inizializzare le animazioni e lo scroll orizzontale
+const initializeAnimations = () => {
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   // Animazioni per la sezione copertina e contenuto
   const coverImage = document.querySelector('.cover-image');
@@ -178,6 +200,15 @@ onMounted(() => {
       },
     });
   });
+};
+
+onMounted(() => {
+  if (!post) return;
+
+  // Se non c'è una password, inizializza subito le animazioni
+  if (!post.attributes.password) {
+    initializeAnimations();
+  }
 });
 </script>
 
@@ -244,13 +275,11 @@ h4, p {
   margin-top: 20px;
 }
 h4 {
-  text-decoration: underline;
-  font-family: "ivypresto-display", serif;
   margin-bottom: 30px;
 }
 p {
   font-size: 1.5rem;
-  font-family: "ivypresto-display", serif;
+
 }
 
 /* Sezione Orizzontale con Sfondo Bianco */
@@ -305,4 +334,9 @@ p {
   min-height: 100vh;
   padding: 20px;
 }
+
+.error {
+  color: red;
+}
+
 </style>

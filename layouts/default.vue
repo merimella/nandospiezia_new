@@ -1,7 +1,5 @@
-
 <template>
   <div>
-    <Navbar /> <!-- Navbar fissa -->
     <transition
       mode="in-out"
       @before-leave="beforeLeave"
@@ -9,10 +7,13 @@
       @before-enter="beforeEnter"
       @enter="enter"
     >
-      <NuxtPage /> <!-- Il contenuto dinamico delle pagine -->
+      <div> <!-- Avvolgi NuxtPage in un div -->
+        <NuxtPage />
+      </div>
     </transition>
   </div>
 </template>
+
 
 <script setup>
 import { gsap } from 'gsap';

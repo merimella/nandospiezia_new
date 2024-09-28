@@ -1,12 +1,12 @@
 <template>
   <nav :class="['navbar', { 'navbar-sticky': isSticky }]">
     <div class="menu-links" v-if="!isMobile">
-      <NuxtLink to="/" @click="closeMenu" class="menu-link">Home</NuxtLink>
-      <NuxtLink to="/memories-gallery" @click="closeMenu" class="menu-link">Memories</NuxtLink>
-      <NuxtLink to="/stories-gallery" @click="closeMenu" class="menu-link">Stories</NuxtLink>
-      <NuxtLink to="/about" @click="closeMenu" class="menu-link">About</NuxtLink>
-      <NuxtLink to="/faq" @click="closeMenu" class="menu-link">FAQ</NuxtLink>
-      <NuxtLink to="/contacts" @click="closeMenu" class="menu-link">Contacts</NuxtLink>
+      <NuxtLink to="/" active-class="active" @click="closeMenu" class="menu-link">Home</NuxtLink>
+      <NuxtLink to="/memories-gallery" active-class="active" @click="closeMenu" class="menu-link">Memories</NuxtLink>
+      <NuxtLink to="/stories-gallery" active-class="active" @click="closeMenu" class="menu-link">Stories</NuxtLink>
+      <NuxtLink to="/about" active-class="active" @click="closeMenu" class="menu-link">About</NuxtLink>
+      <NuxtLink to="/faq" active-class="active" @click="closeMenu" class="menu-link">FAQ</NuxtLink>
+      <NuxtLink to="/contacts" active-class="active" @click="closeMenu" class="menu-link">Contacts</NuxtLink>
     </div>
 
     <!-- Bottone "MORE" su desktop e hamburger su mobile -->
@@ -22,6 +22,7 @@
     <MenuItems :isMenuOpen="isMenuOpen" @close-menu="closeMenu" />
   </nav>
 </template>
+
 
 <script>
 import MenuItems from '~/components/MenuItems.vue';
@@ -48,7 +49,7 @@ export default {
   },
   methods: {
     handleScroll() {
-      const content = document.querySelector('#content'); // Elemento che segna il passaggio al contenuto
+      const content = document.querySelector('#content');
 
       // Rende la navbar sticky se lo scroll raggiunge il contenuto
       if (window.scrollY >= content.offsetTop) {
@@ -59,11 +60,19 @@ export default {
     },
     checkMobile() {
       this.isMobile = window.innerWidth <= 768; // Imposta il menu mobile per schermi piccoli
+
+      const navbar = document.querySelector('.navbar');
+      
+      // Rimuove il mix-blend-mode quando non è più mobile
+      if (!this.isMobile) {
+        navbar.style.mixBlendMode = 'normal';
+      } else {
+        navbar.style.mixBlendMode = 'difference';
+      }
     },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
-      
-      // Aggiungi o rimuovi la classe .active alla navbar
+
       const navbar = document.querySelector('.navbar');
       if (this.isMenuOpen) {
         navbar.classList.add('active');
@@ -74,11 +83,12 @@ export default {
     closeMenu() {
       this.isMenuOpen = false;
       const navbar = document.querySelector('.navbar');
-      navbar.classList.remove('active'); // Rimuovi la classe .active quando il menu si chiude
+      navbar.classList.remove('active');
     }
   }
 };
 </script>
+
 
 <style scoped>
 /* Navbar inizialmente posizionata sopra il contenuto */
@@ -108,6 +118,8 @@ export default {
   padding-left: 30px;
   padding-right: 30px;
   z-index: 1000;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Menu links */
@@ -123,11 +135,18 @@ export default {
   color: black;
   font-size: 18px;
   text-transform: uppercase;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent; /* Imposta un bordo trasparente per un effetto underline */
 }
 
 .menu-link:hover {
   color: grey;
+}
+
+/* Link attivo con underline */
+.menu-link.active {
+  border-bottom: 2px solid black; /* Sottolinea il link attivo */
+  color: black; /* Mantiene il colore nero sul link attivo */
 }
 
 /* Bottone per il menu su mobile */

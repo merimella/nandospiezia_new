@@ -1,83 +1,42 @@
 <template>
-  <div class="smooth-wrapper"> <!-- Smooth wrapper -->
-    <div class="smooth-content"> <!-- Smooth content -->
-      <Header 
-        title="Nando Spiezia" 
-        subtitle="PHOTOGRAPHY" 
-        :images="['/images/header-slide-1.webp', '/images/header-slide-2.webp', '/images/header-slide-3.webp']" 
-      />
-      <div ref="headerContent1">
-        <HeaderContent1 />
+  <div class="page-container">
+    <Navbar />
+    <div class="header">
+      <Header />
+    </div>
+    <div id="content" class="scroll-content">
+      <div class="content-wrapper"> <!-- Aggiungi un contenitore extra -->
+        <HomeWrapper />
+        <HomeGallery />
       </div>
-      <HeaderContent2 />
-      <HomeGallery />
-      
-      <section class="content">
-        <!-- Rest of your homepage content -->
-      </section>
     </div>
   </div>
 </template>
 
+
 <script setup>
-import { onMounted } from 'vue';
-import { gsap } from 'gsap';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import Header from '~/components/Header.vue';
-import HeaderContent1 from '~/components/HeaderContent1.vue';
-import HomeGallery from '~/components/HomeGallery.vue';
-
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-
-onMounted(() => {
-  const smoother = ScrollSmoother.create({
-    wrapper: ".smooth-wrapper",
-    content: ".smooth-content",
-    smooth: 1.5,
-    effects: true,
-  });
-
-  // Rimuove il pinning dell'header e fa in modo che lo scrolling passi sopra l'header
-  ScrollTrigger.create({
-    trigger: '[ref="headerContent1"]',
-    start: "top top", // Inizia il trigger quando headerContent1 è in cima
-    end: "bottom top", // Fine del trigger
-    scrub: true,
-    onEnter: () => {
-      gsap.to('.header', { opacity: 0 });
-    },
-    onLeaveBack: () => {
-      gsap.to('.header', { opacity: 1 });
-    }
-  });
-});
 </script>
 
 <style scoped>
-.content {
-  margin-top: 100vh; /* Sposta il contenuto sotto l'header */
-}
 
-.smooth-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-.smooth-content {
-  position: relative;
-  will-change: transform;
-}
-
-header {
-  z-index: 100; /* Assicura che l'header rimanga sopra il contenuto */
-  position: fixed; /* Mantiene l'header fisso in cima */
-  width: 100%;
+/* Assicurati che l'header sia fisso in alto */
+.header {
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1; /* Assicurati che il contenuto scorra sotto l'header */
+  background-color: white; /* Aggiusta in base al tuo design */
+  width: 100%; /* Full width per coprire lo schermo */
+  height: 100vh; /* Full height per coprire il viewport se necessario */
+  z-index: 1;
 }
 
-
+/* Contenuto scrollabile */
+.scroll-content {
+  margin-top: 100vh; /* Sposta il contenuto sotto l'header */
+  position: relative;
+  z-index: 2; /* Assicurati che questo scorra sopra l'header */
+}
 </style>

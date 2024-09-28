@@ -5,12 +5,12 @@
       <div
         v-for="(post, index) in posts.slice(0, 9)"
         :key="`post-${post.id}`" 
-        class="col-12 col-md-4 col-lg-4 d-flex align-items-stretch gallery-item"
+        class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch gallery-item"
         @mouseenter="startHoverAnimation(index)" 
         @mouseleave="stopHoverAnimation(index)"
       >
         <!-- Aggiungiamo NuxtLink per il reindirizzamento basato sullo slug -->
-        <NuxtLink :to="`/memories/${post.attributes.slug}`" class="image-container">
+        <NuxtLink :to="`/stories/${post.attributes.slug}`" class="image-container">
           <!-- Sequenza di immagini dalla galleria -->
           <img 
             v-for="(image, imgIndex) in post.attributes.gallery.data" 
@@ -45,8 +45,6 @@ export default {
       intervals: [] // Salviamo gli intervalli per ogni galleria
     };
   },
-
-
   mounted() {
     if (process.client) {
       this.fetchPostsData();
@@ -63,7 +61,7 @@ export default {
           'http://localhost:1337/api/posts?populate=gallery',
           {
             headers: {
-              Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`,
+              Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`, // Sostituisci con la tua API Key
             }
           }
         );
@@ -138,16 +136,26 @@ export default {
   overflow: hidden;
 }
 
-.img-fluid {
+.image-container {
+  position: relative;
   width: 100%;
-  height: 800px; /* Altezza fissa di 800px */
-  object-fit: cover; /* Assicuriamoci che le immagini coprano tutto lo spazio */
-  object-position: center center; /* Centriamo l'immagine per evitare spazi bianchi */
-  display: none; /* Le immagini sono nascoste di default */
+  padding-bottom: 120%; /* Manteniamo le proporzioni 500x600 */
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover; 
+  object-position: center;
+  display: none;
+  transition: transform 0.3s ease;
 }
 
 .gallery-image.active {
-  display: block; /* Solo l'immagine attiva è visibile */
+  display: block; 
 }
 
 .info-container {
@@ -174,15 +182,13 @@ p {
   font-size: 1rem;
 }
 
-.image-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-
-.gallery-image {
-  transition: transform 0.3s ease;
-  object-fit: cover; /* Assicuriamo che l'immagine copra l'intero spazio */
-  object-position: center center; /* Manteniamo l'immagine centrata */
+@media (max-width: 768px) {
+  .gallery-item {
+    height: auto; 
+  }
+  .gallery-image {
+    height: auto;
+    width: 100%;
+  }
 }
 </style>

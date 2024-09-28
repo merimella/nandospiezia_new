@@ -1,10 +1,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  pages: true,
+  ssr: false,
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
-    '@/assets/css/fonts.css', // Percorso al tuo file CSS principale
+    '@/assets/css/fonts.css',
   ],
 
   app: {
@@ -17,5 +19,10 @@ export default defineNuxtConfig({
         }
       ]
     }
+  },
+
+  // Aggiungi transpile per GSAP
+  build: {
+    transpile: ['gsap'],
   }
 });

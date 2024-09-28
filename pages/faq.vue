@@ -1,5 +1,6 @@
 <template>
   <div> <!-- Single root element -->
+    <Navbar /> 
     <h1>FAQ Page</h1>
     <p>Here are the frequently asked questions.</p>
   </div>
@@ -13,6 +14,7 @@
 <style scoped>
 div{
   background-color:grey;
+  height: 1000px;
   
 }
 </style>

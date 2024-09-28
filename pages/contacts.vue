@@ -1,18 +1,33 @@
 <template>
-  <div> <!-- Single root element -->
-    <h1>FAQ Page</h1>
-    <p>Here are the frequently asked questions.</p>
-  </div>
+
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+      <Navbar /> 
+      <Form />
+    </div>
+
 </template>
 
+<script setup>
+// Importa il modulo delle transizioni GSAP
 
-<script lang="ts" setup>
+import Form from '~/components/Form.vue';
 
+// Puoi utilizzare le funzioni di transizione definite in `gsap-transitions.js`
 </script>
 
 <style scoped>
-div{
-  background-color:green;
- 
+div {
+  background-color: white; /* Imposta lo sfondo bianco */
+}
+
+/* Evita che la pagina abbia margini esterni */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.min-vh-100 {
+  min-height: 100vh; /* Imposta l'altezza minima a 100% della viewport */
 }
 </style>
