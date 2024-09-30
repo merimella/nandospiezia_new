@@ -21,6 +21,7 @@
       <div class="h-3">YOUR WEDDING, BEST LOVE TALE</div>
     </div>
   </div>
+  <CustomFooter />
 </template>
 
 <style scoped>

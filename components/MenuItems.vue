@@ -112,6 +112,9 @@ export default {
   text-align: left;
   text-decoration: none;
 }
+.split-links{
+  overflow: hidden;
+}
 
 .logo-img {
   height: 30px; /* Ridimensiona il logo per essere proporzionato all'hamburger */

@@ -3,7 +3,7 @@
     <div class="content">
       <!-- Slideshow -->
       <ul class="slideshow">
-        <li v-for="(image, index) in images" :key="index" :class="{ active: index === currentImage }">
+        <li v-for="(image, index) in currentImages" :key="index" :class="{ active: index === currentImage }">
           <img :src="image || '/images/default.webp'" alt="Slideshow Image" />
         </li>
       </ul>
@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-
 export default {
   data() {
     return {
       title: '',
       subtitle: '',
-      images: [],
-      currentImage: 0,
+      imagesDesktop: [], // Immagini per desktop
+      imagesMobile: [], // Immagini per mobile
+      currentImages: [], // Immagini attualmente visualizzate (desktop o mobile)
+      currentImage: 0, // Indice immagine attuale nello slideshow
       interval: null // Memorizza l'intervallo per lo slideshow
     };
   },
@@ -40,38 +40,60 @@ export default {
       });
       
       const data = await response.json();
-      const attributes = data.data[0]?.attributes; // Accede ai dati del primo header-slider
+      const attributes = data.data[0]?.attributes;
 
       // Popola i dati restituiti dall'API
       this.title = attributes?.title || 'Default Title';
       this.subtitle = attributes?.subtitle || 'Default Subtitle';
 
-      // Concatenare il percorso base per gli URL delle immagini
-      this.images = [
-      `http://localhost:1337${attributes?.headerSlide1?.data?.attributes?.url}`,
-      `http://localhost:1337${attributes?.headerSlide2?.data?.attributes?.url}`,
-      `http://localhost:1337${attributes?.headerSlide3?.data?.attributes?.url}`,
-      `http://localhost:1337${attributes?.headerSlider4?.data?.attributes?.url}`,  // Correzione per headerSlider4
-      `http://localhost:1337${attributes?.headerSlide5?.data?.attributes?.url}`
-    ];
+      // Popola le immagini per desktop
+      this.imagesDesktop = [
+        `http://localhost:1337${attributes?.headerSlide1?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide2?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide3?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide4?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide5?.data?.attributes?.url}`
+      ];
+
+      // Popola le immagini per mobile
+      this.imagesMobile = [
+        `http://localhost:1337${attributes?.headerSlideMobile1?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile2?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile3?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile4?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile5?.data?.attributes?.url}`
+      ];
 
       // Avvia lo slideshow
+      this.updateImages();
       this.startSlideshow();
+
+      // Aggiungi un listener per il ridimensionamento della finestra
+      window.addEventListener('resize', this.updateImages);
     } catch (error) {
       console.error('Errore durante la chiamata API:', error);
     }
   },
   methods: {
     startSlideshow() {
-      if (this.images.length === 0) return; // Evita slideshow vuoti
+      if (this.currentImages.length === 0) return; // Evita slideshow vuoti
       this.interval = setInterval(() => {
-        this.currentImage = (this.currentImage + 1) % this.images.length;
-      }, 3000);
+        this.currentImage = (this.currentImage + 1) % this.currentImages.length;
+      }, 3000); // Cambia immagine ogni 3 secondi
     },
     stopSlideshow() {
       clearInterval(this.interval);
+    },
+
+    // Funzione per aggiornare le immagini in base alla larghezza dello schermo
+    updateImages() {
+      this.currentImages = window.innerWidth <= 768 ? this.imagesMobile : this.imagesDesktop;
     }
   },
+  beforeUnmount() {
+    this.stopSlideshow(); // Ferma lo slideshow quando il componente viene distrutto
+    window.removeEventListener('resize', this.updateImages); // Rimuovi il listener di ridimensionamento
+  }
 };
 </script>
 
@@ -131,12 +153,32 @@ export default {
   z-index: 10;
 }
 
+.text-overlay h1 {
+  font-size: 4rem !important;
+  font-weight: 200;
+  font-family: 'SilkSerif', serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-overlay h2 {
+  font-weight: 300;
+  font-family: 'Forma DJR Text', sans-serif;
+  letter-spacing: 6px;
+  font-size: 1rem !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 h1, h2 {
   margin: 0;
 }
 
 h1 {
-  font-size: 4rem!important;
+  font-size: 4rem !important;
   font-weight: 200;
   font-family: 'SilkSerif', serif;
   text-transform: uppercase;
@@ -146,6 +188,6 @@ h2 {
   font-weight: 300;
   font-family: 'Forma DJR Text', sans-serif;
   letter-spacing: 6px;
-  font-size: 1rem!important;
+  font-size: 1rem !important;
 }
 </style>

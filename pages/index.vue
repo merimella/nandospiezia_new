@@ -7,7 +7,7 @@
     <div id="content" class="scroll-content">
       <div class="content-wrapper"> <!-- Aggiungi un contenitore extra -->
         <HomeWrapper />
-       
+        <FooterForm />
         <Footer />
       </div>
     </div>
@@ -40,4 +40,5 @@
   position: relative;
   z-index: 2; /* Assicurati che questo scorra sopra l'header */
 }
+
 </style>

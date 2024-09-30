@@ -51,7 +51,7 @@ export default {
       `http://localhost:1337${attributes?.headerSlide1?.data?.attributes?.url}`,
       `http://localhost:1337${attributes?.headerSlide2?.data?.attributes?.url}`,
       `http://localhost:1337${attributes?.headerSlide3?.data?.attributes?.url}`,
-      `http://localhost:1337${attributes?.headerSlider4?.data?.attributes?.url}`,  // Correzione per headerSlider4
+      `http://localhost:1337${attributes?.headerSlide4?.data?.attributes?.url}`,  // Correzione per headerSlider4
       `http://localhost:1337${attributes?.headerSlide5?.data?.attributes?.url}`
     ];
 
@@ -129,7 +129,30 @@ export default {
   text-align: center;
   color: white;
   z-index: 10;
+
 }
+
+
+.text-overlay h1 {
+  font-size: 4rem!important;
+  font-weight: 200;
+  font-family: 'SilkSerif', serif;
+  text-transform: uppercase;
+  white-space: nowrap;  /* Impedisce il testo di andare a capo */
+  overflow: hidden;      /* Nasconde l'eccesso di testo */
+  text-overflow: ellipsis;  /* Aggiunge ellissi (...) se il testo è troppo lungo */
+}
+
+.text-overlay h2 {
+  font-weight: 300;
+  font-family: 'Forma DJR Text', sans-serif;
+  letter-spacing: 6px;
+  font-size: 1rem!important;
+  white-space: nowrap;  /* Impedisce il testo di andare a capo */
+  overflow: hidden;      /* Nasconde l'eccesso di testo */
+  text-overflow: ellipsis;  /* Aggiunge ellissi (...) se il testo è troppo lungo */
+}
+
 
 h1, h2 {
   margin: 0;

@@ -1,5 +1,9 @@
 <template>
   <div class="container-fluid photo-gallery p-0">
+    <!-- Titolo della sezione -->
+    <div class="gallery-title text-center py-4">
+      <h1>Your Best Day Deserves Best Memories</h1>
+    </div>
     <div class="row g-0">
       <!-- Creiamo 9 div uguali disposti in 3 colonne per desktop e 2 colonne per mobile -->
       <div
@@ -32,9 +36,6 @@
   </div>
 </template>
 
-
-
-
 <script>
 import { gsap } from "gsap";
 
@@ -42,10 +43,10 @@ export default {
   name: "PhotoGallery",
   data() {
     return {
-      posts: [], // Dati caricati da Strapi
-      hoverIndex: null, // Tiene traccia del div su cui si passa il mouse
-      currentImageIndex: [], // Tiene traccia dell'indice dell'immagine corrente per ogni div
-      intervals: [] // Salviamo gli intervalli per ogni galleria
+      posts: [],
+      hoverIndex: null,
+      currentImageIndex: [],
+      intervals: []
     };
   },
   mounted() {
@@ -54,7 +55,6 @@ export default {
     }
   },
   beforeUnmount() {
-    // Puliamo gli intervalli quando il componente viene distrutto
     this.clearAllIntervals();
   },
   methods: {
@@ -64,17 +64,15 @@ export default {
           'http://localhost:1337/api/posts?populate=gallery',
           {
             headers: {
-              Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`, // Sostituisci con la tua API Key
+              Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`, 
             }
           }
         );
         const data = await response.json();
         this.posts = data?.data || [];
 
-        // Inizializziamo l'indice dell'immagine corrente per ogni div
         this.currentImageIndex = this.posts.map(() => 0);
 
-        // Partiamo solo con la prima galleria in automatico
         this.startAutomaticAnimation(0);
       } catch (error) {
         console.error("Errore durante la chiamata API:", error);
@@ -84,20 +82,17 @@ export default {
       const totalImages = this.posts[index].attributes.gallery.data.length;
       const interval = setInterval(() => {
         this.currentImageIndex[index] = (this.currentImageIndex[index] + 1) % totalImages;
-      }, speed); // Cambia immagine ogni 2 secondi per default
-      this.intervals[index] = interval; // Salviamo l'intervallo
+      }, speed);
+      this.intervals[index] = interval;
     },
     startHoverAnimation(index) {
-      // Ferma tutte le altre animazioni
       this.clearAllIntervals();
-
-      // Iniziamo l'animazione solo all'hover, tranne per la prima galleria
       if (!this.intervals[index]) {
-        this.startAutomaticAnimation(index, 1500); // Partenza più veloce dopo hover
+        this.startAutomaticAnimation(index, 1500);
       }
       this.hoverIndex = index;
       gsap.to(`.gallery-item:nth-child(${index + 1}) .gallery-image.active`, {
-        scale: 1.1, // Effetto di zoom
+        scale: 1.1,
         duration: 0.3,
         ease: "power3.out"
       });
@@ -105,19 +100,17 @@ export default {
     stopHoverAnimation(index) {
       this.hoverIndex = null;
       gsap.to(`.gallery-item:nth-child(${index + 1}) .gallery-image.active`, {
-        scale: 1, // Ritorniamo alla scala originale
+        scale: 1,
         duration: 0.3,
         ease: "power3.out"
       });
 
-      // Se si lascia l'hover, fermiamo l'animazione
       if (this.intervals[index]) {
         clearInterval(this.intervals[index]);
         this.intervals[index] = null;
       }
     },
     clearAllIntervals() {
-      // Ferma tutte le animazioni delle gallerie
       this.intervals.forEach((interval, idx) => {
         if (interval) {
           clearInterval(interval);
@@ -134,16 +127,23 @@ export default {
   background: #ffffff;
 }
 
+.gallery-title h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #333;
+}
+
 .gallery-item {
   position: relative;
   overflow: hidden;
-  padding: 0; /* Rimuove lo spazio tra le immagini */
+  padding: 0;
 }
 
 .image-container {
   position: relative;
   width: 100%;
-  padding-bottom: 125%; /* Rapporto 4:5 (100/80 = 1.25, quindi padding-bottom 125%) */
+  padding-bottom: 125%; 
 }
 
 .gallery-image {
@@ -152,7 +152,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  object-fit: cover; /* Garantisce che l'immagine si adatti al contenitore senza deformarsi */
+  object-fit: cover;
   object-position: center;
   display: none;
   transition: transform 0.3s ease;
@@ -186,23 +186,22 @@ p {
   font-size: 1rem;
 }
 
-/* Gestione del layout su desktop e mobile */
 @media (min-width: 768px) {
   .gallery-item {
-    flex-basis: 33.33%; /* Ogni immagine occuperà il 33.33% della larghezza su desktop (3 colonne) */
-    max-width: 33.33%; /* Impedisce all'immagine di superare il 33.33% della larghezza */
+    flex-basis: 33.33%; 
+    max-width: 33.33%; 
   }
 }
 
 @media (max-width: 768px) {
   .gallery-item {
-    flex-basis: 50%; /* Ogni immagine occuperà il 50% della larghezza su mobile (2 colonne) */
-    max-width: 50%; /* Impedisce all'immagine di superare il 50% della larghezza */
-    padding: 0; /* Rimuove qualsiasi padding */
+    flex-basis: 50%; 
+    max-width: 50%; 
+    padding: 0; 
   }
   
   .image-container {
-    padding-bottom: 125%; /* Mantiene il rapporto d'aspetto 4:5 su mobile */
+    padding-bottom: 125%; 
   }
   
   .gallery-image {
@@ -210,5 +209,4 @@ p {
     width: 100%;
   }
 }
-
 </style>
