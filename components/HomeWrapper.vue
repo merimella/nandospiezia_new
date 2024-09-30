@@ -244,8 +244,14 @@ export default {
     margin-right: 20px;
   }
 
+
+  .section{
+    padding-bottom: 50px!important;
+  }
+
   .section3{
-    padding-bottom: 150px!important;
+    padding-bottom: 50px!important;
+    padding-top: 50px!important;
   }
 
   .img-section {
@@ -270,4 +276,49 @@ export default {
 
 
 }
+
+/* Layout della galleria su schermi piccoli */
+@media (max-width: 768px) {
+  .gallery-item {
+    width: 100%; /* Default: singola immagine per riga */
+  }
+
+  /* Prima immagine grande (100%) */
+  .gallery-item:nth-child(1) {
+    width: 100%; /* Prima immagine occupa l'intera larghezza */
+  }
+
+  /* Seconda e terza immagine piccole affiancate al 50% */
+  .gallery-item:nth-child(2),
+  .gallery-item:nth-child(3) {
+    width: 48%; /* Due immagini affiancate al 50% ciascuna */
+    margin: 1%; /* Aggiunge un piccolo margine */
+  }
+
+  /* Quarta immagine grande (100%) */
+  .gallery-item:nth-child(4) {
+    width: 100%; /* Quarta immagine occupa l'intera larghezza */
+  }
+
+  /* Quinta e sesta immagine piccole affiancate al 50% */
+  .gallery-item:nth-child(5),
+  .gallery-item:nth-child(6) {
+    width: 48%; /* Due immagini affiancate al 50% ciascuna */
+    margin: 1%; /* Aggiunge un piccolo margine */
+  }
+
+  /* Settima immagine grande (100%) */
+  .gallery-item:nth-child(7) {
+    width: 100%; /* Settima immagine occupa l'intera larghezza */
+  }
+
+  /* Ottava e nona immagine piccole affiancate al 50% */
+  .gallery-item:nth-child(8),
+  .gallery-item:nth-child(9) {
+    width: 48%; /* Due immagini affiancate al 50% ciascuna */
+    margin: 1%; /* Aggiunge un piccolo margine */
+  }
+}
+
+
 </style>

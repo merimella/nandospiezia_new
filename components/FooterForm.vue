@@ -48,7 +48,7 @@ const footerFormData = ref({
 // Funzione di invio del form semplificato
 const submitFooterForm = async () => {
   try {
-    await axios.post('http://localhost:1337/api/form-submissions', {
+    await axios.post('https://nandospieziastrapi-production.up.railway.app/api/form-submissions', {
       data: footerFormData.value,
     });
     alert('Your info has been sent successfully!');

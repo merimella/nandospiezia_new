@@ -13,7 +13,7 @@
           <img
             v-for="(image, imgIndex) in post.attributes.gallery.data"
             :key="imgIndex"
-            :src="`http://localhost:1337${image.attributes.url}`"
+            :src="`https://nandospieziastrapi-production.up.railway.app${image.attributes.url}`"
             class="img-fluid gallery-image"
             alt="Gallery Image"
             :class="{ 'active': imgIndex === currentImageIndex[index] }"
@@ -64,7 +64,7 @@ export default {
       const config = useRuntimeConfig();
       try {
         const response = await fetch(
-          "http://localhost:1337/api/posts?populate=gallery",
+          "https://nandospieziastrapi-production.up.railway.app/api/posts?populate=gallery",
           {
             headers: {
               Authorization: `Bearer ${config.public.strapiBearerKey}`,

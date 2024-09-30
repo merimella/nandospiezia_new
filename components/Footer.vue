@@ -72,6 +72,9 @@ h1 {
   font-family: 'SilkSerif', serif;
   text-transform: uppercase;
   margin: 0;
+  white-space: nowrap; /* Impedisce al testo di andare a capo */
+  overflow: hidden; /* Evita overflow del testo se è troppo lungo */
+  text-overflow: ellipsis; /* Mostra '...' se il testo è troppo lungo */
 }
 
 h2 {
@@ -88,4 +91,11 @@ h2 {
   text-align: center;
   color: #000;
 }
+
+@media (max-width: 768px) {
+  .text-overlay h1{
+    font-size: 55px !important;
+  }
+}
+
 </style>
