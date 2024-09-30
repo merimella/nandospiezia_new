@@ -16,6 +16,7 @@
 
     <!-- Contenuto StoriesGallery -->
     <StoriesGallery />
+    <Footer />
   </div>
 </template>
 
@@ -58,6 +59,10 @@ export default {
 </script>
 
 <style scoped>
+.page-container{
+  background-color: white;
+}
+
 /* Stile della navbar con hamburger */
 .navbar {
   position: fixed;

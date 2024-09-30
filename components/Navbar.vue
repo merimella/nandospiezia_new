@@ -42,10 +42,19 @@ export default {
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.checkMobile);
     this.checkMobile(); // Verifica lo stato mobile all'inizio
+    this.handleScroll(); // Verifica la posizione della navbar al caricamento iniziale
   },
-  beforeUnmount() { // in Nuxt 3 usiamo `beforeUnmount` al posto di `beforeDestroy`
+  beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
     window.removeEventListener('resize', this.checkMobile);
+  },
+  watch: {
+    // Aggiungiamo un watcher per monitorare i cambi di route
+    '$route'() {
+      this.$nextTick(() => {
+        this.handleScroll(); // Richiama handleScroll per ricalcolare la posizione della navbar
+      });
+    }
   },
   methods: {
     handleScroll() {
@@ -88,6 +97,7 @@ export default {
   }
 };
 </script>
+
 
 
 <style scoped>

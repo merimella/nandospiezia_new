@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid home-wrapper">
     <!-- Prima sezione -->
-    <div class="row py-5 mx-auto content-wrapper">
+    <div class="section row py-5 mx-auto content-wrapper">
       <!-- Heading e immagine sulla stessa riga -->
       <div class="col-lg-6 order-lg-1">
        
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Terza sezione -->
-    <div class="row py-5 align-items-center mx-auto content-wrapper">
+    <div class="section3 row py-5 align-items-center mx-auto content-wrapper">
       <div class="row py-5 text-center mx-auto content-wrapper">
         <div class="col">
           <h2 class="h2 split-text">Your story, our lens</h2>
@@ -164,7 +164,15 @@ export default {
   color: #000;
   font-weight: 400;
 }
+.section{
+  
+  padding-bottom: 100px!important;;
+}
 
+.section3{
+  padding-top: 150px!important;
+  padding-bottom: 250px!important;;
+}
 .paragraph-box {
   margin-top: 200px;
   margin-left: -200px;
@@ -236,6 +244,10 @@ export default {
     margin-right: 20px;
   }
 
+  .section3{
+    padding-bottom: 150px!important;
+  }
+
   .img-section {
     height: auto; /* Aggiusta l'altezza dell'immagine su mobile */
     margin-bottom: 20px; /* Aggiungi spazio tra l'immagine e il testo su mobile */
@@ -247,5 +259,15 @@ export default {
     padding-right: 10px;
     font-size: 1.1rem; /* Riduci leggermente la dimensione del font per migliorare la leggibilità su mobile */
   }
+
+  .home-gallery {
+  display: flex; /* Imposta il layout a Flexbox */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* (Facoltativo) Centra il contenuto verticalmente */
+  width: 95%; /* Larghezza del contenitore */
+  margin: 0 auto; /* Centra il contenitore stesso all'interno del genitore */
+}
+
+
 }
 </style>
