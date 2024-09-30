@@ -10,6 +10,7 @@
     <div id="content" class="scroll-content">
         
       <MemomoriesGallery />
+      <Footer />
     </div>
   </div>
   </template>

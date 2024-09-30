@@ -1,10 +1,13 @@
 <template>
-
-    <div class="d-flex justify-content-center align-items-center min-vh-100">
-      <Navbar /> 
-      <Form />
+  <div class="page-container">
+    <Navbar />
+    <div id="content" class="scroll-content">
+      <div class="content-wrapper"> <!-- Aggiungi un contenitore extra -->
+        <Form />
+        <Footer />
+      </div>
     </div>
-
+  </div>
 </template>
 
 <script setup>
@@ -16,18 +19,11 @@ import Form from '~/components/Form.vue';
 </script>
 
 <style scoped>
-div {
-  background-color: white; /* Imposta lo sfondo bianco */
-}
 
-/* Evita che la pagina abbia margini esterni */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
 
-.min-vh-100 {
-  min-height: 100vh; /* Imposta l'altezza minima a 100% della viewport */
+.scroll-content {
+
+  position: relative;
+  z-index: 2; /* Assicurati che questo scorra sopra l'header */
 }
 </style>

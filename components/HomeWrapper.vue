@@ -63,7 +63,7 @@
       </div>
       <!-- Testi centrati sopra l'immagine -->
       <div class="col-lg-6 text-center text-lg-start order-lg-1">
-        <img class="img-fluid img-section rounded-top mt-4 fade-in-img" src="/public/images/homewrapper/img1.png" />
+        <img class="img-fluid img-rounded img-section rounded-top mt-4 fade-in-img" src="/public/images/homewrapper/left-container.png" />
       </div>
       <!-- Paragrafo e pulsante a destra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-2">
@@ -76,10 +76,14 @@
             Using a blend of reportage and editorial photography, we create a visual narrative that showcases both 
             grand and intimate moments, reflecting the true essence of your relationship.
           </p>
-          <button class="btn btn-link">READ MORE</button>
+          <button class="btn btn-link">REQUEST A QUOTE</button>
         </div>
       </div>
     </div>
+    <div class="home-gallery">
+      <HomeGallery />
+    </div>
+    
   </div>
 </template>
 
@@ -186,13 +190,25 @@ export default {
   object-fit: cover;
 }
 
-.img-fluid {
-  object-fit: cover;
-}
+
 
 .img-section {
-  height: 700px;
-  object-fit: cover;
+  height: auto;
+  width: 100%; /* Assicura che l'immagine riempia completamente la colonna */
+  aspect-ratio: 4/5; /* Imposta il rapporto di aspetto su 4:5 */
+  object-fit: cover; /* Garantisce che l'immagine si adatti al contenitore senza deformarsi */
+  padding: 0;
+  margin: 0;
+}
+
+
+.img-rounded {
+  border-top-left-radius: 50% !important; /* Arrotonda l'immagine */
+  border-top-right-radius: 50% !important; /* Arrotonda l'immagine */
+  object-fit: cover; /* Assicura che l'immagine si adatti al contenitore */
+  width: 100%; /* Imposta la larghezza dell'immagine a 100% del contenitore */
+  height: auto; /* Assicura che l'altezza si adatti proporzionalmente */
+  overflow: hidden; /* Evita che l'immagine "sbordi" dal contenitore arrotondato */
 }
 
 .btn-link {
@@ -200,6 +216,14 @@ export default {
   color: #b4b4b4;
   text-decoration: none;
 }
+.home-gallery {
+  display: flex; /* Imposta il layout a Flexbox */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* (Facoltativo) Centra il contenuto verticalmente */
+  width: 75%; /* Larghezza del contenitore */
+  margin: 0 auto; /* Centra il contenitore stesso all'interno del genitore */
+}
+
 
 /* Media queries per i dispositivi mobili */
 @media (max-width: 768px) {

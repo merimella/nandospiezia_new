@@ -7,7 +7,8 @@
     <div id="content" class="scroll-content">
       <div class="content-wrapper"> <!-- Aggiungi un contenitore extra -->
         <HomeWrapper />
-        <HomeGallery />
+       
+        <Footer />
       </div>
     </div>
   </div>
