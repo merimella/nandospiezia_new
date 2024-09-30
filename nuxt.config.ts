@@ -1,7 +1,8 @@
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: '2024-09-28', // La data proposta dal terminale
+
   devtools: { enabled: true },
-  pages: true,
+  pages: true, // Mantieni l'opzione per il routing automatico
   ssr: false,
 
   css: [
@@ -21,7 +22,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // Aggiungi transpile per GSAP
   build: {
     transpile: ['gsap'],
   }

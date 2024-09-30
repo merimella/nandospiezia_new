@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-     "start": "nuxt start"
+    "start": "nuxt start"
   },
   "dependencies": {
     "@nuxt/http": "^0.6.4",
@@ -17,11 +17,10 @@
     "bootstrap": "^5.3.3",
     "consola": "^3.2.3",
     "defu": "^6.1.4",
-    "gsap": "3.12.5",
+    "gsap": "npm:@gsap/shockingly@^3.12.5",
     "locomotive-scroll": "^4.1.4",
+    "lodash": "^4.17.21",
     "nuxt": "^3.13.0",
     "this": "^1.1.0"
   }
 }
-
-

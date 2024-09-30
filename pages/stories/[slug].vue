@@ -88,7 +88,7 @@ import SplitText from 'gsap/SplitText';
 import { useAsyncData } from 'nuxt/app';
 import Footer from '~/components/Footer.vue';
 import PasswordForm from '~/components/PasswordForm.vue';
-import { beforeEnter, enter, beforeLeave, leave } from '~/assets/gsap-transitions.js';
+
 
 // Recupera lo slug dall'URL dinamico
 const route = useRoute();
@@ -100,18 +100,11 @@ const isAuthenticated = ref(false);
 const errorMessage = ref('');
 
 // Recupera il post da Strapi usando lo slug
-try {
-  const { data } = await useAsyncData('post', () => $fetch(`http://localhost:1337/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
-    headers: {
-      Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`
-    }
-  }));
-  console.log('Post data:', data);
-  post.value = data?.data?.[0] || null;
-} catch (error) {
-  console.error('Errore nel recupero del post:', error);
-}
-
+const { data } = await useAsyncData('post', () => $fetch(`http://localhost:1337/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
+  headers: {
+    Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`
+  }
+}));
 
 const post = data.value?.data?.[0] || null;
 
@@ -119,6 +112,12 @@ const post = data.value?.data?.[0] || null;
 const checkPassword = (submittedPassword) => {
   console.log('Password inserita:', submittedPassword);
   console.log('Password attesa:', post.attributes.password);
+
+  // Assicurati che submittedPassword sia una stringa
+  if (typeof submittedPassword !== 'string') {
+    errorMessage.value = 'Errore: La password inserita non è valida.';
+    return;
+  }
 
   if (submittedPassword.trim() === post.attributes.password) {
     isAuthenticated.value = true;
@@ -129,6 +128,7 @@ const checkPassword = (submittedPassword) => {
     errorMessage.value = 'Password errata. Riprova.';
   }
 };
+
 
 
 // Funzione per inizializzare le animazioni e lo scroll orizzontale
