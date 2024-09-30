@@ -21,8 +21,15 @@ export default defineNuxtConfig({
       ]
     }
   },
-
+  
   build: {
     transpile: ['gsap'],
+  },
+
+  runtimeConfig: {
+    public: {
+      strapiApiUrl: process.env.STRAPI_API_URL, // Prende il valore da .env
+      strapiBearerKey: process.env.STRAPI_BEARER_KEY // Prende il valore da .env
+    }
   }
 });

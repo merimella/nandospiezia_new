@@ -1,7 +1,7 @@
 <template>
   <div id="content" class="page-container">
     <Navbar /> 
-    <HomeGallery />
+    <StoriesGallery />
 
   </div>
 </template>
@@ -9,10 +9,11 @@
 <script>
 import Footer from '~/components/Footer.vue';
 import HomeGallery from '~/components/MemomoriesGallery.vue';
+import StoriesGallery from '~/components/StoriesGallery.vue';
 
 export default {
   components: {
-    HomeGallery,
+    StoriesGallery,
 
   }
 }

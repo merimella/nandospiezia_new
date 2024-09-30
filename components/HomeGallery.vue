@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid photo-gallery p-0">
     <div class="row g-0">
-      <!-- Creiamo 9 div uguali disposti in 3 colonne per 3 righe -->
+      <!-- Creiamo 9 div uguali disposti in 3 colonne per desktop e 2 colonne per mobile -->
       <div
         v-for="(post, index) in posts.slice(0, 9)"
         :key="`post-${post.id}`" 
-        class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch gallery-item"
+        class="col-6 col-md-4 d-flex align-items-stretch gallery-item"
         @mouseenter="startHoverAnimation(index)" 
         @mouseleave="stopHoverAnimation(index)"
       >
@@ -31,6 +31,9 @@
     </div>
   </div>
 </template>
+
+
+
 
 <script>
 import { gsap } from "gsap";
@@ -134,12 +137,13 @@ export default {
 .gallery-item {
   position: relative;
   overflow: hidden;
+  padding: 0; /* Rimuove lo spazio tra le immagini */
 }
 
 .image-container {
   position: relative;
   width: 100%;
-  padding-bottom: 120%; /* Manteniamo le proporzioni 500x600 */
+  padding-bottom: 125%; /* Rapporto 4:5 (100/80 = 1.25, quindi padding-bottom 125%) */
 }
 
 .gallery-image {
@@ -148,7 +152,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  object-fit: cover; 
+  object-fit: cover; /* Garantisce che l'immagine si adatti al contenitore senza deformarsi */
   object-position: center;
   display: none;
   transition: transform 0.3s ease;
@@ -182,13 +186,29 @@ p {
   font-size: 1rem;
 }
 
+/* Gestione del layout su desktop e mobile */
+@media (min-width: 768px) {
+  .gallery-item {
+    flex-basis: 33.33%; /* Ogni immagine occuperà il 33.33% della larghezza su desktop (3 colonne) */
+    max-width: 33.33%; /* Impedisce all'immagine di superare il 33.33% della larghezza */
+  }
+}
+
 @media (max-width: 768px) {
   .gallery-item {
-    height: auto; 
+    flex-basis: 50%; /* Ogni immagine occuperà il 50% della larghezza su mobile (2 colonne) */
+    max-width: 50%; /* Impedisce all'immagine di superare il 50% della larghezza */
+    padding: 0; /* Rimuove qualsiasi padding */
   }
+  
+  .image-container {
+    padding-bottom: 125%; /* Mantiene il rapporto d'aspetto 4:5 su mobile */
+  }
+  
   .gallery-image {
-    height: auto;
+    height: 100%;
     width: 100%;
   }
 }
+
 </style>
