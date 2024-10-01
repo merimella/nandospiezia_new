@@ -53,7 +53,7 @@ export default {
       }
 
       const data = await response.json();
-      console.log('API Response:', data);  // Log completo della risposta
+      console.log(data);  // Controlla cosa viene restituito dall'API
       const attributes = data.data[0]?.attributes;
 
       // Popola i dati restituiti dall'API
@@ -109,9 +109,17 @@ export default {
     window.removeEventListener('resize', this.updateImages); // Rimuovi il listener di ridimensionamento
   }
 };
+if (!data.data || data.data.length === 0) {
+  console.error('Nessun dato trovato nella risposta:', data);
+  return; // Esci dal metodo se non ci sono dati validi
+}
 
-console.log('Desktop Images:', this.imagesDesktop);
-console.log('Mobile Images:', this.imagesMobile);
+const attributes = data.data[0]?.attributes;
+if (!attributes) {
+  console.error('Nessun attributo trovato nei dati:', data.data[0]);
+  return;
+}
+
 </script>
 
 <style scoped>
