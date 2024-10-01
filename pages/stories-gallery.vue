@@ -16,6 +16,7 @@
 
     <!-- Contenuto StoriesGallery -->
     <StoriesGallery />
+    <FooterForm />
     <Footer />
   </div>
 </template>

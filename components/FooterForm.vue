@@ -1,97 +1,284 @@
 <template>
-  <div class="footer-form-wrapper bg-white">
-    <div class="footer-form container p-4">
-      <h2 class="text-start">Not ready with all the details?</h2>
-      <p>
-        Let us know your basic info, and we'll get back to you to discuss your wedding photography needs. 
-        Or, if you're ready, you can 
-        <NuxtLink to="/contacts">fill out the full form here</NuxtLink>.
-      </p>
-      <form @submit.prevent="submitFooterForm" class="mx-auto">
-        <div class="row mb-3">
-          <div class="col-sm-12">
-            <input v-model="footerFormData.fullname" type="text" class="form-control" placeholder="Full Name" id="footer-fullname" required />
-          </div>
+
+    
+
+    <!-- Il form di contatto -->
+    <div class="contact-form">
+    
+      <!-- Titolo -->
+    <h1 class="contact-title">Not ready with all the details?</h1>
+
+    <!-- Sottotitolo -->
+    <p class="contact-subtitle">
+      Let us know your basic info, and we'll get back to you to discuss your wedding photography needs.
+      Or, if you're ready, you can fill out the full form
+      <NuxtLink to="/contacts">here</NuxtLink>.
+    </p>
+      <!-- Prima riga: Full Name e Email -->
+      <div class="contact-form-row">
+        <div class="contact-form-field">
+          <input type="text" class="contact-form__input" required />
+          <label class="contact-form__placeholder">FULL NAME</label>
         </div>
-        <div class="row mb-3">
-          <div class="col-sm-12">
-            <input v-model="footerFormData.email" type="email" class="form-control" placeholder="Email" id="footer-email" required />
-          </div>
+
+        <div class="contact-form-field">
+          <input type="email" class="contact-form__input" required />
+          <label class="contact-form__placeholder">EMAIL</label>
         </div>
-        <div class="row mb-3">
-          <div class="col-sm-12">
-            <!-- Placeholder personalizzato per la data -->
-            <input v-model="footerFormData.weddingdate" type="date" class="form-control" id="footer-weddingdate" required placeholder="Wedding Date" onfocus="(this.type='date')" onblur="(this.type='text')" />
-          </div>
+      </div>
+
+      <!-- Seconda riga: Wedding Date e City -->
+      <div class="contact-form-row">
+        <div class="contact-form-field">
+        <input type="text" ref="weddingDate" class="contact-form__input wedding-date-input" @focus="openCalendar" readonly />
+        <label class="contact-form__placeholder no-animation" @click="openCalendar">WEDDING DATE</label>
+      </div>
+
+        <div class="contact-form-field">
+          <input type="text" class="contact-form__input" required />
+          <label class="contact-form__placeholder">CITY</label>
         </div>
-        <div class="row mb-3">
-          <div class="col-sm-12">
-            <button type="submit" class="btn btn-dark w-100">Submit</button>
-          </div>
-        </div>
-      </form>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="checkbox-container">
+        <input type="checkbox" class="contact-form__checkbox" required />
+        <label class="contact-form__checkbox-label">
+          I consent for the information submitted above to be recorded and stored for the purposes of providing services relating to my inquiry. I agree that registration on or use of the Bottega 53 site constitutes agreement to its User Agreement & Privacy Policy.
+        </label>
+      </div>
+
+      <!-- Pulsante di invio -->
+      <div class="contact-form-button">
+        <button class="contact-form__submit">SEND</button>
+      </div>
     </div>
-  </div>
+ 
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import axios from 'axios';
-import { useRuntimeConfig } from 'nuxt/app'; // Importa useRuntimeConfig
 
-// Dati del form semplificato
-const footerFormData = ref({
-  fullname: '',
-  email: '',
-  weddingdate: ''
-});
+<script>
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
 
-// Ottieni la configurazione di runtime
-const config = useRuntimeConfig();
-const apiUrl = config.public.strapiApiUrl; // URL dell'API
+export default {
+  name: "ContactForm",
+  mounted() {
+    const inputs = document.querySelectorAll(".contact-form__input");
 
-// Funzione di invio del form semplificato
-const submitFooterForm = async () => {
-  try {
-    await axios.post(`${apiUrl}/api/form-submissions`, { // Usa l'URL dell'API
-      data: footerFormData.value,
+    inputs.forEach((input) => {
+      // Placeholder animato per i campi, eccetto il campo Wedding Date
+      input.addEventListener("focus", function () {
+        const label = this.closest(".contact-form-field").querySelector(".contact-form__placeholder:not(.no-animation)");
+        if (label) label.classList.add("active");
+      });
+
+      input.addEventListener("blur", function () {
+        const label = this.closest(".contact-form-field").querySelector(".contact-form__placeholder:not(.no-animation)");
+        if (!this.value && label) {
+          label.classList.remove("active");
+        }
+      });
     });
-    alert('Your info has been sent successfully!');
-  } catch (error) {
-    console.error('Error sending the form:', error);
-    alert('There was an error submitting your info.');
-  }
+
+    // Inizializza Flatpickr per il campo Wedding Date
+    flatpickr(this.$refs.weddingDate, {
+      dateFormat: "d/m/Y", // Formato gg/mm/aaaa
+      allowInput: true,    // Consente di digitare manualmente la data
+      onChange: (selectedDates, dateStr, instance) => {
+        // Nascondi il placeholder se una data è stata selezionata
+        const label = this.$refs.weddingDate.closest(".contact-form-field").querySelector(".contact-form__placeholder");
+        if (dateStr) {
+          label.classList.add("active");
+        } else {
+          label.classList.remove("active");
+        }
+      }
+    });
+  },
+  methods: {
+    openCalendar() {
+      // Forza il focus sul campo di data
+      this.$refs.weddingDate.focus();
+    },
+  },
 };
+
+
+
 </script>
 
 
+
+
+
+
 <style scoped>
-/* Wrapper per lo sfondo bianco */
-.footer-form-wrapper {
-  background-color: #ffffff; /* Sfondo bianco */
-  padding: 50px 0; /* Spaziatura sopra e sotto */
+/* Stili di base per il form */
+.contact-form,.contact-section {
+  background: #ffffff;
+  padding: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom:100px;
 }
 
-/* Contenitore del form */
-.footer-form {
-  max-width: 800px; /* Aumentata la larghezza massima */
-  margin: 0 auto;
+.contact-form-row {
+  display: flex;
+  width: 100%;
+  gap: 20px; /* Spaziatura tra i campi nella stessa riga */
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+/* Campi di input */
+.contact-form-field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
 }
 
-p {
-  font-size: 1rem;
+.contact-form__input {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #C2C2C2; /* Sostituzione degli SVG */
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
 }
 
-input, textarea {
+.contact-form__placeholder {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  font-size: 1.2em;
+  color: #c2c2c2;
+  pointer-events: none;
+}
+
+.contact-form__placeholder.active {
+  top: -20px;
+  left: 0;
+  font-size: 0.9em;
+  color: #000;
+}
+
+/* Wedding Date senza animazione */
+.no-animation {
+  top: 8px;
+  transform: none;
+  font-size: 1.2em;
+  color: #c2c2c2;
+}
+
+/* Checkbox */
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.contact-form__checkbox {
+  width: 15px;
+  height: 15px;
+}
+
+.contact-form__checkbox-label {
+  font-size: 12px;
+  color: #000;
+}
+
+/* Pulsante di invio */
+.contact-form-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-form__submit {
+  background: none;
+  border: none;
+  color: #c2c2c2;
+  font-family: "PlayfairDisplay-Regular", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+}/* Stili personalizzati per Flatpickr, se necessario */
+
+.flatpickr-input {
+  border: none;
+  border-bottom: 1px solid #C2C2C2!important;
+  padding: 10px 0;
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
+  width: 100%;
+}
+
+/* Sovrascrivi gli stili di .form-control */
+.form-control {
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   border-radius: 0;
+  padding: 0;
 }
 
-button {
-  background-color: black !important;
+.form-control:focus {
+  color: inherit;
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
 }
+
+/* Titolo e sottotitolo */
+.contact-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.contact-subtitle {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 40px;
+  line-height: 1.5;
+  margin-top: -20px !important;
+}
+
+/* Stili del link Nuxt */
+.contact-subtitle a {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.contact-subtitle a:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .contact-form,.contact-section {
+  background: #ffffff;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  position: relative;
+  padding-top:100px;
+  padding-bottom: 20px;
+}
+}
+
+
 </style>

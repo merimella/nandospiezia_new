@@ -206,7 +206,7 @@ h2 {
 
 @media (max-width: 768px) {
   .text-overlay h1{
-    font-size: 55px !important;
+    font-size: 45px !important;
   }
 }
 </style>

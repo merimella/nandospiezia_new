@@ -36,7 +36,7 @@
   justify-content: center;
   gap: 40px;
   margin: 0;
-  z-index: 2;
+ 
 }
 
 .footer-links {
@@ -94,7 +94,7 @@ h2 {
 
 @media (max-width: 768px) {
   .text-overlay h1{
-    font-size: 55px !important;
+    font-size: 45px !important;
   }
 }
 

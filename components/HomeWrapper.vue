@@ -8,9 +8,9 @@
         <h1 class="h1 split-text">
           ITALIAN EDITORIAL AND REPORTAGE
           <br />
-          WEDDING PHOTOGRAPHERS
+          WEDDING PHOTOGRAPHERS BASED
           <br />
-          BASED IN NAPLES AND AMALFI COAST
+           IN NAPLES AND AMALFI COAST
         </h1>
         <img class="img-fluid img-section mt-4 fade-in-img" src="/public/images/homewrapper/img0.png" />
       </div>
@@ -58,7 +58,7 @@
       <div class="row py-5 text-center mx-auto content-wrapper">
         <div class="col">
           <h2 class="h2 split-text">Your story, our lens</h2>
-          <h1 class="h1 split-text">LOVE STORIES ARE AMONG THE MOST BEAUTIFUL TALES EVER TOLD</h1>
+          <h1 class="h1 split-text">LOVE STORIES ARE AMONG <br>THE MOST BEAUTIFUL TALES EVER TOLD</h1>
         </div>
       </div>
       <!-- Testi centrati sopra l'immagine -->
@@ -273,7 +273,9 @@ export default {
   width: 95%; /* Larghezza del contenitore */
   margin: 0 auto; /* Centra il contenitore stesso all'interno del genitore */
 }
-
+h1{
+  font-size: 20px!important;
+}
 
 }
 

@@ -10,7 +10,7 @@
       <div v-else>
         <!-- Sezione Copertina -->
           <Navbar />
-        <section ref="coverSection" class="sectionCover full-page">
+        <section ref="coverSection" class="sectionCover full-page header">
           <div class="coverSection cover-image-container full-page">
             <img 
               v-if="post.attributes.image && post.attributes.image.data" 
@@ -25,50 +25,62 @@
           </div>
         </section>
 
-        <!-- Sezione Titolo e Contenuto -->
-        <section id="content" ref="contentSection" class="section content-container full-page">
-          <div class="text-container">
-            <h4 class="split-text">{{ post.attributes.heading }}</h4>
-            <h2 class="split-text">{{ post.attributes.subtitle }}</h2>
-            <p class="split-text">{{ post.attributes.description }}</p>
+        <div class="scroll-content">
+
+              <!-- Sezione Titolo e Contenuto -->
+              <section id="content" ref="contentSection" class="section index-up content-container full-page">
+                <div class="text-container">
+                  <h4 class="split-text">{{ post.attributes.heading }}</h4>
+                  <h2 class="split-text">{{ post.attributes.subtitle }}</h2>
+                  <p class="split-text">{{ post.attributes.description }}</p>
+                </div>
+              </section>
+
+                      <!-- Sezione Focus e Paragrafo con Scroll Orizzontale e Sfondo Bianco -->
+                <!-- Sezione Focus e Paragrafo con Scroll Orizzontale e Sfondo Bianco -->
+              <section class="horizontal-section index-up">
+                <div class="horizontal-wrapper">
+                  <!-- Primo Slide -->
+                  <div class="horizontal-slide">
+            <img 
+              v-if="post.attributes.focus1 && post.attributes.focus1.data" 
+              :src="`${apiUrl}${post.attributes.focus1.data.attributes.url}`" 
+              alt="Focus Image 1"
+              class="image-horizontal"
+            />
           </div>
-        </section>
-
-        <!-- Sezione Focus e Paragrafo con Scroll Orizzontale e Sfondo Bianco -->
-        <section class="section horizontal white-background">
-  <div class="horizontal__container">
-    <div class="horizontal__item">
-      <img 
-        v-if="post.attributes.focus1 && post.attributes.focus1.data" 
-        :src="`${apiUrl}${post.attributes.focus1.data.attributes.url}`" 
-        alt="Focus Image 1"
-        class="image-horizontal"
-      />
-      <img 
-        v-if="post.attributes.focus2 && post.attributes.focus2.data" 
-        :src="`${apiUrl}${post.attributes.focus2.data.attributes.url}`" 
-        alt="Focus Image 2"
-        class="image-horizontal"
-      />
-      <img 
-        v-if="post.attributes.focus3 && post.attributes.focus3.data" 
-        :src="`${apiUrl}${post.attributes.focus3.data.attributes.url}`" 
-        alt="Focus Image 3"
-        class="image-horizontal"
-      />
-    </div>
-
-    <div class="horizontal__item">
-      <div class="text-container">
-        <p>{{ post.attributes.paragraph }}</p>
-        <h5>{{ post.attributes.quote }}</h5>
-      </div>
-    </div>
+          <!-- Secondo Slide -->
+          <div class="horizontal-slide">
+            <img 
+              v-if="post.attributes.focus2 && post.attributes.focus2.data" 
+              :src="`${apiUrl}${post.attributes.focus2.data.attributes.url}`" 
+              alt="Focus Image 2"
+              class="image-horizontal"
+            />
+          </div>
+          <!-- Terzo Slide -->
+          <div class="horizontal-slide">
+            <img 
+              v-if="post.attributes.focus3 && post.attributes.focus3.data" 
+              :src="`${apiUrl}${post.attributes.focus3.data.attributes.url}`" 
+              alt="Focus Image 3"
+              class="image-horizontal"
+            />
+          </div>
+          <!-- Quarto Slide con Testo -->
+          <div class="horizontal-slide">
+            <div class="text-container">
+              <p>{{ post.attributes.paragraph }}</p>
+              <h5>{{ post.attributes.quote }}</h5>
+            </div>
+          </div>
+        
   </div>
 </section>
 
+
         <!-- Sezione Galleria con Sfondo Bianco -->
-        <section v-if="post.attributes.gallery && post.attributes.gallery.data.length" class="section gallerySection full-page white-background">
+        <section v-if="post.attributes.gallery && post.attributes.gallery.data.length" class="index-up section gallerySection full-page white-background">
           <div class="gallery-container">
             <div class="masonry-gallery">
               <div
@@ -84,14 +96,17 @@
         </section>
       </div>
     </div>
-   
-   <Footer />
+    <div class="index-up footer">
+      <FooterForm />
+      <Footer />
+    </div>
+  </div>
   </div>
 
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -105,25 +120,25 @@ const slug = route.params.slug;
 
 // Ottieni la configurazione di runtime
 const config = useRuntimeConfig();
-const apiUrl = ref(config.public.strapiApiUrl);  // Usa ref per apiUrl
+const apiUrl = ref(config.public.strapiApiUrl);
 const apiToken = config.public.strapiApiToken;
 
 // Variabili reactive per password e post
 const inputPassword = ref('');
 const isAuthenticated = ref(false);
 const errorMessage = ref('');
-const post = ref(null); // Definisci il post come reactive
+const post = ref(null);
 
 // Recupera il post da Strapi usando lo slug
-const { data } = await useAsyncData('post', () => 
-  $fetch(`${apiUrl.value}/api/posts?filters[slug][$eq]=${slug}&populate=*`, {  // Usa apiUrl.value qui
+const { data } = await useAsyncData('post', () =>
+  $fetch(`${apiUrl.value}/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
     headers: {
       Authorization: `Bearer ${apiToken}`
     }
   })
 );
 
-post.value = data.value?.data?.[0] || null;  // Assegna il valore al post
+post.value = data.value?.data?.[0] || null;
 
 // Funzione per controllare la password
 const checkPassword = (submittedPassword) => {
@@ -182,26 +197,47 @@ const initializeAnimations = () => {
   });
 
   // Scroll orizzontale per la sezione "Focus e Paragrafo"
-  const sections = gsap.utils.toArray(".horizontal__item");
-  let maxWidth = 0;
+  if (window.innerWidth > 767) {
+    // Scroll orizzontale per la sezione "Focus e Paragrafo"
+    const horizontalSection = document.querySelector(".horizontal-section");
+    const horizontalWrapper = document.querySelector(".horizontal-wrapper");
 
-  const getMaxWidth = () => {
-    maxWidth = sections.reduce((acc, section) => acc + section.offsetWidth, 0);
-  };
+    const images = horizontalWrapper.querySelectorAll("img");
+    let imagesLoadedCount = 0;
 
-  getMaxWidth();
-  ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
+    images.forEach((img) => {
+      if (img.complete) {
+        imagesLoadedCount++;
+        if (imagesLoadedCount === images.length) {
+          startHorizontalScroll();
+        }
+      } else {
+        img.onload = () => {
+          imagesLoadedCount++;
+          if (imagesLoadedCount === images.length) {
+            startHorizontalScroll();
+          }
+        };
+      }
+    });
 
-  gsap.to(sections, {
-    x: () => `-${maxWidth - window.innerWidth}`,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".horizontal",
-      pin: true,
-      start: "top top",
-      scrub: true,
-    },
-  });
+    const startHorizontalScroll = () => {
+      const totalScrollWidth = horizontalWrapper.scrollWidth - window.innerWidth;
+
+      gsap.to(horizontalWrapper, {
+        x: -totalScrollWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: horizontalSection,
+          pin: true,
+          scrub: true,
+          end: () => "+=" + totalScrollWidth,
+        },
+      });
+    };
+  } else {
+    // Opzionalmente, puoi aggiungere animazioni specifiche per il mobile qui
+  }
 };
 
 // Esegui al montaggio del componente
@@ -209,10 +245,12 @@ onMounted(() => {
   if (!post.value) return;
 
   if (!post.value.attributes.password) {
+    isAuthenticated.value = true;
     initializeAnimations();
   }
 });
 </script>
+
 
 
 <style scoped>
@@ -223,7 +261,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 1;
+  
 }
 
 /* Sezione Copertina: Testi e immagine centrati */
@@ -235,7 +273,10 @@ onMounted(() => {
   display: flex; /* Per la centratura verticale */
   align-items: center; /* Allinea verticalmente il contenuto */
   justify-content: center; /* Allinea orizzontalmente il contenuto */
+  
 }
+
+
 
 .cover-image {
   width: 100%;
@@ -244,8 +285,14 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  
+  
 }
+.scroll-content{
+  z-index: 2!important;
+}
+  
+
 
 .overlay-text {
   position: absolute;
@@ -257,7 +304,7 @@ onMounted(() => {
 }
 
 h1 {
-  font-size: 40px!important;
+  font-size: 40px !important;
   font-weight: 500;
   font-family: 'SilkSerif', serif;
 }
@@ -284,7 +331,8 @@ h1 {
   margin-top: 20px;
 }
 
-h4, p {
+h4,
+p {
   margin-top: 20px;
 }
 
@@ -297,46 +345,42 @@ p {
 }
 
 /* Sezione Orizzontale */
-.horizontal {
+.horizontal-section {
+  position: relative;
+  width: 100%;
   height: 100vh;
-  background-color: white;
-  display: flex;
-  align-items: center; /* Centratura verticale */
-  justify-content: center;
   overflow: hidden;
-  padding-bottom: 0; /* Evita spazio extra sotto la sezione */
+  background-color: white;
 }
 
-.horizontal__container {
+.horizontal-wrapper {
   display: flex;
-  width: calc(100vw * 3); /* Tre volte la larghezza della finestra */
-  height: 100vh; /* Imposta l'altezza */
+  height: 100%;
 }
 
-.horizontal__item {
-  width: 100vw;
+.horizontal-slide {
+  flex: 0 0 100vw;
+  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
 }
 
-.horizontal__item img {
+.image-horizontal {
   width: auto;
-  height: 80vh;
-  aspect-ratio: 4/5;
+  max-height: 80vh;
   object-fit: cover;
-  margin: 0 10px;
 }
 
 /* Ridurre la larghezza massima del contenitore del testo */
-.horizontal__item .text-container {
-  max-width: 600px; /* Limita la larghezza massima del testo */
-  margin: 0 auto; /* Centra il contenitore del testo */
+.horizontal-slide .text-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .text-container p {
-  margin-bottom: 20px; /* Aggiungi spazio sotto i paragrafi */
+  margin-bottom: 20px;
 }
 
 /* Galleria con sfondo bianco */
@@ -377,6 +421,29 @@ p {
   color: red;
 }
 
+/* Stili per Dispositivi Mobili */
+@media (max-width: 767px) {
+  /* Sezione Orizzontale su Mobile */
+  .horizontal-wrapper {
+    flex-direction: column;
+  }
 
+  .horizontal-slide {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .horizontal-section {
+    height: auto;
+  }
+
+  /* Galleria Masonry su Mobile */
+  .masonry-gallery {
+    column-count: 2;
+  }
+
+}
 
 </style>
