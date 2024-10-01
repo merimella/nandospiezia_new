@@ -53,6 +53,7 @@ export default {
       }
 
       const data = await response.json();
+      console.log(data);  // Controlla cosa viene restituito dall'API
       const attributes = data.data[0]?.attributes;
 
       // Popola i dati restituiti dall'API
