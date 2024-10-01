@@ -33,9 +33,9 @@ export default {
   async mounted() {
     try {
       // Chiamata API per recuperare i dati da Strapi
-      const response = await fetch('nandospieziastrapi-production.up.railway.app/api/header-sliders?populate=*', {
+      const response = await fetch('http://localhost:1337/api/header-sliders?populate=*', {
         headers: {
-          Authorization: `Bearer 47e2b89e521d880906b5c9f7a6c4ea391b869a97ac671ffb2de8d87ce2f4894c48f78f5711c42c5586bcc8cc15c20a695fdd430bbefdb9e529fdba788491e97c28d86437d04eb7778d30af8c2666b0e4aa518026f017e40eba2079dfd5264b867d3938e8b962a6b8362386d730a5826e437ae4d43650064adaa8764d9630feec`,
+          Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`,
         },
       });
       
@@ -48,20 +48,20 @@ export default {
 
       // Popola le immagini per desktop
       this.imagesDesktop = [
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide1?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide2?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide3?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide4?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide5?.data?.attributes?.url}`
+        `http://localhost:1337${attributes?.headerSlide1?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide2?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide3?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide4?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlide5?.data?.attributes?.url}`
       ];
 
       // Popola le immagini per mobile
       this.imagesMobile = [
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile1?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile2?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile3?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile4?.data?.attributes?.url}`,
-        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile5?.data?.attributes?.url}`
+        `http://localhost:1337${attributes?.headerSlideMobile1?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile2?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile3?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile4?.data?.attributes?.url}`,
+        `http://localhost:1337${attributes?.headerSlideMobile5?.data?.attributes?.url}`
       ];
 
       // Avvia lo slideshow

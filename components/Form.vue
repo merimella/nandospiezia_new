@@ -87,7 +87,7 @@ const formData = ref({
 // Funzione di invio del form
 const submitForm = async () => {
   try {
-    await axios.post('https://nandospieziastrapi-production.up.railway.app/api/form-submissions', {
+    await axios.post('http://localhost:1337/api/form-submissions', {
       data: formData.value,
     });
     alert('Form inviato con successo!');

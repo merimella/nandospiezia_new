@@ -19,7 +19,7 @@
           <img 
             v-for="(image, imgIndex) in post.attributes.gallery.data" 
             :key="imgIndex"
-            :src="`${apiUrl}${image.attributes.url}`" 
+            :src="`http://localhost:1337${image.attributes.url}`" 
             class="img-fluid gallery-image" 
             alt="Gallery Image" 
             :class="{ 'active': imgIndex === currentImageIndex[index] }"
@@ -38,7 +38,6 @@
 
 <script>
 import { gsap } from "gsap";
-import { useRuntimeConfig } from '#app'; // Importa useRuntimeConfig per ottenere le variabili di ambiente
 
 export default {
   name: "PhotoGallery",
@@ -47,14 +46,11 @@ export default {
       posts: [],
       hoverIndex: null,
       currentImageIndex: [],
-      intervals: [],
-      apiUrl: '', // Aggiungi apiUrl qui per salvarlo
+      intervals: []
     };
   },
   mounted() {
     if (process.client) {
-      const config = useRuntimeConfig();
-      this.apiUrl = config.public.strapiApiUrl; // Ottieni l'URL API dal runtime config
       this.fetchPostsData();
     }
   },
@@ -64,14 +60,11 @@ export default {
   methods: {
     async fetchPostsData() {
       try {
-        const config = useRuntimeConfig();
-        const bearerKey = config.public.strapiBearerKey; // Ottieni la chiave Bearer dal runtime config
-
         const response = await fetch(
-          `${this.apiUrl}/api/posts?populate=gallery`,
+          'http://localhost:1337/api/posts?populate=gallery',
           {
             headers: {
-              Authorization: `Bearer ${bearerKey}`, // Usa la chiave Bearer dalle variabili di ambiente
+              Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`, 
             }
           }
         );
