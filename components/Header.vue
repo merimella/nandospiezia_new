@@ -53,7 +53,7 @@ export default {
       }
 
       const data = await response.json();
-      console.log(data);  // Controlla cosa viene restituito dall'API
+      console.log('API Response:', data);  // Log completo della risposta
       const attributes = data.data[0]?.attributes;
 
       // Popola i dati restituiti dall'API
@@ -109,6 +109,9 @@ export default {
     window.removeEventListener('resize', this.updateImages); // Rimuovi il listener di ridimensionamento
   }
 };
+
+console.log('Desktop Images:', this.imagesDesktop);
+console.log('Mobile Images:', this.imagesMobile);
 </script>
 
 <style scoped>
