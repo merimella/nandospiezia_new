@@ -13,7 +13,7 @@
             <img
               v-for="(image, imgIndex) in post.attributes.gallery.data"
               :key="imgIndex"
-              :src="`https://nandospieziastrapi-production.up.railway.app${image.attributes.url}`"
+              :src="`${apiUrl}${image.attributes.url}`" 
               class="img-fluid gallery-image"
               alt="Gallery Image"
               :class="{ 'active': imgIndex === currentImageIndex[index] }"
@@ -46,31 +46,30 @@
       };
     },
     mounted() {
-      if (process.client) {
-        this.fetchPostsData();
-      }
-    },
-    updated() {
-      if (!this.animationStarted) {
-        this.animationStarted = true;
-        this.animateGalleryImages();
-      }
-    },
-    beforeUnmount() {
-      this.clearAllIntervals();
-    },
-    methods: {
-      async fetchPostsData() {
+    if (process.client) {
+      this.fetchPostsData();
+    }
+  },
+  beforeUnmount() {
+    this.clearAllIntervals();
+  },
+  methods: {
+    async fetchPostsData() {
+      try {
+        // Ottieni la configurazione di runtime
         const config = useRuntimeConfig();
-        try {
-          const response = await fetch(
-            "https://nandospieziastrapi-production.up.railway.app/api/posts?populate=gallery",
-            {
-              headers: {
-                Authorization: `Bearer ${config.public.strapiBearerKey}`,
-              },
+        this.apiUrl = config.public.strapiApiUrl; // Salva apiUrl nei dati per poterlo usare nel template
+        const apiToken = config.public.strapiApiToken;
+
+        // Usa this.apiUrl perché ora è nei dati del componente
+        const response = await fetch(
+          `${this.apiUrl}/api/posts?populate=gallery`,
+          {
+            headers: {
+              Authorization: `Bearer ${apiToken}`, // Usa apiToken dalla configurazione di runtime
             }
-          );
+          }
+        );
           const data = await response.json();
           this.posts = data?.data || [];
           this.currentImageIndex = this.posts.map(() => 0);

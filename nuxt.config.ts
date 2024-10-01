@@ -33,3 +33,7 @@ export default defineNuxtConfig({
     }
   }
 });
+
+
+ //console.log('STRAPI_API_URL:', process.env.STRAPI_API_URL);
+ //console.log('STRAPI_API_TOKEN:', process.env.STRAPI_API_TOKEN);

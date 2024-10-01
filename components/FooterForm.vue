@@ -37,6 +37,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { useRuntimeConfig } from 'nuxt/app'; // Importa useRuntimeConfig
 
 // Dati del form semplificato
 const footerFormData = ref({
@@ -45,10 +46,14 @@ const footerFormData = ref({
   weddingdate: ''
 });
 
+// Ottieni la configurazione di runtime
+const config = useRuntimeConfig();
+const apiUrl = config.public.strapiApiUrl; // URL dell'API
+
 // Funzione di invio del form semplificato
 const submitFooterForm = async () => {
   try {
-    await axios.post('http://localhost:1337/api/form-submissions', {
+    await axios.post(`${apiUrl}/api/form-submissions`, { // Usa l'URL dell'API
       data: footerFormData.value,
     });
     alert('Your info has been sent successfully!');
@@ -58,6 +63,7 @@ const submitFooterForm = async () => {
   }
 };
 </script>
+
 
 <style scoped>
 /* Wrapper per lo sfondo bianco */

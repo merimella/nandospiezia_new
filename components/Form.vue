@@ -70,6 +70,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { useRuntimeConfig } from 'nuxt/app';
 
 // Dati del form
 const formData = ref({
@@ -84,10 +85,14 @@ const formData = ref({
   privacypolicycheck: false
 });
 
+// Ottieni la configurazione di runtime
+const config = useRuntimeConfig();
+const apiUrl = config.public.strapiApiUrl; // URL dell'API
+
 // Funzione di invio del form
 const submitForm = async () => {
   try {
-    await axios.post('http://localhost:1337/api/form-submissions', {
+    await axios.post(`${apiUrl}/api/form-submissions`, {
       data: formData.value,
     });
     alert('Form inviato con successo!');
@@ -97,6 +102,7 @@ const submitForm = async () => {
   }
 };
 </script>
+
 
 <style scoped>
 .container {

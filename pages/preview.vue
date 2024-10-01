@@ -36,6 +36,8 @@ export default {
     try {
       // Otteniamo il runtime config da Nuxt
       const config = useRuntimeConfig();
+       //console.log('strapiApiUrl:', config.public.strapiApiUrl);
+       //console.log('strapiApiToken:', config.public.strapiApiToken);
       const apiUrl = config.public.strapiApiUrl;
       const apiToken = config.public.strapiApiToken; // Usa strapiApiToken, non strapiBearerKey
 
