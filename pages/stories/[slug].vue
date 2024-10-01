@@ -14,7 +14,7 @@
           <div class="coverSection cover-image-container full-page">
             <img 
               v-if="post.attributes.image && post.attributes.image.data" 
-              :src="`https://nandospieziastrapi-production.up.railway.app${post.attributes.image.data.attributes.url}`" 
+              :src="`http://localhost:1337${post.attributes.image.data.attributes.url}`" 
               alt="Cover Image"
               class="cover-image"
               ref="coverImage"
@@ -40,19 +40,19 @@
     <div class="horizontal__item">
       <img 
         v-if="post.attributes.focus1 && post.attributes.focus1.data" 
-        :src="`https://nandospieziastrapi-production.up.railway.app${post.attributes.focus1.data.attributes.url}`" 
+        :src="`http://localhost:1337${post.attributes.focus1.data.attributes.url}`" 
         alt="Focus Image 1"
         class="image-horizontal"
       />
       <img 
         v-if="post.attributes.focus2 && post.attributes.focus2.data" 
-        :src="`https://nandospieziastrapi-production.up.railway.app${post.attributes.focus2.data.attributes.url}`" 
+        :src="`http://localhost:1337${post.attributes.focus2.data.attributes.url}`" 
         alt="Focus Image 2"
         class="image-horizontal"
       />
       <img 
         v-if="post.attributes.focus3 && post.attributes.focus3.data" 
-        :src="`https://nandospieziastrapi-production.up.railway.app${post.attributes.focus3.data.attributes.url}`" 
+        :src="`http://localhost:1337${post.attributes.focus3.data.attributes.url}`" 
         alt="Focus Image 3"
         class="image-horizontal"
       />
@@ -77,7 +77,7 @@
                 class="masonry-item"
                 :data-index="index"
               >
-                <img :src="`https://nandospieziastrapi-production.up.railway.app${image.attributes.url}`" class="img-fluid" alt="Gallery Image" />
+                <img :src="`http://localhost:1337${image.attributes.url}`" class="img-fluid" alt="Gallery Image" />
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@ const isAuthenticated = ref(false);
 const errorMessage = ref('');
 
 // Recupera il post da Strapi usando lo slug
-const { data } = await useAsyncData('post', () => $fetch(`https://nandospieziastrapi-production.up.railway.app/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
+const { data } = await useAsyncData('post', () => $fetch(`http://localhost:1337/api/posts?filters[slug][$eq]=${slug}&populate=*`, {
   headers: {
     Authorization: `Bearer 98788d4aa362cc31587b9600529fd6314d219985bae8b0d15838b3e114f6611d6c718ea819da564042737ca93cc7c3434a3f840c05a26be22a4794bd73bd1fb3f0e764bef85d1ccc10cd780f6b280c98fe81e427eb62b44d2f47eb6cdce8c64c81501b7005ff128ef23545e8e10e7747359ccda6028a13777e406eaf3180b219`
   }
