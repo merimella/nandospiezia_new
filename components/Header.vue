@@ -35,7 +35,7 @@ export default {
   async mounted() {
     try {
       // Otteniamo il runtime config da Nuxt
-      const config = useRuntimeConfig();
+      const config = useRuntimeConfig()
        console.log('strapiApiUrl:', config.public.strapiApiUrl);
        console.log('strapiApiToken:', config.public.strapiApiToken);
       const apiUrl = config.public.strapiApiUrl;
@@ -53,7 +53,6 @@ export default {
       }
 
       const data = await response.json();
-      console.log(data);  // Controlla cosa viene restituito dall'API
       const attributes = data.data[0]?.attributes;
 
       // Popola i dati restituiti dall'API
@@ -109,17 +108,6 @@ export default {
     window.removeEventListener('resize', this.updateImages); // Rimuovi il listener di ridimensionamento
   }
 };
-if (!data.data || data.data.length === 0) {
-  console.error('Nessun dato trovato nella risposta:', data);
-  return; // Esci dal metodo se non ci sono dati validi
-}
-
-const attributes = data.data[0]?.attributes;
-if (!attributes) {
-  console.error('Nessun attributo trovato nei dati:', data.data[0]);
-  return;
-}
-
 </script>
 
 <style scoped>

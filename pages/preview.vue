@@ -61,21 +61,21 @@ export default {
 
       // Popola le immagini per desktop
       this.imagesDesktop = [
-        `${apiUrl}${attributes?.headerSlide1?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide2?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide3?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide4?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide5?.data?.attributes?.url}`
-      ];
+  attributes?.headerSlide1?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlide1.data.attributes.url}` : '',
+  attributes?.headerSlide2?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlide2.data.attributes.url}` : '',
+  attributes?.headerSlide3?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlide3.data.attributes.url}` : '',
+  attributes?.headerSlide4?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlide4.data.attributes.url}` : '',
+  attributes?.headerSlide5?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlide5.data.attributes.url}` : ''
+];
 
-      // Popola le immagini per mobile
-      this.imagesMobile = [
-        `${apiUrl}${attributes?.headerSlideMobile1?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile2?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile3?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile4?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile5?.data?.attributes?.url}`
-      ];
+this.imagesMobile = [
+  attributes?.headerSlideMobile1?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlideMobile1.data.attributes.url}` : '',
+  attributes?.headerSlideMobile2?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlideMobile2.data.attributes.url}` : '',
+  attributes?.headerSlideMobile3?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlideMobile3.data.attributes.url}` : '',
+  attributes?.headerSlideMobile4?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlideMobile4.data.attributes.url}` : '',
+  attributes?.headerSlideMobile5?.data?.attributes?.url ? `${apiUrl}${attributes.headerSlideMobile5.data.attributes.url}` : ''
+];
+
 
       // Avvia lo slideshow
       this.updateImages();
