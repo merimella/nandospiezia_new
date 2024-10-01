@@ -18,8 +18,6 @@
 </template>
 
 <script>
-import { useRuntimeConfig } from '#app'; // Importa il runtime config per Nuxt
-
 export default {
   data() {
     return {
@@ -34,18 +32,13 @@ export default {
   },
   async mounted() {
     try {
-      // Ottieni il runtime config da Nuxt
-      const config = useRuntimeConfig();
-      const apiUrl = config.public.strapiApiUrl;
-      const bearerKey = config.public.strapiBearerKey;
-      
       // Chiamata API per recuperare i dati da Strapi
-      const response = await fetch(`${apiUrl}/api/header-sliders?populate=*`, {
+      const response = await fetch('nandospieziastrapi-production.up.railway.app/api/header-sliders?populate=*', {
         headers: {
-          Authorization: `Bearer ${bearerKey}`,
+          Authorization: `Bearer 47e2b89e521d880906b5c9f7a6c4ea391b869a97ac671ffb2de8d87ce2f4894c48f78f5711c42c5586bcc8cc15c20a695fdd430bbefdb9e529fdba788491e97c28d86437d04eb7778d30af8c2666b0e4aa518026f017e40eba2079dfd5264b867d3938e8b962a6b8362386d730a5826e437ae4d43650064adaa8764d9630feec`,
         },
       });
-
+      
       const data = await response.json();
       const attributes = data.data[0]?.attributes;
 
@@ -55,20 +48,20 @@ export default {
 
       // Popola le immagini per desktop
       this.imagesDesktop = [
-        `${apiUrl}${attributes?.headerSlide1?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide2?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide3?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide4?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlide5?.data?.attributes?.url}`
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide1?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide2?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide3?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide4?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlide5?.data?.attributes?.url}`
       ];
 
       // Popola le immagini per mobile
       this.imagesMobile = [
-        `${apiUrl}${attributes?.headerSlideMobile1?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile2?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile3?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile4?.data?.attributes?.url}`,
-        `${apiUrl}${attributes?.headerSlideMobile5?.data?.attributes?.url}`
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile1?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile2?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile3?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile4?.data?.attributes?.url}`,
+        `nandospieziastrapi-production.up.railway.app${attributes?.headerSlideMobile5?.data?.attributes?.url}`
       ];
 
       // Avvia lo slideshow
@@ -103,7 +96,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .fullpage-header {
