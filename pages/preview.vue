@@ -37,12 +37,12 @@ export default {
       // Otteniamo il runtime config da Nuxt
       const config = useRuntimeConfig();
       const apiUrl = config.public.strapiApiUrl;
-      const bearerKey = config.public.strapiBearerKey;
+      const apiToken = config.public.strapiApiToken; // Usa strapiApiToken, non strapiBearerKey
 
       // Chiamata API per recuperare i dati da Strapi
       const response = await fetch(`${apiUrl}/api/header-sliders?populate=*`, {
         headers: {
-          Authorization: `Bearer ${bearerKey}`,
+          Authorization: `Bearer ${apiToken}`, // Usa il token API corretto
         },
       });
       
