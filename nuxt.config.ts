@@ -1,8 +1,8 @@
 export default defineNuxtConfig({
-  compatibilityDate: '2024-09-28', // La data proposta dal terminale
+  compatibilityDate: '2024-09-28',
 
   devtools: { enabled: true },
-  pages: true, // Mantieni l'opzione per il routing automatico
+  pages: true, 
   ssr: false,
 
   css: [
@@ -21,19 +21,35 @@ export default defineNuxtConfig({
       ]
     }
   },
-  
+ 
   build: {
     transpile: ['gsap'],
   },
 
+  modules: [
+    [
+      '@nuxtjs/i18n',
+      {
+        locales: [
+          { code: 'en', iso: 'en-US', name: 'English' },
+          { code: 'it', iso: 'it-IT', name: 'Italiano' }
+        ],
+        defaultLocale: 'en',
+        strategy: 'prefix_except_default',
+        detectBrowserLanguage: {
+          useCookie: true,
+          cookieKey: 'i18n_redirected',
+          alwaysRedirect: true,
+          fallbackLocale: 'en'
+        }
+      }
+    ]
+  ],
+
   runtimeConfig: {
     public: {
-      strapiApiUrl: process.env.STRAPI_API_URL, // Prende il valore da .env
-      strapiApiToken: process.env.STRAPI_API_TOKEN // Prende il valore da .env
+      strapiApiUrl: process.env.STRAPI_API_URL,
+      strapiApiToken: process.env.STRAPI_API_TOKEN,
     }
   }
 });
-
-
- //console.log('STRAPI_API_URL:', process.env.STRAPI_API_URL);
- //console.log('STRAPI_API_TOKEN:', process.env.STRAPI_API_TOKEN);
