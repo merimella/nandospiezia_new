@@ -24,6 +24,8 @@
       </div>
     </div>
   </div>
+  <FooterForm />
+  <Footer />
 </template>
 
 <script setup>
