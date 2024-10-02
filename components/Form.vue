@@ -169,190 +169,169 @@ export default {
 <style scoped>
 /* Stili di base per il form */
 .contact-form,.contact-section {
-background: #ffffff;
-padding: 80px;
-display: flex;
-flex-direction: column;
-gap: 40px;
-align-items: flex-start;
-position: relative;
-
+  background: #ffffff;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  position: relative;
 }
 
 .contact-form-row {
-display: flex;
-width: 100%;
-gap: 20px; /* Spaziatura tra i campi nella stessa riga */
+  display: flex;
+  width: 100%;
+  gap: 20px; /* Spaziatura tra i campi nella stessa riga */
 }
 
 /* Campi di input */
 .contact-form-field {
-display: flex;
-flex-direction: column;
-position: relative;
-flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
 }
 
 .contact-form__input {
-width: 100%;
-padding: 10px 0;
-border: none;
-border-bottom: 1px solid #C2C2C2; /* Sostituzione degli SVG */
-font-size: 16px;
-background-color: transparent;
-outline: none;
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #C2C2C2; /* Sostituzione degli SVG */
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
 }
 
 .contact-form__placeholder {
-position: absolute;
-top: 50%;
-left: 0;
-transform: translateY(-50%);
-transition: all 0.3s ease;
-font-size: 1.2em;
-color: #c2c2c2;
-pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  font-size: 1.2em;
+  color: #c2c2c2;
+  pointer-events: none;
 }
 
 .contact-form__placeholder.active {
-top: -20px;
-left: 0;
-font-size: 0.9em;
-color: #000;
+  top: -20px;
+  left: 0;
+  font-size: 0.9em;
+  color: #000;
 }
 
 /* Wedding Date senza animazione */
 .no-animation {
-top: 8px;
-transform: none;
-font-size: 1.2em;
-color: #c2c2c2;
+  top: 8px;
+  transform: none;
+  font-size: 1.2em;
+  color: #c2c2c2;
 }
+
 /* Wedding Date input modificato per sembrare un selettore piuttosto che un campo di testo */
 .wedding-date-input {
-  cursor: pointer; /* Indica che il campo è cliccabile */
-  background-color: transparent; /* Rimuove qualsiasi colore di sfondo */
-  border: none; /* Rimuove il bordo per evitare che sembri un input testuale */
-  border-bottom: 1px solid #C2C2C2; /* Mantiene la linea inferiore */
-  padding: 10px 0;
-  font-size: 16px;
-  outline: none; /* Rimuove il bordo di messa a fuoco */
-}
-
-/* Rimozione della linea di input durante il focus */
-.wedding-date-input:focus {
-  outline: none; /* Rimuove il bordo evidenziato durante il focus */
-  box-shadow: none; /* Evita qualsiasi ombra di input */
-  border-bottom: 1px solid #C2C2C2; /* Mantiene la linea inferiore */
-}
-
-/* Checkbox */
-.checkbox-container {
-display: flex;
-flex-direction: row;
-gap: 10px;
-align-items: center;
-}
-
-.contact-form__checkbox {
-width: 15px;
-height: 15px;
-}
-
-.contact-form__checkbox-label {
-font-size: 12px;
-color: #000;
-}
-
-/* Pulsante di invio */
-.contact-form-button {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.contact-form__submit {
-background: none;
-border: none;
-color: #c2c2c2;
-font-family: "PlayfairDisplay-Regular", sans-serif;
-font-size: 20px;
-cursor: pointer;
-}/* Stili personalizzati per Flatpickr, se necessario */
-
-.flatpickr-input {
-border: none;
-border-bottom: 1px solid #C2C2C2!important;
-padding: 10px 0;
-font-size: 16px;
-background-color: transparent;
-outline: none;
-width: 100%;
-}
-
-/* Sovrascrivi gli stili di .form-control */
-.form-control {
-color: inherit;
-background-color: transparent;
-border: none;
-box-shadow: none;
-border-radius: 0;
-padding: 0;
-}
-
-.form-control:focus {
-color: inherit;
-background-color: transparent;
-border-color: transparent;
-outline: none;
-box-shadow: none;
-}
-
-/* Titolo e sottotitolo */
-.contact-title {
-font-size: 2em;
-font-weight: bold;
-margin-bottom: 10px;
-color: #000;
-}
-
-.contact-subtitle {
-font-size: 1.2em;
-color: #666;
-margin-bottom: 40px;
-line-height: 1.5;
-margin-top: -20px !important;
-}
-
-/* Stili del link Nuxt */
-.contact-subtitle a {
-color: #007bff;
-text-decoration: underline;
-cursor: pointer;
-}
-
-.contact-subtitle a:hover {
-color: #0056b3;
-text-decoration: none;
-}
-.contact-form__textarea {
-  resize: none;
-}
-
-select.contact-form__input {
-  appearance: none;
+  cursor: pointer;
   background-color: transparent;
+  border: none;
   border-bottom: 1px solid #C2C2C2;
   padding: 10px 0;
   font-size: 16px;
   outline: none;
 }
 
+.wedding-date-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-bottom: 1px solid #C2C2C2;
+}
+
+/* Checkbox */
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.contact-form__checkbox {
+  width: 15px;
+  height: 15px;
+}
+
+.contact-form__checkbox-label {
+  font-size: 12px;
+  color: #000;
+}
+
+/* Pulsante di invio */
+.contact-form-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-form__submit {
+  background: none;
+  border: none;
+  color: #c2c2c2;
+  font-family: "PlayfairDisplay-Regular", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Stili personalizzati per Flatpickr, se necessario */
+.flatpickr-input {
+  border: none;
+  border-bottom: 1px solid #C2C2C2 !important;
+  padding: 10px 0;
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.form-control {
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.form-control:focus {
+  color: inherit;
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Titolo e sottotitolo */
+.contact-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.contact-subtitle {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 40px;
+  line-height: 1.5;
+  margin-top: -20px !important;
+}
+
+.contact-form__textarea {
+  resize: none;
+}
+
 /* Stile per il dropdown personalizzato */
 .dropdown-container {
   position: relative;
   cursor: pointer;
-  width: 100%; /* Per garantire che il container si estenda al 100% del contenitore */
+  width: 100%;
 }
 
 .dropdown-trigger {
@@ -361,9 +340,9 @@ select.contact-form__input {
   padding: 10px 0;
   font-size: 16px;
   color: #666;
-  min-width: 142px; /* Larghezza minima */
-  width: auto; /* Permette al dropdown di adattarsi alla larghezza del contenuto */
-  white-space: nowrap; /* Impedisce al testo di andare a capo */
+  min-width: 142px;
+  width: auto;
+  white-space: nowrap;
 }
 
 .dropdown-trigger span {
@@ -382,18 +361,50 @@ select.contact-form__input {
   text-align: left;
   top: 100%;
   z-index: 10;
-  width: auto; /* Adattamento automatico alla lunghezza del contenuto */
-  min-width: 142px; /* Mantieni la larghezza minima */
+  width: auto;
+  min-width: 142px;
 }
 
 .dropdown-item {
   padding: 10px 0;
   cursor: pointer;
-  white-space: nowrap; /* Assicura che il testo rimanga su una singola linea */
+  white-space: nowrap;
 }
 
 .dropdown-item:hover {
   background-color: #f0f0f0;
 }
 
+/* Miglioramenti per dispositivi mobili */
+@media (max-width: 768px) {
+  .contact-form, .contact-section {
+    padding: 40px; /* Ridurre il padding sui dispositivi mobili */
+    gap: 30px; /* Ridurre la spaziatura verticale tra gli elementi */
+  }
+
+  .contact-form-row {
+    flex-direction: column; /* Disporre i campi verticalmente su mobile */
+    gap: 20px; /* Mantenere una buona spaziatura verticale tra i campi */
+  }
+
+  .contact-title {
+    font-size: 1.5em; /* Ridurre la dimensione del titolo su mobile */
+  }
+
+  .contact-subtitle {
+    font-size: 1em; /* Ridurre la dimensione del sottotitolo su mobile */
+  }
+
+  .contact-form__input {
+    font-size: 14px; /* Ridurre la dimensione del testo degli input su mobile */
+  }
+
+  .dropdown-trigger {
+    font-size: 14px; /* Ridurre la dimensione del testo nel dropdown */
+  }
+
+  .contact-form__submit {
+    font-size: 18px; /* Ridurre leggermente il pulsante di invio su mobile */
+  }
+}
 </style>
