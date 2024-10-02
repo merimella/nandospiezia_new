@@ -203,4 +203,10 @@ export default {
   width: 15%;
 }
 
+@media (max-width: 768px) {
+  .menu-item {
+   font-size:50px!important;
+  }
+}
+
 </style>
