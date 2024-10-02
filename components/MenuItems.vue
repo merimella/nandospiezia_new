@@ -206,6 +206,7 @@ export default {
 @media (max-width: 768px) {
   .menu-item {
    font-size:50px!important;
+   padding-top:10px;
   }
 }
 
