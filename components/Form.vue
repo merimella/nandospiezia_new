@@ -379,12 +379,12 @@ export default {
 @media (max-width: 768px) {
   .contact-form, .contact-section {
     padding: 40px; /* Ridurre il padding sui dispositivi mobili */
-    gap: 30px; /* Ridurre la spaziatura verticale tra gli elementi */
+    gap: 40px; /* Ridurre la spaziatura verticale tra gli elementi */
   }
 
   .contact-form-row {
     flex-direction: column; /* Disporre i campi verticalmente su mobile */
-    gap: 20px; /* Mantenere una buona spaziatura verticale tra i campi */
+    gap: 50px; /* Mantenere una buona spaziatura verticale tra i campi */
   }
 
   .contact-title {
