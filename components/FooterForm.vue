@@ -114,6 +114,23 @@ export default {
 
 
 <style scoped>
+/* Annulla il border-radius su iOS */
+input,
+textarea,
+select {
+  -webkit-appearance: none; /* Disabilita lo stile predefinito di iOS */
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0; /* Rimuovi il border-radius */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none; /* Rimuovi il contorno standard quando il campo è selezionato */
+  box-shadow: none; /* Evita effetti di ombra su focus */
+}
+
 /* Stili di base per il form */
 .contact-form, .contact-section {
   background: #ffffff;
@@ -144,7 +161,7 @@ export default {
   width: 100%;
   padding: 10px 0;
   border: none;
-  border-bottom: 1px solid #C2C2C2; /* Sostituzione degli SVG */
+  border-bottom: 1px solid #C2C2C2;
   font-size: 16px;
   background-color: transparent;
   outline: none;
@@ -156,7 +173,7 @@ export default {
   left: 0;
   transform: translateY(-50%);
   transition: all 0.3s ease;
-  font-size: 1.1em; /* Ridotto leggermente da 1.2em */
+  font-size: 1.1em;
   color: #c2c2c2;
   pointer-events: none;
 }
@@ -164,7 +181,7 @@ export default {
 .contact-form__placeholder.active {
   top: -20px;
   left: 0;
-  font-size: 0.8em; /* Ridotto leggermente da 0.9em */
+  font-size: 0.8em;
   color: #000;
 }
 
@@ -172,7 +189,7 @@ export default {
 .no-animation {
   top: 8px;
   transform: none;
-  font-size: 1.1em; /* Ridotto leggermente da 1.2em */
+  font-size: 1.1em;
   color: #c2c2c2;
 }
 
@@ -221,7 +238,6 @@ export default {
   width: 100%;
 }
 
-/* Sovrascrivi gli stili di .form-control */
 .form-control {
   color: inherit;
   background-color: transparent;
@@ -255,18 +271,6 @@ export default {
   margin-top: -20px !important;
 }
 
-/* Stili del link Nuxt */
-.contact-subtitle a {
-  color: #007bff;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.contact-subtitle a:hover {
-  color: #0056b3;
-  text-decoration: none;
-}
-
 /* Media queries per dispositivi mobili */
 @media (max-width: 768px) {
   .contact-form, .contact-section {
@@ -294,4 +298,5 @@ export default {
     border-color: #C2C2C2;
   }
 }
+
 </style>
