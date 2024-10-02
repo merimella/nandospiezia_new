@@ -115,7 +115,7 @@ export default {
 
 <style scoped>
 /* Stili di base per il form */
-.contact-form,.contact-section {
+.contact-form, .contact-section {
   background: #ffffff;
   padding: 200px;
   display: flex;
@@ -123,7 +123,7 @@ export default {
   gap: 40px;
   align-items: flex-start;
   position: relative;
-  padding-bottom:100px;
+  padding-bottom: 100px;
 }
 
 .contact-form-row {
@@ -156,7 +156,7 @@ export default {
   left: 0;
   transform: translateY(-50%);
   transition: all 0.3s ease;
-  font-size: 1.2em;
+  font-size: 1.1em; /* Ridotto leggermente da 1.2em */
   color: #c2c2c2;
   pointer-events: none;
 }
@@ -164,7 +164,7 @@ export default {
 .contact-form__placeholder.active {
   top: -20px;
   left: 0;
-  font-size: 0.9em;
+  font-size: 0.8em; /* Ridotto leggermente da 0.9em */
   color: #000;
 }
 
@@ -172,7 +172,7 @@ export default {
 .no-animation {
   top: 8px;
   transform: none;
-  font-size: 1.2em;
+  font-size: 1.1em; /* Ridotto leggermente da 1.2em */
   color: #c2c2c2;
 }
 
@@ -208,11 +208,12 @@ export default {
   font-family: "PlayfairDisplay-Regular", sans-serif;
   font-size: 20px;
   cursor: pointer;
-}/* Stili personalizzati per Flatpickr, se necessario */
+}
 
+/* Stili personalizzati per Flatpickr */
 .flatpickr-input {
   border: none;
-  border-bottom: 1px solid #C2C2C2!important;
+  border-bottom: 1px solid #C2C2C2 !important;
   padding: 10px 0;
   font-size: 16px;
   background-color: transparent;
@@ -266,19 +267,31 @@ export default {
   text-decoration: none;
 }
 
+/* Media queries per dispositivi mobili */
 @media (max-width: 768px) {
-  .contact-form,.contact-section {
-  background: #ffffff;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: flex-start;
-  position: relative;
-  padding-top:100px;
-  padding-bottom: 20px;
-}
-}
+  .contact-form, .contact-section {
+    background: #ffffff;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+    position: relative;
+    padding-top: 100px;
+    padding-bottom: 20px;
+  }
 
+  /* Sovrascrivi gli stili di Flatpickr su mobile */
+  .flatpickr-calendar {
+    display: none !important; /* Nascondi il calendario su mobile se preferito */
+  }
 
+  .flatpickr-input {
+    font-size: 14px; /* Adatta la dimensione del testo */
+    border-bottom: 1px solid #C2C2C2;
+    padding: 8px 0;
+    background-color: transparent;
+    border-color: #C2C2C2;
+  }
+}
 </style>
