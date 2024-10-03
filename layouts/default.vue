@@ -2,7 +2,7 @@
   <div>
     <!-- Mostra il loader quando isLoading è true -->
     <transition name="loader-fade" mode="out-in">
-      <LogoLoader v-if="isLoading" />
+      <LogoLoader v-if="isLoading" @loading-complete="handleLoadingComplete" />
     </transition>
 
     <!-- Mostra il contenuto della pagina solo quando isLoading è false e il loader è completamente nascosto -->
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { gsap } from 'gsap';
 import LogoLoader from '~/components/LogoLoader.vue'; // Importa il componente LogoLoader
 
@@ -21,7 +21,7 @@ import LogoLoader from '~/components/LogoLoader.vue'; // Importa il componente L
 const isLoading = ref(true);
 const loaderHidden = ref(false); // Variabile per confermare che il loader è completamente nascosto
 
-// Funzione per gestire il completamento del caricamento del sito
+// Funzione per gestire il completamento del caricamento
 const handleLoadingComplete = () => {
   gsap.to('.logo-loader-wrapper', {
     opacity: 0,
@@ -32,14 +32,6 @@ const handleLoadingComplete = () => {
     }
   });
 };
-
-// Utilizza onMounted per aspettare il caricamento completo delle risorse
-onMounted(() => {
-  // Usa window.onload per aspettare il caricamento di tutte le risorse (immagini, CSS, JS)
-  window.onload = () => {
-    handleLoadingComplete(); // Nasconde il loader solo dopo che tutto è caricato
-  };
-});
 
 // Animazione GSAP per l'entrata del contenuto
 const enterAnimation = (el, done) => {
