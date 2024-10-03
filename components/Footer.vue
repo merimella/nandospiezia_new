@@ -1,10 +1,10 @@
 <template>
   <div class="footer-container">
     <References />
-    <div class="text-overlay">
-      <h1>NANDO SPIEZIA</h1>
-      <h2>PHOTOGRAPHY</h2>
+    <div class="footer-claim">
+      <div class="h-3">YOUR WEDDING, BEST LOVE TALE</div>
     </div>
+    
     <div class="footer-links">
       <div class="li">VIA GUGLIELMO MARCONI, 3</div>
       <div class="li">TORRE DEL GRECO (NA) - ITALY</div>
@@ -17,8 +17,9 @@
       <img class="social-icon" src="/images/twitter-negative0.svg" alt="Twitter" />
       <img class="social-icon" src="/images/group0.svg" alt="Group" />
     </div>
-    <div class="footer-claim">
-      <div class="h-3">YOUR WEDDING, BEST LOVE TALE</div>
+    <div class="text-overlay">
+      <h1>NANDO SPIEZIA</h1>
+      <h2>PHOTOGRAPHY</h2>
     </div>
   </div>
   <CustomFooter />

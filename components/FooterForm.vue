@@ -135,6 +135,7 @@ select:focus {
 .contact-form, .contact-section {
   background: #ffffff;
   padding: 200px;
+  padding-top: 120px;
   display: flex;
   flex-direction: column;
   gap: 40px;

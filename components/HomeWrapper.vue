@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid home-wrapper">
     <!-- Prima sezione -->
-    <div class="section row py-5 mx-auto content-wrapper">
+    <div class=" section row mx-auto content-wrapper">
       <!-- Heading e immagine sulla stessa riga -->
       <div class="col-lg-6 order-lg-1">
-       
+       <div class="title">
         <h1 class="h1 split-text">
           ITALIAN EDITORIAL AND REPORTAGE
           <br />
@@ -12,7 +12,8 @@
           <br />
            IN NAPLES AND AMALFI COAST
         </h1>
-        <img class="img-fluid img-section mt-4 fade-in-img" src="/public/images/homewrapper/img0.png" />
+      </div>
+        <img class="img-fluid img-section fade-in-img" src="/public/images/homewrapper/img0.png" />
       </div>
       <!-- Paragrafo e pulsante a destra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-2">
@@ -31,15 +32,17 @@
     </div>
 
     <!-- Seconda sezione -->
-    <div class="row py-5 text-center mx-auto content-wrapper">
+  <div class="section">
+    <div class="title">
+    <div class="row text-center mx-auto content-wrapper">
       <div class="col">
         <h2 class="h2 split-text">Unforgettable</h2>
         <h1 class="h1 split-text">YOUR BEST MEMORIES</h1>
       </div>
     </div>
-
+    </div>
     <!-- Galleria -->
-    <div class="row justify-content-center py-3 mx-auto content-wrapper">
+    <div class="row justify-content-center mx-auto content-wrapper">
       <div class="col-12 d-flex flex-wrap justify-content-center">
         <img class="img-fluid gallery-item fade-in" src="/public/images/homewrapper/gallery-10.png" />
         <img class="img-fluid gallery-item fade-in" src="/public/images/homewrapper/gallery-20.png" />
@@ -52,18 +55,21 @@
         <img class="img-fluid gallery-item fade-in" src="/public/images/homewrapper/gallery-90.png" />
       </div>
     </div>
+  </div>
 
     <!-- Terza sezione -->
-    <div class="section3 row py-5 align-items-center mx-auto content-wrapper">
-      <div class="row py-5 text-center mx-auto content-wrapper">
+    <div class="section row align-items-center mx-auto content-wrapper">
+      <div class="title">
+      <div class="row text-center mx-auto content-wrapper">
         <div class="col">
           <h2 class="h2 split-text">Your story, our lens</h2>
           <h1 class="h1 split-text">LOVE STORIES ARE AMONG <br>THE MOST BEAUTIFUL TALES EVER TOLD</h1>
         </div>
       </div>
+      </div>
       <!-- Testi centrati sopra l'immagine -->
       <div class="col-lg-6 text-center text-lg-start order-lg-1">
-        <img class="img-fluid img-rounded img-section rounded-top mt-4 fade-in-img" src="/public/images/homewrapper/left-container.png" />
+        <img class="img-fluid img-rounded img-section rounded-top fade-in-img" src="/public/images/homewrapper/left-container.png" />
       </div>
       <!-- Paragrafo e pulsante a destra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-2">
@@ -154,30 +160,33 @@ export default {
   box-sizing: border-box;
   background-color: white;
   padding-top: 50px;
+  padding-top: 80px;
+}
+
+.title{
+  padding-bottom: 60px;
+}
+
+.section{
+  padding-bottom: 90px;
 }
 
 .content-wrapper {
   max-width: 1000px;
+  
 }
 
 .h2 {
   color: #000;
   font-weight: 400;
 }
-.section{
-  
-  padding-bottom: 100px!important;;
-}
 
-.section3{
-  padding-top: 150px!important;
-  padding-bottom: 250px!important;;
-}
 .paragraph-box {
   margin-top: 200px;
   margin-left: -200px;
   background-color: white !important; /* Forzare il background bianco */
   z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 
 .h1 {
@@ -245,14 +254,7 @@ export default {
   }
 
 
-  .section{
-    padding-bottom: 50px!important;
-  }
-
-  .section3{
-    padding-bottom: 50px!important;
-    padding-top: 50px!important;
-  }
+ 
 
   .img-section {
     height: auto; /* Aggiusta l'altezza dell'immagine su mobile */
@@ -281,6 +283,11 @@ h1{
 
 /* Layout della galleria su schermi piccoli */
 @media (max-width: 768px) {
+
+  .paragraph-box{
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  }
+
   .gallery-item {
     width: 100%; /* Default: singola immagine per riga */
   }

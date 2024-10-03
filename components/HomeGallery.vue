@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid photo-gallery p-0">
     <!-- Titolo della sezione -->
-    <div class="gallery-title text-center py-4">
+    <div class="gallery-title text-center title">
       <h1>Your Best Day Deserves Best Memories</h1>
     </div>
     <div class="row g-0">
@@ -132,6 +132,11 @@ export default {
 .photo-gallery {
   background: #ffffff;
 }
+
+.title{
+  padding-bottom: 60px;
+}
+
 
 .gallery-title h1 {
   font-size: 2rem;
