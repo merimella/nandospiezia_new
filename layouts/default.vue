@@ -2,12 +2,16 @@
   <div>
     <!-- Mostra il loader quando isLoading è true -->
     <transition name="loader-fade" mode="out-in">
-      <LogoLoader v-if="isLoading" @loading-complete="handleLoadingComplete" />
+      <div v-if="isLoading" class="logo-loader-wrapper">
+        <LogoLoader @loading-complete="handleLoadingComplete" />
+      </div>
     </transition>
 
-    <!-- Mostra il contenuto della pagina solo quando isLoading è false e il loader è completamente nascosto -->
-    <transition :css="false" mode="out-in" @enter="enterAnimation" @leave="leaveAnimation">
-      <NuxtPage v-if="!isLoading && loaderHidden" />
+    <!-- Wrapper div intorno a NuxtPage, sempre visibile ma controllato con l'opacità -->
+    <transition name="page-fade" mode="out-in" :css="false" @enter="enterAnimation" @leave="leaveAnimation">
+      <div :class="{ 'hidden-content': isLoading }">
+        <NuxtPage />
+      </div>
     </transition>
   </div>
 </template>
@@ -19,7 +23,6 @@ import LogoLoader from '~/components/LogoLoader.vue'; // Importa il componente L
 
 // Variabile reattiva per gestire lo stato di caricamento
 const isLoading = ref(true);
-const loaderHidden = ref(false); // Variabile per confermare che il loader è completamente nascosto
 
 // Funzione per gestire il completamento del caricamento
 const handleLoadingComplete = () => {
@@ -27,8 +30,7 @@ const handleLoadingComplete = () => {
     opacity: 0,
     duration: 1,
     onComplete: () => {
-      isLoading.value = false; // Rendi false solo dopo che il loader è sparito
-      loaderHidden.value = true; // Conferma che il loader è nascosto
+      isLoading.value = false;   // Nasconde il loader
     }
   });
 };
@@ -65,6 +67,20 @@ const leaveAnimation = (el, done) => {
 }
 .loader-fade-enter, .loader-fade-leave-to {
   opacity: 0;
+}
+
+/* Stile per la transizione di dissolvenza della pagina */
+.page-fade-enter-active, .page-fade-leave-active {
+  transition: opacity 1s ease;
+}
+.page-fade-enter, .page-fade-leave-to {
+  opacity: 0;
+}
+
+/* Stile per nascondere temporaneamente il contenuto della pagina quando il loader è attivo */
+.hidden-content {
+  opacity: 0;
+  pointer-events: none; /* Evita che il contenuto sia cliccabile mentre il loader è attivo */
 }
 
 /* Stile per nascondere la scrollbar */

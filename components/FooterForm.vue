@@ -258,8 +258,7 @@ select:focus {
 
 /* Titolo e sottotitolo */
 .contact-title {
-  font-size: 2em;
-  font-weight: bold;
+  text-transform: uppercase;
   margin-bottom: 10px;
   color: #000;
 }
