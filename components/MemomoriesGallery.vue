@@ -36,7 +36,7 @@
       <!-- Immagini della seconda galleria -->
       <img v-if="secondGallery.length > 0" class="img-fluid img-one fade-in" :src="secondGallery[0].url || '/images/default.webp'" />
       <img v-if="secondGallery.length > 1" class="img-fluid img-two fade-in" :src="secondGallery[1].url || '/images/default.webp'" />
-      <img v-if="secondGallery.length > 2" class="img-fluid img-three fade-in" :src="secondGallery[2].url || '/images/default.webp'" />
+      <!-- <img v-if="secondGallery.length > 2" class="img-fluid img-three fade-in" :src="secondGallery[2].url || '/images/default.webp'" />-->
     </div>
 
     <!-- Full gallery -->
