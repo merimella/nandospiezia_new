@@ -139,7 +139,7 @@ export default {
 
 
 .gallery-title h1 {
-  font-size: 2rem;
+  
   font-weight: 400;
   text-transform: uppercase;
   color: #333;

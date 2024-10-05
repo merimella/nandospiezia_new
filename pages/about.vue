@@ -6,6 +6,7 @@
       <!-- Heading e immagine sulla stessa riga -->
       <div class="col-lg-6 order-lg-1">
         <div class="title">
+          <h2>ABOUT</h2>
           <h1 class="h1 split-text">
             BORN TO GIVE EMOTIONS
             <br />
@@ -232,9 +233,7 @@ export default {
   width: 95%; /* Larghezza del contenitore */
   margin: 0 auto; /* Centra il contenitore stesso all'interno del genitore */
 }
-h1{
-  font-size: 20px!important;
-}
+
 
 }
 

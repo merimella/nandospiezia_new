@@ -7,9 +7,9 @@
         <div class="title">
           <h1 class="h1 split-text">
             ITALIAN EDITORIAL AND REPORTAGE
-            <br />
+            
             WEDDING PHOTOGRAPHERS BASED
-            <br />
+           
             IN NAPLES AND AMALFI COAST
           </h1>
         </div>
@@ -271,9 +271,7 @@ export default {
   width: 95%; /* Larghezza del contenitore */
   margin: 0 auto; /* Centra il contenitore stesso all'interno del genitore */
 }
-h1{
-  font-size: 20px!important;
-}
+
 
 }
 

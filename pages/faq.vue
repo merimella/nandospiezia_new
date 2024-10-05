@@ -309,9 +309,7 @@ export default {
     width: 95%; /* Larghezza del contenitore */
     margin: 0 auto; /* Centra il contenitore stesso all'interno del genitore */
   }
-  h1{
-    font-size: 20px!important;
-  }
+
 }
 
 /* Layout della galleria su schermi piccoli */

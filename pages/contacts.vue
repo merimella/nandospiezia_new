@@ -1,7 +1,7 @@
 <template>
-  <div class="page-container">
+  <div id="content" class="page-container">
     <Navbar />
-    <div id="content" class="scroll-content">
+    <div  class="scroll-content">
       <div class="content-wrapper"> <!-- Aggiungi un contenitore extra -->
         <Form />
         <Footer />
