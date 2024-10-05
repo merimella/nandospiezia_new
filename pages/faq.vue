@@ -9,8 +9,6 @@
       <h2>FAQ</h2>
           <h1 class="h1 split-text">
             MOST FREQUENTLY
-
-            <br />
             ASKED QUESTIONS
           </h1>
         </div>
@@ -228,21 +226,8 @@ export default {
   font-weight: 400;
 }
 
-.paragraph-box {
-  background-color: white !important; /* Forzare il background bianco */
-  z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  margin-left:-90px;
-  padding: 65px!important;
-}
-.paragraph-box-left {
-  background-color: white !important; /* Forzare il background bianco */
-  z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  margin-right: -90px;
-  padding: 65px!important;
-  
-}
+
+
 .h1 {
   color: #000;
   font-weight: 300;
@@ -301,23 +286,9 @@ export default {
     padding-bottom: 40px;
   }
 
-  .paragraph-box {
-    margin-top: -70px; /* Resetta il margine superiore su mobile */
-    margin-left: 0; /* Resetta il margine a sinistra su mobile */
-    padding: 20px; /* Aggiunge padding ai lati per ridurre lo spazio del testo su mobile */
-    background-color: white !important; /* Mantiene il background bianco su mobile */
-    margin-left: 20px;
-    margin-right: 20px;
-  }
 
-  .paragraph-box-left {
-    margin-bottom: -70px; /* Resetta il margine superiore su mobile */
-    margin-left: 0; /* Resetta il margine a sinistra su mobile */
-    padding: 20px; /* Aggiunge padding ai lati per ridurre lo spazio del testo su mobile */
-    background-color: white !important; /* Mantiene il background bianco su mobile */
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+
+ 
 
   .img-section {
     height: auto; /* Aggiusta l'altezza dell'immagine su mobile */
@@ -345,10 +316,7 @@ export default {
 
 /* Layout della galleria su schermi piccoli */
 @media (max-width: 768px) {
-  .paragraph-box{
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  }
-
+ 
   .gallery-item {
     width: 100%; /* Default: singola immagine per riga */
   }

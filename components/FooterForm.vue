@@ -1,11 +1,8 @@
 <template>
-
+  <!-- Il form di contatto -->
+  <div class="contact-form">
     
-
-    <!-- Il form di contatto -->
-    <div class="contact-form">
-    
-      <!-- Titolo -->
+    <!-- Titolo -->
     <h1 class="contact-title">Not ready with all the details?</h1>
 
     <!-- Sottotitolo -->
@@ -14,48 +11,47 @@
       Or, if you're ready, you can fill out the full form
       <NuxtLink to="/contacts">here</NuxtLink>.
     </p>
-      <!-- Prima riga: Full Name e Email -->
-      <div class="contact-form-row">
-        <div class="contact-form-field">
-          <input type="text" class="contact-form__input" required />
-          <label class="contact-form__placeholder">FULL NAME</label>
-        </div>
-
-        <div class="contact-form-field">
-          <input type="email" class="contact-form__input" required />
-          <label class="contact-form__placeholder">EMAIL</label>
-        </div>
+    
+    <!-- Prima riga: Full Name e Email -->
+    <div class="contact-form-row">
+      <div class="contact-form-field">
+        <input type="text" class="contact-form__input" required style="-webkit-appearance: none; appearance: none; border-radius: 0;" />
+        <label class="contact-form__placeholder">FULL NAME</label>
       </div>
 
-      <!-- Seconda riga: Wedding Date e City -->
-      <div class="contact-form-row">
-        <div class="contact-form-field">
-        <input type="text" ref="weddingDate" class="contact-form__input wedding-date-input" @focus="openCalendar" readonly />
+      <div class="contact-form-field">
+        <input type="email" class="contact-form__input" required style="-webkit-appearance: none; appearance: none; border-radius: 0;" />
+        <label class="contact-form__placeholder">EMAIL</label>
+      </div>
+    </div>
+
+    <!-- Seconda riga: Wedding Date e City -->
+    <div class="contact-form-row">
+      <div class="contact-form-field">
+        <input type="text" ref="weddingDate" class="contact-form__input wedding-date-input" @focus="openCalendar" readonly style="-webkit-appearance: none; appearance: none; border-radius: 0;" />
         <label class="contact-form__placeholder no-animation" @click="openCalendar">WEDDING DATE</label>
       </div>
 
-        <div class="contact-form-field">
-          <input type="text" class="contact-form__input" required />
-          <label class="contact-form__placeholder">CITY</label>
-        </div>
-      </div>
-
-      <!-- Checkbox -->
-      <div class="checkbox-container">
-        <input type="checkbox" class="contact-form__checkbox" required />
-        <label class="contact-form__checkbox-label">
-          I consent for the information submitted above to be recorded and stored for the purposes of providing services relating to my inquiry. I agree that registration on or use of the Bottega 53 site constitutes agreement to its User Agreement & Privacy Policy.
-        </label>
-      </div>
-
-      <!-- Pulsante di invio -->
-      <div class="contact-form-button">
-        <button class="contact-form__submit">SEND</button>
+      <div class="contact-form-field">
+        <input type="text" class="contact-form__input" required style="-webkit-appearance: none; appearance: none; border-radius: 0;" />
+        <label class="contact-form__placeholder">CITY</label>
       </div>
     </div>
- 
-</template>
 
+    <!-- Checkbox con validation -->
+    <div class="checkbox-container">
+      <input type="checkbox" id="consentCheckbox" class="contact-form__checkbox" required v-model="consentGiven" style="-webkit-appearance: checkbox; appearance: checkbox; border-radius: 0; border: 1px solid #C2C2C2; width: 20px; height: 20px;" />
+      <label for="consentCheckbox" class="contact-form__checkbox-label">
+        I consent for the information submitted above to be recorded and stored for the purposes of providing services relating to my inquiry. I agree that registration on or use of the Bottega 53 site constitutes agreement to its User Agreement & Privacy Policy.
+      </label>
+    </div>
+
+    <!-- Pulsante di invio -->
+    <div class="contact-form-button">
+      <button class="contact-form__submit" :disabled="!consentGiven" style="-webkit-appearance: none; appearance: none; border-radius: 0;">SEND</button>
+    </div>
+  </div>
+</template>
 
 <script>
 import flatpickr from "flatpickr";
@@ -63,6 +59,11 @@ import "flatpickr/dist/flatpickr.min.css";
 
 export default {
   name: "ContactForm",
+  data() {
+    return {
+      consentGiven: false // Controlla se l'utente ha dato il consenso
+    };
+  },
   mounted() {
     const inputs = document.querySelectorAll(".contact-form__input");
 
@@ -103,15 +104,7 @@ export default {
     },
   },
 };
-
-
-
 </script>
-
-
-
-
-
 
 <style scoped>
 /* Annulla il border-radius su iOS */
@@ -166,6 +159,9 @@ select:focus {
   font-size: 16px;
   background-color: transparent;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 .contact-form__placeholder {
@@ -203,8 +199,12 @@ select:focus {
 }
 
 .contact-form__checkbox {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+  border-radius: 0;
+  border: 1px solid #C2C2C2;
 }
 
 .contact-form__checkbox-label {
@@ -226,6 +226,9 @@ select:focus {
   font-family: "PlayfairDisplay-Regular", sans-serif;
   font-size: 20px;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 /* Stili personalizzati per Flatpickr */
@@ -246,6 +249,8 @@ select:focus {
   box-shadow: none;
   border-radius: 0;
   padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .form-control:focus {
@@ -297,6 +302,11 @@ select:focus {
     background-color: transparent;
     border-color: #C2C2C2;
   }
-}
 
+  /* Assicurarsi che la casella di spunta sia quadrata anche su dispositivi mobili */
+  .contact-form__checkbox {
+    width: 20px;
+    height: 20px;
+  }
+}
 </style>

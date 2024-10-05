@@ -79,23 +79,20 @@
 </div>
 
 
-
-    <!-- Checkbox -->
+    <!-- Checkbox con validation -->
     <div class="checkbox-container">
-      <input type="checkbox" class="contact-form__checkbox" required />
-      <label class="contact-form__checkbox-label">
+      <input type="checkbox" id="consentCheckbox" class="contact-form__checkbox" required v-model="consentGiven" />
+      <label for="consentCheckbox" class="contact-form__checkbox-label">
         I consent for the information submitted above to be recorded and stored for the purposes of providing services relating to my inquiry. I agree that registration on or use of Nando Spiezia site constitutes agreement to its User Agreement & Privacy Policy.
       </label>
     </div>
 
     <!-- Pulsante di invio -->
     <div class="contact-form-button">
-      <button class="contact-form__submit">SEND</button>
+      <button class="contact-form__submit" :disabled="!consentGiven">SEND</button>
     </div>
   </div>
 </template>
-
-
 
 <script>
 import flatpickr from "flatpickr";
@@ -107,6 +104,7 @@ export default {
     return {
       dropdownOpen: false,  // Controlla se il dropdown è aperto o chiuso
       selectedOption: "",   // Memorizza l'opzione selezionata dal dropdown
+      consentGiven: false   // Controlla se l'utente ha dato il consenso
     };
   },
   mounted() {
@@ -158,13 +156,7 @@ export default {
     },
   },
 };
-
 </script>
-
-
-
-
-
 
 <style scoped>
 /* Stili di base per il form */
@@ -200,6 +192,9 @@ export default {
   font-size: 16px;
   background-color: transparent;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 .contact-form__placeholder {
@@ -237,6 +232,9 @@ export default {
   padding: 10px 0;
   font-size: 16px;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 .wedding-date-input:focus {
@@ -254,8 +252,36 @@ export default {
 }
 
 .contact-form__checkbox {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+  border-radius: 0;
+  border: 1px solid #C2C2C2;
+}
+
+.contact-form__checkbox:checked {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.contact-form__checkbox::before {
+  content: '\2713';
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  display: none;
+}
+
+.contact-form__checkbox:checked::before {
+  display: block;
 }
 
 .contact-form__checkbox-label {
@@ -277,6 +303,9 @@ export default {
   font-family: "PlayfairDisplay-Regular", sans-serif;
   font-size: 20px;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 /* Stili personalizzati per Flatpickr, se necessario */
@@ -297,6 +326,8 @@ export default {
   box-shadow: none;
   border-radius: 0;
   padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .form-control:focus {
@@ -309,8 +340,7 @@ export default {
 
 /* Titolo e sottotitolo */
 .contact-title {
-  font-size: 2em;
-  font-weight: bold;
+
   margin-bottom: 10px;
   color: #000;
 }
@@ -325,6 +355,9 @@ export default {
 
 .contact-form__textarea {
   resize: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 /* Stile per il dropdown personalizzato */
@@ -406,5 +439,15 @@ export default {
   .contact-form__submit {
     font-size: 18px; /* Ridurre leggermente il pulsante di invio su mobile */
   }
+
+  /* Assicurarsi che la casella di spunta sia quadrata anche su dispositivi mobili */
+  .contact-form__checkbox {
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+  border-radius: 0;
+  border: 1px solid #C2C2C2;
+}
 }
 </style>

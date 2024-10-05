@@ -146,14 +146,6 @@ export default {
   font-weight: 400;
 }
 
-.paragraph-box {
-  margin-top: 200px;
-  background-color: white !important; /* Forzare il background bianco */
-  z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  margin-left:-90px;
-  padding: 65px!important;
-}
 
 .h1 {
   color: #000;
@@ -216,14 +208,7 @@ export default {
 
 /* Media queries per i dispositivi mobili */
 @media (max-width: 768px) {
-  .paragraph-box {
-    margin-top: -70px; /* Resetta il margine superiore su mobile */
-    margin-left: 0; /* Resetta il margine a sinistra su mobile */
-    padding: 20px; /* Aggiunge padding ai lati per ridurre lo spazio del testo su mobile */
-    background-color: white !important; /* Mantiene il background bianco su mobile */
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+
 
 
  
@@ -256,9 +241,7 @@ h1{
 /* Layout della galleria su schermi piccoli */
 @media (max-width: 768px) {
 
-  .paragraph-box{
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  }
+ 
 
   .gallery-item {
     width: 100%; /* Default: singola immagine per riga */
