@@ -129,6 +129,16 @@ p {
   padding: 65px!important;
   
 }
+.contact-form__placeholder{
+  font-family: "Playfair Display", serif;
+}
+
+.contact-form__checkbox-label{
+  font-family: "Playfair Display", serif;
+  font-weight: 100;
+}
+
+
 
 @media (max-width: 768px) {
 
@@ -154,5 +164,7 @@ p {
   margin-left: 20px!important;
   margin-right: 20px!important;
 }
+
+
 
 }

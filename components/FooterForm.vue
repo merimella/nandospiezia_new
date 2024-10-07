@@ -210,6 +210,7 @@ select:focus {
 .contact-form__checkbox-label {
   font-size: 12px;
   color: #000;
+  
 }
 
 /* Pulsante di invio */

@@ -4,10 +4,10 @@
   <div class="page-container">
     <Navbar /> 
   
-     <div class="header">
-          <HeaderMemories />
-        </div>
-    <div id="content" class="scroll-content">
+    <div :id="isMobile ? 'content' : ''" class="header"> <!-- ID su header per mobile -->
+      <Header />
+    </div>
+    <div :id="!isMobile ? 'content' : ''" class="scroll-content"> <!-- ID su scroll-content per desktop -->
         
       <MemomoriesGallery />
       <Footer />
@@ -15,17 +15,28 @@
   </div>
   </template>
 
-<script>
-import MemomoriesGallery from '~/components/MemomoriesGallery.vue';
-import HeaderMemories from '~/components/HeaderMemories.vue';
-import Navbar from '~/components/Navbar.vue';
 
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-export default {
-  components: {
-    MemomoriesGallery
-  }
-}
+// Flag per verificare se siamo su mobile
+const isMobile = ref(false);
+
+// Funzione per controllare la dimensione dello schermo
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth <= 768; // Imposta mobile per schermi sotto i 768px
+};
+
+// Al montaggio del componente, controlla la dimensione dello schermo e aggiungi l'event listener
+onMounted(() => {
+  checkScreenSize(); // Verifica al caricamento
+  window.addEventListener('resize', checkScreenSize); // Ascolta il ridimensionamento
+});
+
+// Pulisci l'event listener quando il componente viene smontato
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
 </script>
 
 <style scoped>

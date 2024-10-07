@@ -87,7 +87,7 @@ h2 {
 }
 
 .footer-claim {
-  font-family: 'Nexa', sans-serif;
+  font-family: 'SilkSerif', serif;
   font-size: 30px;
   text-align: center;
   color: #000;

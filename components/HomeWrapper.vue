@@ -226,6 +226,7 @@ export default {
   border-top-left-radius: 50% !important; /* Arrotonda l'immagine */
   border-top-right-radius: 50% !important; /* Arrotonda l'immagine */
   object-fit: cover; /* Assicura che l'immagine si adatti al contenitore */
+  object-position: center bottom; /* Fa partire il cover dell'immagine dal basso */
   width: 100%; /* Imposta la larghezza dell'immagine a 100% del contenitore */
   height: auto; /* Assicura che l'altezza si adatti proporzionalmente */
   overflow: hidden; /* Evita che l'immagine "sbordi" dal contenitore arrotondato */
