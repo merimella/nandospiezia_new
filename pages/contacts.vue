@@ -2,7 +2,7 @@
   <div id="content" class="page-container">
     <Navbar />
     <div  class="scroll-content">
-      <div class="content-wrapper"> <!-- Aggiungi un contenitore extra -->
+      <div class="content-wrapper mx-auto"> <!-- Aggiungi un contenitore extra -->
         <Form />
         <Footer />
       </div>
@@ -26,4 +26,8 @@ import Form from '~/components/Form.vue';
   position: relative;
   z-index: 2; /* Assicurati che questo scorra sopra l'header */
 }
+.content-wrapper{
+  max-width: 1350px;
+}
+
 </style>

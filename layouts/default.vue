@@ -35,27 +35,27 @@ const handleLoadingComplete = () => {
   });
 };
 
-// Animazione GSAP per l'entrata del contenuto
+// Animazione GSAP per l'entrata del contenuto (quando la nuova pagina appare)
 const enterAnimation = (el, done) => {
   gsap.fromTo(
     el,
-    { opacity: 0 },
+    { opacity: 0 },  // Nuova pagina inizia invisibile
     {
-      opacity: 1,
-      duration: 1,
+      opacity: 1,    // La nuova pagina appare gradualmente
+      duration: 0.8, // Puoi regolare la durata della transizione
       ease: 'power2.out',
-      onComplete: done,
+      onComplete: done, // Assicura che la transizione termini correttamente
     }
   );
 };
 
-// Animazione GSAP per l'uscita del contenuto (se necessaria)
+// Animazione GSAP per l'uscita del contenuto (quando la vecchia pagina scompare)
 const leaveAnimation = (el, done) => {
   gsap.to(el, {
-    opacity: 0,
-    duration: 0.5,
+    opacity: 0,       // La vecchia pagina scompare
+    duration: 0.5,    // Durata dell'animazione di uscita
     ease: 'power2.in',
-    onComplete: done,
+    onComplete: done, // Assicura che la transizione termini correttamente
   });
 };
 </script>
@@ -71,7 +71,7 @@ const leaveAnimation = (el, done) => {
 
 /* Stile per la transizione di dissolvenza della pagina */
 .page-fade-enter-active, .page-fade-leave-active {
-  transition: opacity 1s ease;
+  transition: opacity 0.8s ease; /* Transizione più veloce per cambiare le pagine */
 }
 .page-fade-enter, .page-fade-leave-to {
   opacity: 0;

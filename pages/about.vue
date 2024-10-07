@@ -4,7 +4,7 @@
     <!-- Prima sezione -->
     <div  class="row mx-auto content-wrapper">
       <!-- Heading e immagine sulla stessa riga -->
-      <div class="col-lg-6 order-lg-1">
+      <div class="section col-lg-6 order-lg-1">
         <div class="title">
           <h2>ABOUT</h2>
           <h1 class="h1 split-text">

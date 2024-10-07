@@ -25,11 +25,11 @@
       <!-- Paragrafo e pulsante a destra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-2">
         <div class="p-4 paragraph-box">
-          <h2>HOW MUCH DOES YOUR SERVICE COST?</h2>
+          <h3>HOW MUCH DOES YOUR SERVICE COST?</h3>
           <p class="p">
             We offer various packages based on the duration of the service and the number of photographers needed. All packages can be customized to suit your needs! Fill out the form and we will respond within 24 hours.
           </p>
-          <h2>HOW CAN I BOOK AND HOW FAR IN ADVANCE DO I NEED TO CONTACT YOU?</h2>
+          <h3>HOW CAN I BOOK AND HOW FAR IN ADVANCE DO I NEED TO CONTACT YOU?</h3>
           <p class="p">
           The minimum notice, negotiation, and organization time depends on the date of the wedding. If the wedding is scheduled in the low season, 4-5 months may be sufficient. However, in the high season (July to September), it is not uncommon to need up to a year in advance.
           Weddings are confirmed only by contract and first deposit. We usually book each event 6-9 months in advance, so please contact us in time to check our availability immediately.
@@ -43,12 +43,12 @@
       <!-- Paragrafo a sinistra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-1">
         <div class="p-4 paragraph-box-left">
-          <h2>WHAT TERRITORY DO YOU OPERATE IN? DO YOU ALSO WORK ABROAD?</h2>
+          <h3>WHAT TERRITORY DO YOU OPERATE IN? DO YOU ALSO WORK ABROAD?</h3>
           <p class="p">
             Within two months after your wedding, we will provide you with a selection of high-resolution JPEG photos. These will be available in a private online gallery for you to view and share. If you prefer to receive your photos sooner, you can opt for our FAST delivery service, which ensures you get your selection within 30 days of the wedding.
 If your package includes an album, it will be ready for pickup at our studio or can be shipped to you within one month after the layout approval.
           </p>
-          <h2>HOW MANY PHOTOGRAPHERS WILL I NEED FOR MY WEDDING?</h2>
+          <h3>HOW MANY PHOTOGRAPHERS WILL I NEED FOR MY WEDDING?</h3>
           <p class="p">
             Yes, we offer a comprehensive wedding album service. We use high-quality materials and offer a range of customization options to ensure your album reflects your personal style and the unique story of your wedding.
           </p>    
@@ -79,11 +79,11 @@ If your package includes an album, it will be ready for pickup at our studio or 
       <!-- Paragrafo e pulsante a destra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-2">
         <div class="p-4 paragraph-box">
-          <h2>WHEN AND HOW WILL YOU RECIVE THE PHOTOS? AND HOW DOU YOU HANDLE THE IMAGES? </h2>
+          <h3>WHEN AND HOW WILL YOU RECIVE THE PHOTOS? AND HOW DOU YOU HANDLE THE IMAGES? </h3>
           <p class="p">
             Yes, we do offer additional services. If desired, we can be present at your engagement party, brunch, and rehearsal. These events are great opportunities to become comfortable in front of the camera, build a rapport with us, and see our working style. For pre-wedding shoots, we offer special sessions with a unique style that we choose together.
           </p>
-          <h2>DO YOU OFFER A WEDDING ALBUM SERVICE?</h2>
+          <h3>DO YOU OFFER A WEDDING ALBUM SERVICE?</h3>
           <p class="p">
             Absolutely, we can recommend a wedding filmmaker who aligns perfectly with our style and storytelling approach. We collaborate with some of the best professionals in the industry to ensure your wedding video beautifully complements our photographic work
           </p>    
@@ -97,12 +97,12 @@ If your package includes an album, it will be ready for pickup at our studio or 
       <!-- Paragrafo a sinistra (verticalmente centrati) -->
       <div class="col-lg-6 d-flex flex-column justify-content-center order-lg-1">
         <div class="p-4 paragraph-box-left">
-          <h2>DO YOU OFFER ADDITIONAL SERVICES, SUCH AS ENGAGEMENT PARTY OR PREWEDDING?</h2>
+          <h3>DO YOU OFFER ADDITIONAL SERVICES, SUCH AS ENGAGEMENT PARTY OR PREWEDDING?</h3>
           <p class="p">
             Yes, we do offer additional services. If desired, we can be present at your engagement party, brunch, and rehearsal. These events are great opportunities to become comfortable in front of the camera, build a rapport with us, 
             and see our working style. For pre-wedding shoots, we offer special sessions with a unique style that we choose together.
           </p>
-          <h2>CAN YOU HELP US FIND A VIDEOGRAPHY SERVICE?</h2>
+          <h3>CAN YOU HELP US FIND A VIDEOGRAPHY SERVICE?</h3>
           <p class="p">
             Absolutely, we can recommend a wedding filmmaker who aligns perfectly with our style and storytelling approach. 
             We collaborate with some of the best professionals in the industry to ensure your wedding video beautifully complements our photographic work
