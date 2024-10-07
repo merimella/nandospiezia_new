@@ -137,7 +137,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-grow: 1;
-  gap: 35px;
+  gap: 65px;
 }
 
 .menu-link {

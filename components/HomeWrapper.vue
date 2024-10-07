@@ -10,7 +10,7 @@
             
             WEDDING PHOTOGRAPHERS BASED
            
-            IN NAPLES AND AMALFI COAST
+            IN NAPLES AND AMALFI COAST, ITALY
           </h1>
         </div>
         <img class="img-fluid img-section fade-in-img" src="/images/homewrapper/img0.png" />
