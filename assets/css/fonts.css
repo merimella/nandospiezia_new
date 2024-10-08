@@ -151,7 +151,11 @@ p {
 @media (max-width: 768px) {
 
   h1{
-    font-size: 30px !important;
+    font-size: 25px !important;
+  }
+
+  .h2{
+    font-size: 15px !important;
   }
   .paragraph-box {
     margin-top: -70px!important; /* Resetta il margine superiore su mobile */
